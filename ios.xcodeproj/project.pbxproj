@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
+		24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C6460520B6E5C6003FA122 /* CoreLocation.framework */; };
 		24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */; };
-		24D62B1020B5A9C7001367B8 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* HomeScreenController.swift */; };
 		24D62B1320B5A9C7001367B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1120B5A9C7001367B8 /* Main.storyboard */; };
 		24D62B1520B5A9C9001367B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1420B5A9C9001367B8 /* Assets.xcassets */; };
 		24D62B1820B5A9C9001367B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */; };
 		24D62B2320B5A9C9001367B8 /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B2220B5A9C9001367B8 /* iosTests.swift */; };
+		24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF531920B5AD63006B81E2 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +28,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
+		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24D62B0A20B5A9C7001367B8 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		24D62B0F20B5A9C7001367B8 /* HomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
+		24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDelegateViewController.swift; sourceTree = "<group>"; };
 		24D62B1220B5A9C7001367B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		24D62B1420B5A9C9001367B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24D62B1720B5A9C9001367B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +40,7 @@
 		24D62B1E20B5A9C9001367B8 /* iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D62B2220B5A9C9001367B8 /* iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTests.swift; sourceTree = "<group>"; };
 		24D62B2420B5A9C9001367B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24DF531920B5AD63006B81E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */,
+				24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +69,7 @@
 				24D62B0C20B5A9C7001367B8 /* ios */,
 				24D62B2120B5A9C9001367B8 /* iosTests */,
 				24D62B0B20B5A9C7001367B8 /* Products */,
+				24DF531820B5AD63006B81E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,9 +86,10 @@
 			isa = PBXGroup;
 			children = (
 				24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */,
-				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
-				24D62B0F20B5A9C7001367B8 /* HomeScreenController.swift */,
+				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
+				2488956220BB59AF00540180 /* HomeScreenController.swift */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
+				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
 				24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */,
 				24D62B1920B5A9C9001367B8 /* Info.plist */,
 			);
@@ -94,6 +103,15 @@
 				24D62B2420B5A9C9001367B8 /* Info.plist */,
 			);
 			path = iosTests;
+			sourceTree = "<group>";
+		};
+		24DF531820B5AD63006B81E2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24C6460520B6E5C6003FA122 /* CoreLocation.framework */,
+				24DF531920B5AD63006B81E2 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +164,11 @@
 				TargetAttributes = {
 					24D62B0920B5A9C7001367B8 = {
 						CreatedOnToolsVersion = 9.3.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					24D62B1D20B5A9C9001367B8 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -197,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D62B1020B5A9C7001367B8 /* HomeScreenController.swift in Sources */,
+				2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
