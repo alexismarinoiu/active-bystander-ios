@@ -13,6 +13,7 @@ import CoreLocation
 class FindDelegateViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var connectButton: UIButton!
     
     private static let viewport = MKCoordinateSpanMake(0.01, 0.01)
     
@@ -20,14 +21,16 @@ class FindDelegateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
+        
+        connectButton.layer.cornerRadius = 5
 
         mapView.showsUserLocation = true
-
-        // Register with the location service to update the map and the user's location when it changes
+        
+        // -- Set up the location manager --
+        locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        // Track the location if it's changing
+        locationManager.startUpdatingLocation()
         focus()
     }
 
