@@ -45,10 +45,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Vlp-Ij-9pj" firstAttribute="leading" secondItem="KHw-qX-2nm" secondAttribute="leading" constant="20" id="6l0-C2-BHa"/>
-                            <constraint firstItem="KHw-qX-2nm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Nvg-Uh-9vY"/>
+                            <constraint firstItem="KHw-qX-2nm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Nvg-Uh-9vY"/>
                             <constraint firstAttribute="bottom" secondItem="KHw-qX-2nm" secondAttribute="bottom" id="RdN-Sd-or7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="ncU-xu-JOf" secondAttribute="bottom" id="XKJ-9u-Nr5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KHw-qX-2nm" secondAttribute="trailing" id="daG-hg-lEN"/>
+                            <constraint firstAttribute="trailing" secondItem="KHw-qX-2nm" secondAttribute="trailing" id="daG-hg-lEN"/>
                             <constraint firstItem="ncU-xu-JOf" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dcO-Hc-RIp"/>
                             <constraint firstAttribute="trailing" secondItem="ncU-xu-JOf" secondAttribute="trailing" id="gpM-xT-4bh"/>
                             <constraint firstItem="KHw-qX-2nm" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="i8j-uM-LdP"/>
