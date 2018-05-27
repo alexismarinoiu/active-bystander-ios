@@ -75,18 +75,41 @@
         <!--Profile-->
         <scene sceneID="sWj-Kj-6hz">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Czx-Xo-YLq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hYQ-9c-fGW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-5k-GKE">
+                                <rect key="frame" x="179" y="96" width="160" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9o0-5k-GKE" secondAttribute="height" multiplier="1:1" id="dxv-7J-2hL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jon Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
+                                <rect key="frame" x="50" y="203" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFT-Ig-zFJ">
+                                <rect key="frame" x="16" y="257" width="348" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="p2Y-4a-5zt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="fyx-ba-wCi"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2118" y="904"/>
+            <point key="canvasLocation" x="2117.5999999999999" y="903.69458128078827"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">
