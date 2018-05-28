@@ -634,32 +634,49 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                 <rect key="frame" x="17" y="68" width="341" height="226"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="College ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fkU-lM-DUG">
-                                <rect key="frame" x="45" y="509" width="281" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hia-3f-8SV">
-                                <rect key="frame" x="45" y="547" width="281" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-NN-kWV">
-                                <rect key="frame" x="166" y="405" width="42" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log In"/>
-                                <connections>
-                                    <segue destination="NsK-cK-E49" kind="show" id="Lj2-0z-wEY"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-ra-oUg">
+                                <rect key="frame" x="0.0" y="588" width="375" height="90"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="College ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fkU-lM-DUG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hia-3f-8SV">
+                                        <rect key="frame" x="0.0" y="30" width="375" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-NN-kWV">
+                                        <rect key="frame" x="166.66666666666666" y="60" width="42" height="30"/>
+                                        <state key="normal" title="Log In"/>
+                                        <connections>
+                                            <segue destination="NsK-cK-E49" kind="show" id="Lj2-0z-wEY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="hia-3f-8SV" firstAttribute="leading" secondItem="eQE-ra-oUg" secondAttribute="leading" id="GCB-qi-2mF"/>
+                                    <constraint firstItem="fkU-lM-DUG" firstAttribute="leading" secondItem="eQE-ra-oUg" secondAttribute="leading" id="Mvc-ng-cjb"/>
+                                    <constraint firstAttribute="trailing" secondItem="fkU-lM-DUG" secondAttribute="trailing" id="gA4-FU-Xf3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hia-3f-8SV" secondAttribute="trailing" id="jdc-Js-Lsk"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eQE-ra-oUg" firstAttribute="leading" secondItem="kuU-Ot-Kfx" secondAttribute="leading" id="Irm-k8-yYJ"/>
+                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="trailing" secondItem="eQE-ra-oUg" secondAttribute="trailing" id="LAl-Hu-iZ4"/>
+                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="bottom" secondItem="eQE-ra-oUg" secondAttribute="bottom" constant="100" id="fKw-84-JgA"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="kuU-Ot-Kfx"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="fKw-84-JgA" id="8jk-w8-oTO"/>
+                        <outlet property="loginStackView" destination="eQE-ra-oUg" id="ogj-00-0Vs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZML-sA-5NW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
