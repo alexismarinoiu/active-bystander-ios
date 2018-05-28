@@ -463,6 +463,60 @@ I love helping my fellow students when they are in need. Coming from a disadvant
             </objects>
             <point key="canvasLocation" x="3137" y="1739"/>
         </scene>
+        <!--Settings Controller-->
+        <scene sceneID="3I5-4i-FwR">
+            <objects>
+                <tableViewController id="Dzh-Iz-rNG" customClass="SettingsController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hyE-k3-qHe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="switch" id="DR8-aE-ZL6" customClass="SettingsSwitchCell" customModule="ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DR8-aE-ZL6" id="btX-cj-Lnu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKp-L1-VUy">
+                                            <rect key="frame" x="16" y="11" width="278" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-va-8mT">
+                                            <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchToggled:" destination="DR8-aE-ZL6" eventType="valueChanged" id="mGS-yy-0jB"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="SKp-L1-VUy" secondAttribute="bottom" id="0y4-Cs-tze"/>
+                                        <constraint firstAttribute="trailing" secondItem="4pK-va-8mT" secondAttribute="trailing" constant="16" id="4df-SI-ZaZ"/>
+                                        <constraint firstItem="4pK-va-8mT" firstAttribute="centerY" secondItem="btX-cj-Lnu" secondAttribute="centerY" id="5tG-CG-z2i"/>
+                                        <constraint firstItem="4pK-va-8mT" firstAttribute="leading" secondItem="SKp-L1-VUy" secondAttribute="trailing" constant="16" id="dRw-KV-otx"/>
+                                        <constraint firstItem="SKp-L1-VUy" firstAttribute="leading" secondItem="btX-cj-Lnu" secondAttribute="leadingMargin" id="mGx-cx-tqm"/>
+                                        <constraint firstItem="SKp-L1-VUy" firstAttribute="top" secondItem="btX-cj-Lnu" secondAttribute="topMargin" id="oxf-ut-4tf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="SKp-L1-VUy" id="Ffp-ls-MUz"/>
+                                    <outlet property="toggleSwitch" destination="4pK-va-8mT" id="APY-XL-Iul"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Dzh-Iz-rNG" id="zpf-G8-GAe"/>
+                            <outlet property="delegate" destination="Dzh-Iz-rNG" id="Txn-zH-Wck"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIz-XJ-DRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2117.5999999999999" y="1652.9556650246307"/>
+        </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">
             <objects>
