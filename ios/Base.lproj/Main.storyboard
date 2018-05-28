@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,44 +73,174 @@
             </objects>
             <point key="canvasLocation" x="1212" y="904"/>
         </scene>
+        <!--Profile Nav-->
+        <scene sceneID="g8X-uf-0bJ">
+            <objects>
+                <navigationController title="Profile Nav" id="z9u-XT-8iD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="VjZ-so-Je1"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dqc-uq-Cho">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Czx-Xo-YLq" kind="relationship" relationship="rootViewController" id="N9X-4S-Ots"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="joX-Sz-9dK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2241" y="904"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="sWj-Kj-6hz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Czx-Xo-YLq" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hYQ-9c-fGW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-5k-GKE">
-                                <rect key="frame" x="179" y="96" width="160" height="128"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7Z-0W-Ias" userLabel="Primary Scroll View">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wys-Bp-61R">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2061"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOq-tR-DJs">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="132-FS-IxU">
+                                                <rect key="frame" x="0.0" y="176" width="375" height="1842"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFT-Ig-zFJ">
+                                                        <rect key="frame" x="8" y="8" width="359" height="1826"/>
+                                                        <mutableString key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="QFT-Ig-zFJ" secondAttribute="trailing" id="0H2-Lu-VGt"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="QFT-Ig-zFJ" secondAttribute="bottom" id="LDj-Nf-HKy"/>
+                                                    <constraint firstItem="QFT-Ig-zFJ" firstAttribute="top" secondItem="132-FS-IxU" secondAttribute="topMargin" id="QX8-Yu-zta"/>
+                                                    <constraint firstItem="QFT-Ig-zFJ" firstAttribute="leading" secondItem="132-FS-IxU" secondAttribute="leadingMargin" id="urn-Tv-ksf"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhc-GK-J3v" userLabel="Separator View">
+                                                <rect key="frame" x="0.0" y="2018" width="375" height="1"/>
+                                                <color key="backgroundColor" white="0.878" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="wgJ-Ar-kgP"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wN-Ll-8Ag">
+                                                <rect key="frame" x="0.0" y="2019" width="375" height="42"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
+                                                <state key="normal" title="Settings"/>
+                                            </button>
+                                        </subviews>
+                                        <viewLayoutGuide key="safeArea" id="lA9-Lp-81T"/>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="9o0-5k-GKE" secondAttribute="height" multiplier="1:1" id="dxv-7J-2hL"/>
+                                    <constraint firstAttribute="bottom" secondItem="wys-Bp-61R" secondAttribute="bottom" id="1jl-tc-6TC"/>
+                                    <constraint firstAttribute="trailing" secondItem="wys-Bp-61R" secondAttribute="trailing" id="Qj0-G8-c98"/>
+                                    <constraint firstItem="wys-Bp-61R" firstAttribute="leading" secondItem="X7Z-0W-Ias" secondAttribute="leading" id="a5G-Bt-ZA3"/>
+                                    <constraint firstItem="wys-Bp-61R" firstAttribute="top" secondItem="X7Z-0W-Ias" secondAttribute="top" id="gQ5-Tn-pv1"/>
+                                    <constraint firstItem="wys-Bp-61R" firstAttribute="width" secondItem="X7Z-0W-Ias" secondAttribute="width" id="i0E-ro-GLW"/>
                                 </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jon Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
-                                <rect key="frame" x="50" y="203" width="64" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFT-Ig-zFJ">
-                                <rect key="frame" x="16" y="257" width="348" height="224"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </scrollView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf3-Z8-RBS" userLabel="Header Visual Effect View">
+                                <rect key="frame" x="0.0" y="88" width="375" height="176"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GBw-2g-Y9f">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6tk-cy-3DH">
+                                            <rect key="frame" x="8" y="8" width="359" height="160"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-5k-GKE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="AOS-gf-a6n"/>
+                                                        <constraint firstAttribute="width" secondItem="9o0-5k-GKE" secondAttribute="height" multiplier="1:1" id="dxv-7J-2hL"/>
+                                                        <constraint firstAttribute="width" constant="160" id="g25-gS-VdJ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San D'wich" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
+                                                    <rect key="frame" x="233.66666666666666" y="128.66666666666666" width="125.33333333333334" height="31.333333333333343"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="6tk-cy-3DH" firstAttribute="leading" secondItem="GBw-2g-Y9f" secondAttribute="leadingMargin" id="5Hj-NN-d81"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="6tk-cy-3DH" secondAttribute="bottom" id="bw7-2f-ppa"/>
+                                        <constraint firstItem="6tk-cy-3DH" firstAttribute="top" secondItem="GBw-2g-Y9f" secondAttribute="topMargin" id="fGq-vV-oF0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="6tk-cy-3DH" secondAttribute="trailing" id="gkR-FF-82j"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKs-Jj-xM7" userLabel="Separator View">
+                                <rect key="frame" x="0.0" y="263" width="375" height="1"/>
+                                <color key="backgroundColor" white="0.878" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Z1B-P6-qIH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="p2Y-4a-5zt" firstAttribute="trailing" secondItem="aKs-Jj-xM7" secondAttribute="trailing" id="5CC-Lh-H2N"/>
+                            <constraint firstItem="X7Z-0W-Ias" firstAttribute="top" secondItem="p2Y-4a-5zt" secondAttribute="top" id="Gc2-Po-Jl5"/>
+                            <constraint firstItem="X7Z-0W-Ias" firstAttribute="bottom" secondItem="hYQ-9c-fGW" secondAttribute="bottom" id="HWU-Oi-Plh"/>
+                            <constraint firstItem="p2Y-4a-5zt" firstAttribute="trailing" secondItem="kf3-Z8-RBS" secondAttribute="trailing" id="Iga-X9-gdc"/>
+                            <constraint firstItem="aKs-Jj-xM7" firstAttribute="leading" secondItem="p2Y-4a-5zt" secondAttribute="leading" id="P1N-IR-byO"/>
+                            <constraint firstItem="kf3-Z8-RBS" firstAttribute="leading" secondItem="p2Y-4a-5zt" secondAttribute="leading" id="QIt-y1-zFR"/>
+                            <constraint firstItem="aKs-Jj-xM7" firstAttribute="bottom" secondItem="kf3-Z8-RBS" secondAttribute="bottom" id="Rrf-LR-1gr"/>
+                            <constraint firstItem="p2Y-4a-5zt" firstAttribute="trailing" secondItem="X7Z-0W-Ias" secondAttribute="trailing" id="cuD-KZ-yac"/>
+                            <constraint firstItem="eOq-tR-DJs" firstAttribute="height" secondItem="kf3-Z8-RBS" secondAttribute="height" id="d6a-nw-NOg"/>
+                            <constraint firstItem="kf3-Z8-RBS" firstAttribute="top" secondItem="p2Y-4a-5zt" secondAttribute="top" id="dON-bJ-seg"/>
+                            <constraint firstItem="X7Z-0W-Ias" firstAttribute="leading" secondItem="p2Y-4a-5zt" secondAttribute="leading" id="yBs-Sw-Ife"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="p2Y-4a-5zt"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="fyx-ba-wCi"/>
+                    <navigationItem key="navigationItem" title="Profile" id="K78-tu-Bp8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="qAY-oQ-wQx"/>
+                    </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2117.5999999999999" y="903.69458128078827"/>
+            <point key="canvasLocation" x="2240.8000000000002" y="1738.6699507389164"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">
@@ -206,7 +337,7 @@
                     <connections>
                         <segue destination="mGF-oc-uKE" kind="relationship" relationship="viewControllers" id="jv3-qz-BHt"/>
                         <segue destination="6yr-rk-cKJ" kind="relationship" relationship="viewControllers" id="q5f-X7-v7a"/>
-                        <segue destination="Czx-Xo-YLq" kind="relationship" relationship="viewControllers" id="lPu-16-afG"/>
+                        <segue destination="z9u-XT-8iD" kind="relationship" relationship="viewControllers" id="Qp4-Bq-Cxd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEg-Qq-upX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -216,5 +347,6 @@
     </scenes>
     <resources>
         <image name="ablogo" width="349" height="349"/>
+        <image name="oldman" width="133" height="133"/>
     </resources>
 </document>
