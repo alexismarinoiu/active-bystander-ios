@@ -12,10 +12,13 @@ import CoreLocation
 class SettingsController: UITableViewController {
     
     private let locationManager = CLLocationManager()
+    private weak var locationTrackingCell: SettingsSwitchCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager.delegate = self
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -47,15 +50,12 @@ class SettingsController: UITableViewController {
         if indexPath.section == 0 && indexPath.item == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath)
             let switchCell = cell as! SettingsSwitchCell
-            switchCell.titleLabel.text = NSLocalizedString("Location Tracking", comment: "")
-            switchCell.action = { [weak lm = locationManager] (isOn: Bool) -> Void in
-                if isOn {
-                    lm?.requestAlwaysAuthorization()
-                    if !CLLocationManager.locationServicesEnabled() ||
-                        CLLocationManager.authorizationStatus() != .authorizedAlways  {
-                        switchCell.toggleSwitch.isOn = false
-                        return
-                    }
+            locationTrackingCell = switchCell
+            switchCell.kind = .locationTracking
+            switchCell.titleLabel.text = switchCell.kind?.label
+            switchCell.action = { [weak `self` = self] (isOn: Bool) -> Void in
+                if isOn && (!CLLocationManager.locationServicesEnabled() ||  CLLocationManager.authorizationStatus() != .authorizedAlways) {
+                    self?.locationManager.requestAlwaysAuthorization()
                 }
                 UserDefaults.standard.set(isOn, forKey: UserDefaultsConstants.locationEnabled)
             }
@@ -63,24 +63,46 @@ class SettingsController: UITableViewController {
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
         }
-
         return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return NSLocalizedString("General", comment: "")
+            return NSLocalizedString ("General", comment: "")
         }
-        
         return nil
     }
     
+}
+
+extension SettingsController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if !CLLocationManager.locationServicesEnabled() || CLLocationManager.authorizationStatus() != .authorizedAlways  {
+            UserDefaults.standard.set(false, forKey: UserDefaultsConstants.locationEnabled)
+            if locationTrackingCell?.kind == .locationTracking {
+                locationTrackingCell?.toggleSwitch.isOn = false
+            }
+        }
+    }
 }
 
 class SettingsSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var toggleSwitch: UISwitch!
     var action: ((Bool) -> Void)?
+    var kind: Kind?
+    
+    enum Kind {
+        case locationTracking
+        
+        var label: String {
+            switch self {
+            case .locationTracking:
+                return NSLocalizedString("Location Tracking", comment: "")
+            }
+        }
+    }
     
     @IBAction func switchToggled(_ sender: UISwitch) {
         action?(sender.isOn)
