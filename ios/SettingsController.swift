@@ -54,7 +54,7 @@ class SettingsController: UITableViewController {
             switchCell.kind = .locationTracking
             switchCell.titleLabel.text = switchCell.kind?.label
             switchCell.action = { [weak `self` = self] (isOn: Bool) -> Void in
-                if isOn && (!CLLocationManager.locationServicesEnabled() ||  CLLocationManager.authorizationStatus() != .authorizedAlways) {
+                if isOn {
                     self?.locationManager.requestAlwaysAuthorization()
                 }
                 UserDefaults.standard.set(isOn, forKey: UserDefaultsConstants.locationEnabled)
