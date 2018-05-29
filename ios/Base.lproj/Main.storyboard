@@ -67,7 +67,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Xdn-qU-wpM"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Inbox" id="QRt-wC-cZr"/>
+                    <tabBarItem key="tabBarItem" title="Inbox" image="icon-inbox" selectedImage="icon-inbox" id="QRt-wC-cZr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tcG-0q-FsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,7 +77,7 @@
         <scene sceneID="g8X-uf-0bJ">
             <objects>
                 <navigationController title="Profile Nav" id="z9u-XT-8iD" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="VjZ-so-Je1"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="icon-profile" selectedImage="icon-profile" id="VjZ-so-Je1"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dqc-uq-Cho">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -524,7 +524,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
         <scene sceneID="O9x-N1-FWL">
             <objects>
                 <navigationController title="Home Nav" id="mGF-oc-uKE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="hnI-dB-cW7"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="icon-home" selectedImage="icon-home" id="hnI-dB-cW7"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zUN-WP-Fbv">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -693,6 +693,9 @@ I love helping my fellow students when they are in need. Coming from a disadvant
     <resources>
         <image name="ablogo" width="349" height="349"/>
         <image name="icon-camera" width="80" height="80"/>
+        <image name="icon-home" width="20" height="20"/>
+        <image name="icon-inbox" width="20" height="20"/>
+        <image name="icon-profile" width="20" height="20"/>
         <image name="oldman" width="133" height="133"/>
     </resources>
 </document>
