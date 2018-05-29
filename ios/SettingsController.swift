@@ -59,7 +59,7 @@ class SettingsController: UITableViewController {
                 }
                 UserDefaults.standard.set(isOn, forKey: UserDefaultsConstants.locationEnabled)
             }
-            switchCell.toggleSwitch.isOn = false
+            switchCell.toggleSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsConstants.locationEnabled)
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
         }
