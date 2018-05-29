@@ -57,22 +57,6 @@
             </objects>
             <point key="canvasLocation" x="346" y="2589"/>
         </scene>
-        <!--Inbox-->
-        <scene sceneID="nfv-fh-E1Y">
-            <objects>
-                <viewController id="6yr-rk-cKJ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Bie-gv-aeB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Xdn-qU-wpM"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Inbox" image="icon-inbox" selectedImage="icon-inbox" id="QRt-wC-cZr"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tcG-0q-FsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1212" y="904"/>
-        </scene>
         <!--Profile Nav-->
         <scene sceneID="g8X-uf-0bJ">
             <objects>
@@ -607,7 +591,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
         <scene sceneID="fhH-cY-1Wz">
             <objects>
                 <navigationController title="Inbox Nav" id="0gK-ch-4nY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inbox" id="TvD-wJ-MiO"/>
+                    <tabBarItem key="tabBarItem" title="Inbox" image="icon-inbox" selectedImage="icon-inbox" id="TvD-wJ-MiO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PPf-xf-tSd">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
