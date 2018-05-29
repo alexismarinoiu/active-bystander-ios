@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SettingsController: UITableViewController {
+    
+    private let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,9 +47,17 @@ class SettingsController: UITableViewController {
         if indexPath.section == 0 && indexPath.item == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath)
             let switchCell = cell as! SettingsSwitchCell
-            switchCell.titleLabel.text = NSLocalizedString("Location tracking", comment: "")
-            switchCell.action = { (isOn: Bool) -> Void in
-                print("Hello World \(isOn)")
+            switchCell.titleLabel.text = NSLocalizedString("Location Tracking", comment: "")
+            switchCell.action = { [weak lm = locationManager] (isOn: Bool) -> Void in
+                if isOn {
+                    lm?.requestAlwaysAuthorization()
+                    if !CLLocationManager.locationServicesEnabled() ||
+                        CLLocationManager.authorizationStatus() != .authorizedAlways  {
+                        switchCell.toggleSwitch.isOn = false
+                        return
+                    }
+                }
+                UserDefaults.standard.set(isOn, forKey: UserDefaultsConstants.locationEnabled)
             }
             switchCell.toggleSwitch.isOn = false
         } else {
