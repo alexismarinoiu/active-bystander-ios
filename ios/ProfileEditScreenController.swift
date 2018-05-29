@@ -1,7 +1,16 @@
 import UIKit
+import MobileCoreServices
 
 class ProfileEditScreenController: UIViewController {
     
+    lazy var picker: UIImagePickerController = { () -> UIImagePickerController in
+        let controller = UIImagePickerController()
+        controller.sourceType = .photoLibrary
+        controller.mediaTypes = [kUTTypeImage] as [String]
+        controller.delegate = self
+        return controller
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -13,17 +22,9 @@ class ProfileEditScreenController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
 
+// MARK: - Actions
 extension ProfileEditScreenController {
     // Cancel
     @IBAction func cancelButtonPress(_ sender: UINavigationItem) {
@@ -33,5 +34,20 @@ extension ProfileEditScreenController {
     // Done
     @IBAction func doneButtonPress(_ sender: UINavigationItem) {
         // TODO: Save
+    }
+    
+    @IBAction func profilePicturePress(_ sender: UITapGestureRecognizer) {
+        present(picker, animated: true, completion: nil)
+    }
+}
+
+extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        // TODO: Implement
     }
 }

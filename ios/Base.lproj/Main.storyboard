@@ -272,12 +272,16 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbb-5x-ass">
                                                         <rect key="frame" x="0.0" y="18.333333333333314" width="375" height="240"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
+                                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
                                                                 <rect key="frame" x="67.666666666666686" y="0.0" width="240" height="240"/>
+                                                                <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="240" id="Kgf-z3-VUd"/>
                                                                     <constraint firstAttribute="height" constant="240" id="uGG-Li-H7I"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="8qu-9o-6Kb" appends="YES" id="p4l-ME-Fhg"/>
+                                                                </connections>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -406,6 +410,11 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYe-e2-GP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8qu-9o-6Kb">
+                    <connections>
+                        <action selector="profilePicturePress:" destination="cAO-Nm-ese" id="yNG-gc-KX7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3136.8000000000002" y="1837.6847290640394"/>
         </scene>
