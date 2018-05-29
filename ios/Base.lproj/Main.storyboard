@@ -272,23 +272,52 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbb-5x-ass">
                                                         <rect key="frame" x="0.0" y="18.333333333333314" width="375" height="240"/>
                                                         <subviews>
-                                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-PF-73I">
                                                                 <rect key="frame" x="67.666666666666686" y="0.0" width="240" height="240"/>
-                                                                <gestureRecognizers/>
+                                                                <subviews>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                                                        <gestureRecognizers/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="240" id="Kgf-z3-VUd"/>
+                                                                            <constraint firstAttribute="height" constant="240" id="uGG-Li-H7I"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outletCollection property="gestureRecognizers" destination="8qu-9o-6Kb" appends="YES" id="p4l-ME-Fhg"/>
+                                                                        </connections>
+                                                                    </imageView>
+                                                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJ3-1Z-KZ7">
+                                                                        <rect key="frame" x="-0.6666666666666714" y="0.0" width="240" height="240"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.30013912671232879" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </view>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-camera" translatesAutoresizingMaskIntoConstraints="NO" id="Axq-rI-KNN">
+                                                                        <rect key="frame" x="140" y="140" width="100" height="100"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="100" id="LrL-r0-wvy"/>
+                                                                            <constraint firstAttribute="width" secondItem="Axq-rI-KNN" secondAttribute="height" multiplier="1:1" id="TUf-6i-ork"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="240" id="Kgf-z3-VUd"/>
-                                                                    <constraint firstAttribute="height" constant="240" id="uGG-Li-H7I"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="bJ3-1Z-KZ7" secondAttribute="bottom" id="KV1-gD-hgs"/>
+                                                                    <constraint firstItem="Znx-yJ-QBU" firstAttribute="leading" secondItem="QWG-PF-73I" secondAttribute="leading" id="RiS-E0-3pV"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="bJ3-1Z-KZ7" secondAttribute="trailing" id="U0z-jy-SdU"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Znx-yJ-QBU" secondAttribute="bottom" id="aIe-EB-DiU"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Znx-yJ-QBU" secondAttribute="trailing" id="jlo-wl-DHh"/>
+                                                                    <constraint firstItem="bJ3-1Z-KZ7" firstAttribute="leading" secondItem="QWG-PF-73I" secondAttribute="leading" id="l2J-GT-GcL"/>
+                                                                    <constraint firstItem="bJ3-1Z-KZ7" firstAttribute="top" secondItem="QWG-PF-73I" secondAttribute="top" id="l3r-Hs-UBY"/>
+                                                                    <constraint firstItem="Znx-yJ-QBU" firstAttribute="top" secondItem="QWG-PF-73I" secondAttribute="top" id="rlD-4Q-DhS"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Axq-rI-KNN" secondAttribute="bottom" id="ti8-mf-eX5"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Axq-rI-KNN" secondAttribute="trailing" id="u9F-h3-ORV"/>
                                                                 </constraints>
-                                                                <connections>
-                                                                    <outletCollection property="gestureRecognizers" destination="8qu-9o-6Kb" appends="YES" id="p4l-ME-Fhg"/>
-                                                                </connections>
-                                                            </imageView>
+                                                            </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="Znx-yJ-QBU" firstAttribute="centerX" secondItem="Sbb-5x-ass" secondAttribute="centerX" id="ANo-B8-ueN"/>
-                                                            <constraint firstAttribute="bottom" secondItem="Znx-yJ-QBU" secondAttribute="bottom" id="XWb-T4-vfw"/>
-                                                            <constraint firstItem="Znx-yJ-QBU" firstAttribute="top" secondItem="Sbb-5x-ass" secondAttribute="top" id="w6Y-6V-q3o"/>
+                                                            <constraint firstAttribute="bottom" secondItem="QWG-PF-73I" secondAttribute="bottom" id="MVf-3t-wjv"/>
+                                                            <constraint firstItem="QWG-PF-73I" firstAttribute="top" secondItem="Sbb-5x-ass" secondAttribute="top" id="gvb-YV-Fkt"/>
+                                                            <constraint firstItem="QWG-PF-73I" firstAttribute="centerX" secondItem="Sbb-5x-ass" secondAttribute="centerX" id="lii-rz-qFs"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -539,6 +568,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
     </scenes>
     <resources>
         <image name="ablogo" width="349" height="349"/>
+        <image name="icon-camera" width="80" height="80"/>
         <image name="oldman" width="133" height="133"/>
     </resources>
 </document>
