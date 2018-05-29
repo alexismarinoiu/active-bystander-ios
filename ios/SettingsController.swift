@@ -68,7 +68,7 @@ class SettingsController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return NSLocalizedString ("General", comment: "")
+            return NSLocalizedString("General", comment: "")
         }
         return nil
     }
