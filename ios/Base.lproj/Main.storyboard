@@ -161,6 +161,9 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                                 <rect key="frame" x="0.0" y="2019" width="375" height="42"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
                                                 <state key="normal" title="Settings"/>
+                                                <connections>
+                                                    <segue destination="Dzh-Iz-rNG" kind="show" id="el6-eE-ACM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="lA9-Lp-81T"/>
@@ -515,7 +518,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UIz-XJ-DRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2117.5999999999999" y="1652.9556650246307"/>
+            <point key="canvasLocation" x="3076" y="1739"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">
