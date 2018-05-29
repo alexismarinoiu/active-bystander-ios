@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */; };
 		2411B1AD20BD8FED00589DB9 /* LogInScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */; };
+		2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */; };
 		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
 		2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */; };
 		2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956520BB60BA00540180 /* InboxScreenController.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
 		2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInScreenController.swift; sourceTree = "<group>"; };
+		2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShifter.swift; sourceTree = "<group>"; };
 		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		2488956520BB60BA00540180 /* InboxScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
 		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -104,6 +106,7 @@
 				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 				2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */,
 				2488956520BB60BA00540180 /* InboxScreenController.swift */,
+				2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
 				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
 				24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */,
@@ -243,6 +246,7 @@
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
 				2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
+				2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */,
 				2411B1AD20BD8FED00589DB9 /* LogInScreenController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

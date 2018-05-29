@@ -731,16 +731,12 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                             <constraint firstItem="eQE-ra-oUg" firstAttribute="top" relation="lessThanOrEqual" secondItem="Fme-H9-2p6" secondAttribute="bottom" constant="200" id="SEN-0s-BPG"/>
                             <constraint firstItem="Fme-H9-2p6" firstAttribute="top" secondItem="kuU-Ot-Kfx" secondAttribute="top" priority="250" constant="200" id="T6V-KO-agJ"/>
                             <constraint firstItem="Fme-H9-2p6" firstAttribute="centerX" secondItem="V2H-p7-83k" secondAttribute="centerX" id="eEl-iL-TQr"/>
-                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="bottom" secondItem="eQE-ra-oUg" secondAttribute="bottom" constant="100" id="fKw-84-JgA"/>
                             <constraint firstItem="eQE-ra-oUg" firstAttribute="leading" secondItem="kuU-Ot-Kfx" secondAttribute="leading" constant="30" id="fTb-KO-KxA"/>
                             <constraint firstItem="eQE-ra-oUg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fme-H9-2p6" secondAttribute="bottom" constant="20" id="pD8-Xo-RLV"/>
+                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="bottom" secondItem="eQE-ra-oUg" secondAttribute="bottom" constant="100" id="sJq-bw-122"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kuU-Ot-Kfx"/>
                     </view>
-                    <connections>
-                        <outlet property="bottomConstraint" destination="fKw-84-JgA" id="8jk-w8-oTO"/>
-                        <outlet property="loginStackView" destination="eQE-ra-oUg" id="ogj-00-0Vs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZML-sA-5NW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
