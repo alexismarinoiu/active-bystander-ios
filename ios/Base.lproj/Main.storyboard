@@ -603,6 +603,79 @@ I love helping my fellow students when they are in need. Coming from a disadvant
             </objects>
             <point key="canvasLocation" x="344.80000000000001" y="1739.2803598200901"/>
         </scene>
+        <!--Inbox Nav-->
+        <scene sceneID="fhH-cY-1Wz">
+            <objects>
+                <navigationController title="Inbox Nav" id="0gK-ch-4nY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Inbox" id="TvD-wJ-MiO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PPf-xf-tSd">
+                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6a0-HY-SIq" kind="relationship" relationship="rootViewController" id="lX7-Jy-8j8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gPp-DB-GRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1239" y="904"/>
+        </scene>
+        <!--Inbox-->
+        <scene sceneID="wQW-pg-c4A">
+            <objects>
+                <tableViewController title="Inbox" id="6a0-HY-SIq" customClass="InboxScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="5Qg-sO-bjK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="request" textLabel="iIM-NV-890" style="IBUITableViewCellStyleDefault" id="s44-Yi-s2A">
+                                <rect key="frame" x="0.0" y="55.333333333333343" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s44-Yi-s2A" id="Ynp-az-dBx">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iIM-NV-890">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="message" textLabel="PWV-0C-0Or" style="IBUITableViewCellStyleDefault" id="Fuc-M0-yVb">
+                                <rect key="frame" x="0.0" y="99.333333333333343" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fuc-M0-yVb" id="9A1-pj-dLu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PWV-0C-0Or">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6a0-HY-SIq" id="OGL-Ly-sCT"/>
+                            <outlet property="delegate" destination="6a0-HY-SIq" id="Fv9-EJ-QB2"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Inbox" id="cYo-Dc-qgz"/>
+                    <navigationItem key="navigationItem" title="Inbox" id="2qp-Dl-Cje"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R4S-Ni-5sC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1238" y="1739"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="tLh-vk-26e">
             <objects>
@@ -614,8 +687,8 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                     </tabBar>
                     <connections>
                         <segue destination="mGF-oc-uKE" kind="relationship" relationship="viewControllers" id="jv3-qz-BHt"/>
-                        <segue destination="6yr-rk-cKJ" kind="relationship" relationship="viewControllers" id="q5f-X7-v7a"/>
-                        <segue destination="z9u-XT-8iD" kind="relationship" relationship="viewControllers" id="Qp4-Bq-Cxd"/>
+                        <segue destination="0gK-ch-4nY" kind="relationship" relationship="viewControllers" id="m7U-lr-zw2"/>
+                        <segue destination="z9u-XT-8iD" kind="relationship" relationship="viewControllers" id="pQZ-je-3La"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEg-Qq-upX" userLabel="First Responder" sceneMemberID="firstResponder"/>
