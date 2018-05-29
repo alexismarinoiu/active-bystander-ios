@@ -694,13 +694,19 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Vpd-MR-Tua" id="nfw-fl-jcz"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hia-3f-8SV">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hia-3f-8SV">
                                         <rect key="frame" x="0.0" y="40" width="315" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Vpd-MR-Tua" id="psh-EU-o35"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-NN-kWV">
                                         <rect key="frame" x="136.66666666666666" y="80" width="42" height="30"/>
@@ -737,6 +743,10 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kuU-Ot-Kfx"/>
                     </view>
+                    <connections>
+                        <outlet property="logo" destination="Fme-H9-2p6" id="3zb-NE-95b"/>
+                        <outlet property="topConstraint" destination="T6V-KO-agJ" id="sIY-s9-9lo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZML-sA-5NW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
