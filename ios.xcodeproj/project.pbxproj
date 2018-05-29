@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */; };
 		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
 		2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */; };
 		24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C6460520B6E5C6003FA122 /* CoreLocation.framework */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
 		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24D62B0A20B5A9C7001367B8 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 				24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */,
 				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
 				2488956220BB59AF00540180 /* HomeScreenController.swift */,
+				2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
 				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
 				24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */,
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */,
+				2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */,
 				2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 			);

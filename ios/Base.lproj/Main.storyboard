@@ -112,7 +112,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="1000" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFT-Ig-zFJ">
                                                         <rect key="frame" x="8" y="8" width="359" height="1826"/>
-                                                        <mutableString key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+                                                        <string key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
 
 I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
 
@@ -136,7 +136,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
 
 I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
 
-I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</mutableString>
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -191,8 +191,8 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                                         <constraint firstAttribute="width" constant="160" id="g25-gS-VdJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San D'wich" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
-                                                    <rect key="frame" x="233.66666666666666" y="128.66666666666666" width="125.33333333333334" height="31.333333333333343"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
+                                                    <rect key="frame" x="285" y="128.66666666666666" width="74" height="31.333333333333343"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -235,12 +235,233 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="fyx-ba-wCi"/>
                     <navigationItem key="navigationItem" title="Profile" id="K78-tu-Bp8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="qAY-oQ-wQx"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="qAY-oQ-wQx">
+                            <connections>
+                                <segue destination="wqe-oO-lHT" kind="presentation" id="JsN-4P-2QD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2240.8000000000002" y="1738.6699507389164"/>
+        </scene>
+        <!--Edit Profile-->
+        <scene sceneID="ZvJ-kT-7wM">
+            <objects>
+                <viewController id="cAO-Nm-ese" customClass="ProfileEditScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s1T-64-YWt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FA3-Ih-E8y">
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bTy-hE-j03">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="657"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yCc-kC-bBn" userLabel="Profile Picture Stack">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="258.33333333333331"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7k8-0k-MKn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbb-5x-ass">
+                                                        <rect key="frame" x="0.0" y="18.333333333333314" width="375" height="240"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-PF-73I">
+                                                                <rect key="frame" x="67.666666666666686" y="0.0" width="240" height="240"/>
+                                                                <subviews>
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                                                        <gestureRecognizers/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="240" id="Kgf-z3-VUd"/>
+                                                                            <constraint firstAttribute="height" constant="240" id="uGG-Li-H7I"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outletCollection property="gestureRecognizers" destination="8qu-9o-6Kb" appends="YES" id="p4l-ME-Fhg"/>
+                                                                        </connections>
+                                                                    </imageView>
+                                                                    <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJ3-1Z-KZ7">
+                                                                        <rect key="frame" x="-0.6666666666666714" y="0.0" width="240" height="240"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.30013912671232879" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </view>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-camera" translatesAutoresizingMaskIntoConstraints="NO" id="Axq-rI-KNN">
+                                                                        <rect key="frame" x="140" y="140" width="100" height="100"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="100" id="LrL-r0-wvy"/>
+                                                                            <constraint firstAttribute="width" secondItem="Axq-rI-KNN" secondAttribute="height" multiplier="1:1" id="TUf-6i-ork"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="bJ3-1Z-KZ7" secondAttribute="bottom" id="KV1-gD-hgs"/>
+                                                                    <constraint firstItem="Znx-yJ-QBU" firstAttribute="leading" secondItem="QWG-PF-73I" secondAttribute="leading" id="RiS-E0-3pV"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="bJ3-1Z-KZ7" secondAttribute="trailing" id="U0z-jy-SdU"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Znx-yJ-QBU" secondAttribute="bottom" id="aIe-EB-DiU"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Znx-yJ-QBU" secondAttribute="trailing" id="jlo-wl-DHh"/>
+                                                                    <constraint firstItem="bJ3-1Z-KZ7" firstAttribute="leading" secondItem="QWG-PF-73I" secondAttribute="leading" id="l2J-GT-GcL"/>
+                                                                    <constraint firstItem="bJ3-1Z-KZ7" firstAttribute="top" secondItem="QWG-PF-73I" secondAttribute="top" id="l3r-Hs-UBY"/>
+                                                                    <constraint firstItem="Znx-yJ-QBU" firstAttribute="top" secondItem="QWG-PF-73I" secondAttribute="top" id="rlD-4Q-DhS"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Axq-rI-KNN" secondAttribute="bottom" id="ti8-mf-eX5"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Axq-rI-KNN" secondAttribute="trailing" id="u9F-h3-ORV"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="QWG-PF-73I" secondAttribute="bottom" id="MVf-3t-wjv"/>
+                                                            <constraint firstItem="QWG-PF-73I" firstAttribute="top" secondItem="Sbb-5x-ass" secondAttribute="top" id="gvb-YV-Fkt"/>
+                                                            <constraint firstItem="QWG-PF-73I" firstAttribute="centerX" secondItem="Sbb-5x-ass" secondAttribute="centerX" id="lii-rz-qFs"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Sbb-5x-ass" firstAttribute="centerX" secondItem="37F-HL-PGp" secondAttribute="centerX" id="8ah-gb-Sfp"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="37F-HL-PGp"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pyq-0h-h67" userLabel="Name Stack">
+                                                <rect key="frame" x="0.0" y="274.33333333333331" width="375" height="48.333333333333314"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71a-43-YTj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="33" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Harold" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hta-iK-byd">
+                                                        <rect key="frame" x="0.0" y="18.333333333333371" width="375" height="30"/>
+                                                        <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="hta-iK-byd" firstAttribute="leading" secondItem="t4P-7g-M6G" secondAttribute="leading" id="lVe-co-mkO"/>
+                                                    <constraint firstItem="t4P-7g-M6G" firstAttribute="trailing" secondItem="hta-iK-byd" secondAttribute="trailing" id="oed-OY-eYL"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="t4P-7g-M6G"/>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vSb-fn-Sfc" userLabel="Biography Stack">
+                                                <rect key="frame" x="0.0" y="338.66666666666674" width="375" height="318.33333333333326"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Biography" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9j-Be-Y2Y">
+                                                        <rect key="frame" x="0.0" y="0.0" width="57.333333333333336" height="14.333333333333334"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s22-ef-Joo">
+                                                        <rect key="frame" x="0.0" y="18.333333333333314" width="375" height="300.00000000000006"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="abC-Mn-3dy"/>
+                                                        </constraints>
+                                                        <string key="text">I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.
+
+I love helping my fellow students when they are in need. Coming from a disadvantaged background, I have witnessed discrimination and micro-aggressions throughout my life. I want to do my part to make a real difference to Imperial Students and the wider world.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Kfx-oD-hoO" firstAttribute="trailing" secondItem="s22-ef-Joo" secondAttribute="trailing" id="m9a-78-7gD"/>
+                                                    <constraint firstItem="s22-ef-Joo" firstAttribute="leading" secondItem="Kfx-oD-hoO" secondAttribute="leading" id="mCl-Co-Usf"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="safeArea" id="Kfx-oD-hoO"/>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="pyq-0h-h67" firstAttribute="leading" secondItem="bTy-hE-j03" secondAttribute="leading" id="6QJ-S4-Ws2"/>
+                                            <constraint firstItem="yCc-kC-bBn" firstAttribute="width" secondItem="bTy-hE-j03" secondAttribute="width" id="UwF-h5-Qkq"/>
+                                            <constraint firstItem="vSb-fn-Sfc" firstAttribute="width" secondItem="bTy-hE-j03" secondAttribute="width" id="bnK-QV-iAP"/>
+                                            <constraint firstAttribute="trailing" secondItem="pyq-0h-h67" secondAttribute="trailing" id="lVk-n9-gxg"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bTy-hE-j03" firstAttribute="leading" secondItem="FA3-Ih-E8y" secondAttribute="leading" id="VLE-sm-4lf"/>
+                                    <constraint firstItem="bTy-hE-j03" firstAttribute="top" secondItem="FA3-Ih-E8y" secondAttribute="top" id="duP-DE-pb2"/>
+                                    <constraint firstItem="bTy-hE-j03" firstAttribute="width" secondItem="FA3-Ih-E8y" secondAttribute="width" id="eZj-eW-mOV"/>
+                                    <constraint firstAttribute="bottom" secondItem="bTy-hE-j03" secondAttribute="bottom" id="iKd-1C-nDh"/>
+                                    <constraint firstAttribute="trailing" secondItem="bTy-hE-j03" secondAttribute="trailing" id="u5p-Hb-sRb"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FA3-Ih-E8y" firstAttribute="top" secondItem="o0g-Qt-Lwm" secondAttribute="top" id="5by-G2-yqy"/>
+                            <constraint firstItem="FA3-Ih-E8y" firstAttribute="trailing" secondItem="o0g-Qt-Lwm" secondAttribute="trailing" id="7Q6-Xe-HHz"/>
+                            <constraint firstItem="FA3-Ih-E8y" firstAttribute="leading" secondItem="o0g-Qt-Lwm" secondAttribute="leading" id="oyC-MU-toj"/>
+                            <constraint firstItem="o0g-Qt-Lwm" firstAttribute="bottom" secondItem="FA3-Ih-E8y" secondAttribute="bottom" id="v8l-Eh-hhX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="o0g-Qt-Lwm"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="GX9-19-Gi7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oau-Vv-Pt6">
+                            <connections>
+                                <action selector="cancelButtonPress:" destination="cAO-Nm-ese" id="BrS-E3-vmS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Ihl-OB-IX9">
+                            <connections>
+                                <action selector="doneButtonPress:" destination="cAO-Nm-ese" id="239-9t-gga"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYe-e2-GP4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8qu-9o-6Kb">
+                    <connections>
+                        <action selector="profilePicturePress:" destination="cAO-Nm-ese" id="yNG-gc-KX7"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3136.8000000000002" y="1837.6847290640394"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Yjz-Vl-B38">
+            <objects>
+                <navigationController id="wqe-oO-lHT" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DGm-tH-Njn">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cAO-Nm-ese" kind="relationship" relationship="rootViewController" id="tno-uw-VFD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vr6-iS-H02" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3137" y="1739"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">
@@ -347,6 +568,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
     </scenes>
     <resources>
         <image name="ablogo" width="349" height="349"/>
+        <image name="icon-camera" width="80" height="80"/>
         <image name="oldman" width="133" height="133"/>
     </resources>
 </document>
