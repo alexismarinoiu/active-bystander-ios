@@ -606,7 +606,6 @@ I love helping my fellow students when they are in need. Coming from a disadvant
         <!--Tab Bar Controller-->
         <scene sceneID="tLh-vk-26e">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JEg-Qq-upX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="NsK-cK-E49" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yct-bh-FFB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -619,6 +618,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                         <segue destination="z9u-XT-8iD" kind="relationship" relationship="viewControllers" id="Qp4-Bq-Cxd"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JEg-Qq-upX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="347" y="16"/>
         </scene>
