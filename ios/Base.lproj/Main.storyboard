@@ -630,27 +630,23 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ablogo" translatesAutoresizingMaskIntoConstraints="NO" id="Fme-H9-2p6">
-                                <rect key="frame" x="17" y="68" width="341" height="226"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-ra-oUg">
-                                <rect key="frame" x="0.0" y="588" width="375" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-ra-oUg">
+                                <rect key="frame" x="30" y="568" width="315" height="110"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="College ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fkU-lM-DUG">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hia-3f-8SV">
-                                        <rect key="frame" x="0.0" y="30" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="315" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxr-NN-kWV">
-                                        <rect key="frame" x="166.66666666666666" y="60" width="42" height="30"/>
+                                        <rect key="frame" x="136.66666666666666" y="80" width="42" height="30"/>
                                         <state key="normal" title="Log In"/>
                                         <connections>
                                             <segue destination="NsK-cK-E49" kind="show" id="Lj2-0z-wEY"/>
@@ -664,12 +660,23 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                     <constraint firstAttribute="trailing" secondItem="hia-3f-8SV" secondAttribute="trailing" id="jdc-Js-Lsk"/>
                                 </constraints>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ablogo" translatesAutoresizingMaskIntoConstraints="NO" id="Fme-H9-2p6">
+                                <rect key="frame" x="87.666666666666686" y="244" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Fme-H9-2p6" secondAttribute="height" multiplier="1:1" id="FEg-xo-Txg"/>
+                                    <constraint firstAttribute="width" constant="200" id="Ztg-cK-AWw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eQE-ra-oUg" firstAttribute="leading" secondItem="kuU-Ot-Kfx" secondAttribute="leading" id="Irm-k8-yYJ"/>
-                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="trailing" secondItem="eQE-ra-oUg" secondAttribute="trailing" id="LAl-Hu-iZ4"/>
+                            <constraint firstItem="kuU-Ot-Kfx" firstAttribute="trailing" secondItem="eQE-ra-oUg" secondAttribute="trailing" constant="30" id="LAl-Hu-iZ4"/>
+                            <constraint firstItem="eQE-ra-oUg" firstAttribute="top" relation="lessThanOrEqual" secondItem="Fme-H9-2p6" secondAttribute="bottom" constant="200" id="SEN-0s-BPG"/>
+                            <constraint firstItem="Fme-H9-2p6" firstAttribute="top" secondItem="kuU-Ot-Kfx" secondAttribute="top" priority="250" constant="200" id="T6V-KO-agJ"/>
+                            <constraint firstItem="Fme-H9-2p6" firstAttribute="centerX" secondItem="V2H-p7-83k" secondAttribute="centerX" id="eEl-iL-TQr"/>
                             <constraint firstItem="kuU-Ot-Kfx" firstAttribute="bottom" secondItem="eQE-ra-oUg" secondAttribute="bottom" constant="100" id="fKw-84-JgA"/>
+                            <constraint firstItem="eQE-ra-oUg" firstAttribute="leading" secondItem="kuU-Ot-Kfx" secondAttribute="leading" constant="30" id="fTb-KO-KxA"/>
+                            <constraint firstItem="eQE-ra-oUg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Fme-H9-2p6" secondAttribute="bottom" constant="20" id="pD8-Xo-RLV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kuU-Ot-Kfx"/>
                     </view>
