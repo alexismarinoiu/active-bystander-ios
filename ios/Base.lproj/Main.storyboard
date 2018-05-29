@@ -466,10 +466,10 @@ I love helping my fellow students when they are in need. Coming from a disadvant
             </objects>
             <point key="canvasLocation" x="3137" y="1739"/>
         </scene>
-        <!--Settings Controller-->
+        <!--Settings-->
         <scene sceneID="3I5-4i-FwR">
             <objects>
-                <tableViewController id="Dzh-Iz-rNG" customClass="SettingsController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Settings" id="Dzh-Iz-rNG" customClass="SettingsController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hyE-k3-qHe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -518,7 +518,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UIz-XJ-DRN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3076" y="1739"/>
+            <point key="canvasLocation" x="3137" y="2568"/>
         </scene>
         <!--Home Nav-->
         <scene sceneID="O9x-N1-FWL">

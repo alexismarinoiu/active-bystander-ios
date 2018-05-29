@@ -97,11 +97,11 @@
 				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
 				2488956220BB59AF00540180 /* HomeScreenController.swift */,
 				2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */,
+				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
 				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
 				24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */,
 				24D62B1920B5A9C9001367B8 /* Info.plist */,
-				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 			);
 			path = ios;
 			sourceTree = "<group>";
