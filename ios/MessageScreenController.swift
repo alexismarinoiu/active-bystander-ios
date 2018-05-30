@@ -15,7 +15,8 @@ class MessageScreenController: UIViewController {
         Message(me: true, text: "Hello"),
         Message(me: true, text: "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello"),
         Message(me: false, text: "What's up?"),
-        Message(me: true, text: "Hello"),
+        Message(me: true, text: "Good thanks, how about you????????????????????????????????????????????????????????"),
+        Message(me: false, text: "Good. Btw have you heard of.........................................."),
     ]
     
     override func viewDidLoad() {
@@ -48,6 +49,16 @@ extension MessageScreenController: UITableViewDataSource {
         let msg = messages[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: msg.me ? "sender" : "receiver", for: indexPath) as! MessageScreenMessageView
         cell.textField.text = msg.text
+        cell.textView.layer.cornerRadius = 20
+        let textWidth = cell.textField.frame.size.width
+        if textWidth > cell.frame.size.width {
+            
+        }
+        let newSize = cell.textField.sizeThatFits(CGSize(width: textWidth, height: CGFloat.greatestFiniteMagnitude))
+//        print (cell.frame.size.width)
+//        print (newSize.width)
+        cell.textView.frame.size = CGSize(width: max(textWidth, newSize.width), height: newSize.height)
+        
         return cell
     }
     
@@ -56,14 +67,7 @@ extension MessageScreenController: UITableViewDataSource {
     }
 }
 
-//extension MessageScreenController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 99
-//    }
-//}
-
 class MessageScreenMessageView: UITableViewCell {
     @IBOutlet var textField: UILabel!
-//
-//    radi
+    @IBOutlet var textView: UIView!
 }
