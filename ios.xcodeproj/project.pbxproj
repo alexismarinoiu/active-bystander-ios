@@ -13,6 +13,7 @@
 		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
 		2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */; };
 		2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956520BB60BA00540180 /* InboxScreenController.swift */; };
+		2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493CDDA20BF48BE00284C2E /* Notifications.swift */; };
 		24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C6460520B6E5C6003FA122 /* CoreLocation.framework */; };
 		24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */; };
 		24D62B1320B5A9C7001367B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1120B5A9C7001367B8 /* Main.storyboard */; settings = {ASSET_TAGS = (0, ); }; };
@@ -41,6 +42,7 @@
 		2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShifter.swift; sourceTree = "<group>"; };
 		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		2488956520BB60BA00540180 /* InboxScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
+		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24D62B0A20B5A9C7001367B8 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,11 +107,12 @@
 				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
 				2488956220BB59AF00540180 /* HomeScreenController.swift */,
 				2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */,
-				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 				2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */,
 				2488956520BB60BA00540180 /* InboxScreenController.swift */,
 				2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */,
 				337E944320BC578D00B0926E /* MessageScreenController.swift */,
+				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
+				2493CDDA20BF48BE00284C2E /* Notifications.swift */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
 				24D62B1120B5A9C7001367B8 /* Main.storyboard */,
 				24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */,
@@ -190,6 +193,9 @@
 					24D62B0920B5A9C7001367B8 = {
 						CreatedOnToolsVersion = 9.3.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
@@ -245,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */,
 				5ED7F9FC20BC670A000E3D9F /* SettingsController.swift in Sources */,
 				2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */,
 				2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */,

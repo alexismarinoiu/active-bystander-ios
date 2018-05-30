@@ -13,9 +13,30 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    public private(set) var locationManager: CLLocationManager?
+    public let notificationCenter = NotificationCenter()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.activityType = CLActivityType.other
+        locationManager.distanceFilter = 5
+        locationManager.pausesLocationUpdatesAutomatically = false
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.delegate = self
+        self.locationManager = locationManager
+        
+        // Check if we are running normally or in the background to receive location updates
+        if let hasLocation = launchOptions?[.location] as? NSNumber,
+            hasLocation.boolValue {
+            updateMonitoring()
+            return true
+        }
+
+        // Request the location permission
+        locationManager.requestAlwaysAuthorization()
+        updateMonitoring()
+
         return true
     }
 
@@ -41,7 +62,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+}
 
+extension AppDelegate {
+    func updateMonitoring() {
+        if UserDefaults.this.isLocationEnabled &&
+            CLLocationManager.authorizationStatus() == .authorizedAlways &&
+            CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            locationManager?.startMonitoringSignificantLocationChanges()
+        } else {
+            locationManager?.stopMonitoringSignificantLocationChanges()
+        }
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        updateMonitoring()
+        notificationCenter.post(name: .AVLocationAuthorizationNotification, object: self, userInfo: [0: status])
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        notificationCenter.post(name: .AVLocationChangeNotification, object: self, userInfo: [0: locations])
+        NSLog("ZHZ: LOCATION UPDATED %@", locations.map {"\($0.coordinate),"}.joined() as String)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if let error = error as? CLError, error.code == .denied {
+            // Location updates are not authorised.
+            manager.stopMonitoringSignificantLocationChanges()
+            return
+        }
+    }
 }
 
 

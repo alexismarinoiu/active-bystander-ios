@@ -11,17 +11,19 @@ import CoreLocation
 
 class SettingsController: UITableViewController {
     
-    private let locationManager = CLLocationManager()
     private weak var locationTrackingCell: SettingsSwitchCell?
+    private weak var locationManager: CLLocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        locationManager.delegate = self
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            locationManager = appDelegate.locationManager
+            appDelegate.notificationCenter.addObserver(self,
+                                                       selector: #selector(locationManagerChangedAuthorization(notification:)),
+                                                       name: .AVLocationAuthorizationNotification, object: nil)
+        }
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -53,13 +55,13 @@ class SettingsController: UITableViewController {
             locationTrackingCell = switchCell
             switchCell.kind = .locationTracking
             switchCell.titleLabel.text = switchCell.kind?.label
-            switchCell.action = { [weak `self` = self] (isOn: Bool) -> Void in
+            switchCell.action = { [weak lm = locationManager] (isOn: Bool) -> Void in
                 if isOn {
-                    self?.locationManager.requestAlwaysAuthorization()
+                    lm?.requestAlwaysAuthorization()
                 }
-                UserDefaults.standard.set(isOn, forKey: UserDefaultsConstants.locationEnabled)
+                UserDefaults.this.isLocationEnabled = isOn
             }
-            switchCell.toggleSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultsConstants.locationEnabled)
+            switchCell.toggleSwitch.isOn = UserDefaults.this.isLocationEnabled
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
         }
@@ -75,11 +77,15 @@ class SettingsController: UITableViewController {
     
 }
 
-extension SettingsController: CLLocationManagerDelegate {
+extension SettingsController {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if !CLLocationManager.locationServicesEnabled() || CLLocationManager.authorizationStatus() != .authorizedAlways  {
-            UserDefaults.standard.set(false, forKey: UserDefaultsConstants.locationEnabled)
+    @objc func locationManagerChangedAuthorization(notification: Notification) {
+        guard let status = notification.userInfo?[0] as? CLAuthorizationStatus else {
+            return
+        }
+        
+        if !CLLocationManager.locationServicesEnabled() || status != .authorizedAlways  {
+            UserDefaults.this.isLocationEnabled = false
             if locationTrackingCell?.kind == .locationTracking {
                 locationTrackingCell?.toggleSwitch.isOn = false
             }
