@@ -4,16 +4,13 @@ class InboxScreenController: UITableViewController {
     
     // Part of the model, should be moved at some point
     
-    struct MessageRequest {
-        let title: String
-    }
-    
     struct Message {
         let title: String
+        let latestMessage: String
     }
 
     var messages: [Message] = []
-    var requests: [MessageRequest] = []
+    var requests: [Message] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +23,14 @@ class InboxScreenController: UITableViewController {
         
         // Some dummy data for now
         messages.append(contentsOf: [
-            Message(title: "Hi"),
-            Message(title: "There"),
-            Message(title: "Testing")
+            Message(title: "Harold Jr", latestMessage: "Hello"),
+            Message(title: "Mark Zuckerberg", latestMessage: "Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc Zucc"),
+            Message(title: "Tester Testington", latestMessage: "Another Test")
             ])
         
         requests.append(contentsOf: [
-            MessageRequest(title: "I request"),
-            MessageRequest(title: "Your attention")
+            Message(title: "Annoying Orange", latestMessage: "Hey! Hey Apple! Hey!"),
+            Message(title: "Vulnerable Person", latestMessage: "\"Vulnerable Person\" has requested to connect with you.")
             ])
         
         tableView.reloadData()
@@ -62,17 +59,12 @@ class InboxScreenController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell
-        
-        switch indexPath.section {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "request", for: indexPath)
-            cell.textLabel?.text = requests[indexPath.item].title
-        case 1:
-            fallthrough
-        default:
-            cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
-            cell.textLabel?.text = messages[indexPath.item].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath) as! MessageTableViewCell
+        let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
+        cell.threadTitleLabel.text = message.title
+        cell.latestMessageLabel.text = message.latestMessage
+        if let image = UIImage(named: "oldman") {
+            cell.setThreadImage(image)
         }
 
         return cell
@@ -80,7 +72,7 @@ class InboxScreenController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return NSLocalizedString("Message Requests", comment: "")
+            return NSLocalizedString("Connection Requests", comment: "")
         }
         
         return NSLocalizedString("Messages", comment: "")
@@ -106,29 +98,26 @@ class InboxScreenController: UITableViewController {
     }
     */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+}
 
+class MessageTableViewCell: UITableViewCell {
+    @IBOutlet weak var threadTitleLabel: UILabel!
+    @IBOutlet weak var latestMessageLabel: UILabel!
+    @IBOutlet weak var threadImage: UIImageView!
+    
+    /// Helper method to set the image of the thread and
+    //  round it off in the process
+    ///
+    /// - Parameter newThreadImage: Image to set
+    func setThreadImage(_ newThreadImage: UIImage) {
+        UIGraphicsBeginImageContext(threadImage.bounds.size)
+        let path = UIBezierPath(roundedRect: threadImage.bounds,
+                                cornerRadius: threadImage.frame.size.width / 2)
+        path.addClip()
+        newThreadImage.draw(in: threadImage.bounds)
+        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        threadImage.image = finalImage
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
