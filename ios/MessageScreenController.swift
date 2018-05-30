@@ -76,15 +76,6 @@ extension MessageScreenController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: msg.me ? "sender" : "receiver", for: indexPath) as! MessageScreenMessageView
         cell.textField.text = msg.text
         cell.textView.layer.cornerRadius = 20
-        let textWidth = cell.textField.frame.size.width
-        if textWidth > cell.frame.size.width {
-            
-        }
-        let newSize = cell.textField.sizeThatFits(CGSize(width: textWidth, height: CGFloat.greatestFiniteMagnitude))
-//        print (cell.frame.size.width)
-//        print (newSize.width)
-        cell.textView.frame.size = CGSize(width: max(textWidth, newSize.width), height: newSize.height)
-        
         return cell
     }
     
