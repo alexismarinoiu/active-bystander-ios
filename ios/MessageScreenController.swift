@@ -28,6 +28,13 @@ class MessageScreenController: UIViewController {
         shifter.delegate = self
         shifter.register()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (tableView.contentSize.height - tableView.bounds.size.height > 0) {
+            let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
+            tableView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
