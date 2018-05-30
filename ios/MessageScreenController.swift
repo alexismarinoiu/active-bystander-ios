@@ -2,6 +2,8 @@ import UIKit
 
 class MessageScreenController: UIViewController {
 
+    private var shifter = KeyboardShifter()
+    @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     
     struct Message {
@@ -23,7 +25,8 @@ class MessageScreenController: UIViewController {
         super.viewDidLoad()
 
         tableView.dataSource = self
-//        tableView.delegate = self
+        shifter.delegate = self
+        shifter.register()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +45,22 @@ class MessageScreenController: UIViewController {
     }
     */
 
+}
+
+
+extension MessageScreenController: KeyboardShifterDelegate {
+    
+    func keyboard(_ keyboardShifter: KeyboardShifter, shiftedBy delta: CGFloat, duration: Double, options: UIViewAnimationOptions) {
+        view.frame.origin.y += delta
+        
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       options: options,
+                       animations: {},
+                       completion: { [weak view = view] _ in
+                        view?.layoutIfNeeded()
+        })
+    }
 }
 
 extension MessageScreenController: UITableViewDataSource {
