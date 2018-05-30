@@ -13,7 +13,7 @@ class MessageScreenController: UIViewController {
         Message(me: true, text: "Hello"),
         Message(me: true, text: "Hello"),
         Message(me: true, text: "Hello"),
-        Message(me: true, text: "Hello"),
+        Message(me: true, text: "Hello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello\nHello"),
         Message(me: false, text: "What's up?"),
         Message(me: true, text: "Hello"),
     ]
