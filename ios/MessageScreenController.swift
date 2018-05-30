@@ -4,7 +4,9 @@ class MessageScreenController: UIViewController {
 
     private var shifter = KeyboardShifter()
     @IBOutlet var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageTableView: UITableView!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var textInput: UITextField!
     
     struct Message {
         let me: Bool
@@ -24,15 +26,15 @@ class MessageScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.dataSource = self
+        messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (tableView.contentSize.height - tableView.bounds.size.height > 0) {
-            let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
-            tableView.setContentOffset(bottomOffset, animated: true)
+        if (messageTableView.contentSize.height - messageTableView.bounds.size.height > 0) {
+            let bottomOffset = CGPoint(x: 0, y: messageTableView.contentSize.height - messageTableView.bounds.size.height)
+            messageTableView.setContentOffset(bottomOffset, animated: true)
         }
     }
 
@@ -41,7 +43,12 @@ class MessageScreenController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func sendPressed(_ sender: Any) {
+        messages.append(contentsOf: [Message(me: true, text: textInput.text!)])
+        self.messageTableView.reloadData()
+        textInput.text = ""
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -54,9 +61,7 @@ class MessageScreenController: UIViewController {
 
 }
 
-
 extension MessageScreenController: KeyboardShifterDelegate {
-    
     func keyboard(_ keyboardShifter: KeyboardShifter, shiftedBy delta: CGFloat, duration: Double, options: UIViewAnimationOptions) {
         view.frame.origin.y += delta
         

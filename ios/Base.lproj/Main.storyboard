@@ -179,6 +179,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tue-64-ayH">
                                                 <rect key="frame" x="331" y="15" width="36" height="27"/>
                                                 <state key="normal" title="Send"/>
+                                                <connections>
+                                                    <action selector="sendPressed:" destination="vRJ-kL-huW" eventType="touchUpInside" id="fPK-uV-atq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -199,7 +202,9 @@
                         <viewLayoutGuide key="safeArea" id="GGL-Qn-Hcc"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="Elg-Ak-R0F" id="rdw-KY-aoq"/>
+                        <outlet property="messageTableView" destination="Elg-Ak-R0F" id="rdw-KY-aoq"/>
+                        <outlet property="sendButton" destination="tue-64-ayH" id="nFc-nO-jWe"/>
+                        <outlet property="textInput" destination="lGW-ML-YXG" id="3fn-3G-Xzg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LWm-nd-fl2" userLabel="First Responder" sceneMemberID="firstResponder"/>
