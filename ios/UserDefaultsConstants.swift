@@ -8,9 +8,28 @@
 
 import Foundation
 
-class UserDefaultsConstants {
+private let configuration = UserDefaults.Configuration()
+
+extension UserDefaults {
+    static var this: Configuration {
+        return configuration
+    }
     
-    private init() {}
-    
-    public static let locationEnabled = "avLocationEnabled"
+    class Configuration {
+        
+        fileprivate init() {}
+        
+        private let locationEnabled = "avLocationEnabled"
+        
+        var isLocationEnabled: Bool {
+            get {
+                return UserDefaults.standard.bool(forKey: locationEnabled)
+            }
+            
+            set {
+                UserDefaults.standard.set(newValue, forKey: locationEnabled)
+            }
+        }
+    }
 }
+
