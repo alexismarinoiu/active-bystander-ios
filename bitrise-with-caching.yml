@@ -42,7 +42,7 @@ workflows:
             # debug log
             set -x
 
-            if [ -z BITRISE_BUILD_STATUS ]; then
+            if [ "$BITRISE_BUILD_STATUS" -eq "0" ]; then
                 BSTATUS=success;
             else
                 BSTATUS=failed;
@@ -89,7 +89,7 @@ workflows:
             # debug log
             set -x
 
-            if [ -z BITRISE_BUILD_STATUS ]; then
+            if [ "$BITRISE_BUILD_STATUS" -eq "0" ]; then
                 BSTATUS=success;
             else
                 BSTATUS=failed;
@@ -136,7 +136,7 @@ workflows:
             # debug log
             set -x
 
-            if [ -z BITRISE_BUILD_STATUS ]; then
+            if [ "$BITRISE_BUILD_STATUS" -eq "0" ]; then
                 BSTATUS=success;
             else
                 BSTATUS=failed;
