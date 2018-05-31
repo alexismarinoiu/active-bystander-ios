@@ -35,7 +35,7 @@ class MessageScreenController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let contentOffset = messageTableView.contentSize.height - messageTableView.bounds.size.height
-        if (contentOffset > 0) {
+        if contentOffset > 0 {
             let bottomOffset = CGPoint(x: 0, y: contentOffset)
             messageTableView.setContentOffset(bottomOffset, animated: true)
         }
@@ -51,7 +51,10 @@ class MessageScreenController: UIViewController {
 //    }
     
     @IBAction func sendPressed(_ sender: Any) {
-        if (textInput.text?.isEmpty ?? true) { return }
+        if textInput.text?.isEmpty == true {
+            return
+        }
+        
         messages.append(contentsOf: [Message(me: true, text: textInput.text!)])
         self.messageTableView.reloadData()
         textInput.text = ""
