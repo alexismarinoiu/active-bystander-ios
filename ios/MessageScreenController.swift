@@ -3,7 +3,6 @@ import UIKit
 class MessageScreenController: UIViewController {
 
     private var shifter = KeyboardShifter()
-    @IBOutlet var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textInput: UITextField!
@@ -29,11 +28,15 @@ class MessageScreenController: UIViewController {
         messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
+        
+//        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(UIInputViewController.dismissKeyboard))
+//        self.view.addGestureRecognizer(tap)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if (messageTableView.contentSize.height - messageTableView.bounds.size.height > 0) {
-            let bottomOffset = CGPoint(x: 0, y: messageTableView.contentSize.height - messageTableView.bounds.size.height)
+        let contentOffset = messageTableView.contentSize.height - messageTableView.bounds.size.height
+        if (contentOffset > 0) {
+            let bottomOffset = CGPoint(x: 0, y: contentOffset)
             messageTableView.setContentOffset(bottomOffset, animated: true)
         }
     }
@@ -43,7 +46,12 @@ class MessageScreenController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//    func dismissKeyboard() {
+//        self.view.endEditing(true)
+//    }
+    
     @IBAction func sendPressed(_ sender: Any) {
+        if (textInput.text?.isEmpty ?? true) { return }
         messages.append(contentsOf: [Message(me: true, text: textInput.text!)])
         self.messageTableView.reloadData()
         textInput.text = ""
