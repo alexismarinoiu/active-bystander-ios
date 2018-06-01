@@ -26,11 +26,13 @@ workflows:
 
             curl --request POST --header "PRIVATE-TOKEN: G4i_n-yyCmgBrychB6wm" "https://gitlab.doc.ic.ac.uk/api/v4/projects/48370/statuses/$GIT_CLONE_COMMIT_HASH?state=running&target_url=$BITRISE_BUILD_URL&ref=$BITRISE_GIT_BRANCH"
         title: Gitlab mark as running
+    - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
+        - scheme: "$BITRISE_SCHEME_STAGING"
+    - cache-push@2.0.5: {}
     - script@1.1.5:
         inputs:
         - content: |-
@@ -65,17 +67,19 @@ workflows:
 
             curl --request POST --header "PRIVATE-TOKEN: G4i_n-yyCmgBrychB6wm" "https://gitlab.doc.ic.ac.uk/api/v4/projects/48370/statuses/$GIT_CLONE_COMMIT_HASH?state=running&target_url=$BITRISE_BUILD_URL&ref=$BITRISE_GIT_BRANCH"
         title: Gitlab mark as running
+    - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
+        - scheme: "$BITRISE_SCHEME_STAGING"
     - xcode-archive@2.4.8:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - export_method: development
+        - scheme: "$BITRISE_SCHEME_STAGING"
+        - export_method: "$BITRISE_EXPORT_METHOD"
     - deploy-to-bitrise-io@1.3.12: {}
+    - cache-push@2.0.5: {}
     - script@1.1.5:
         inputs:
         - content: |-
@@ -110,17 +114,19 @@ workflows:
 
             curl --request POST --header "PRIVATE-TOKEN: G4i_n-yyCmgBrychB6wm" "https://gitlab.doc.ic.ac.uk/api/v4/projects/48370/statuses/$GIT_CLONE_COMMIT_HASH?state=running&target_url=$BITRISE_BUILD_URL&ref=$BITRISE_GIT_BRANCH"
         title: Gitlab mark as running
+    - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
+        - scheme: "$BITRISE_SCHEME_PRODUCTION"
     - xcode-archive@2.4.8:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
-        - scheme: "$BITRISE_SCHEME"
-        - export_method: development
+        - scheme: "$BITRISE_SCHEME_PRODUCTION"
+        - export_method: "$BITRISE_EXPORT_METHOD"
     - deploy-to-bitrise-io@1.3.12: {}
+    - cache-push@2.0.5: {}
     - script@1.1.5:
         inputs:
         - content: |-
@@ -146,7 +152,10 @@ app:
     BITRISE_PROJECT_PATH: ios.xcodeproj
   - opts:
       is_expand: false
-    BITRISE_SCHEME: ios
+    BITRISE_EXPORT_METHOD: development
   - opts:
       is_expand: false
-    BITRISE_EXPORT_METHOD: ad-hoc
+    BITRISE_SCHEME_PRODUCTION: Production
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME_STAGING: Staging
