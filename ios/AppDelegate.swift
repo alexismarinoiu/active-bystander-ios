@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.delegate = self
         self.locationManager = locationManager
-        
+
         // Check if we are running normally or in the background to receive location updates
         if let hasLocation = launchOptions?[.location] as? NSNumber,
             hasLocation.boolValue {
@@ -76,7 +76,9 @@ extension AppDelegate: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         notificationCenter.post(name: .AVLocationChangeNotification, object: self, userInfo: [0: locations])
-        NSLog("ZHZ: LOCATION UPDATED %@", locations.map {"\($0.coordinate),"}.joined() as String)
+        BackendServices().post(LocationRequest(), data: locations.last!.coordinate.toMLocation(username: "nv516")) { (success, response: [MLocation]) in
+            print("Location Request: \(success)")
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

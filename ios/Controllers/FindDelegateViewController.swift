@@ -15,8 +15,6 @@ class FindDelegateViewController: UIViewController {
 
     private var locationManager = CLLocationManager()
     
-    private var otherUsers: [CLLocationCoordinate2D] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,12 +30,6 @@ class FindDelegateViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         // Track the location if it's changing
         locationManager.startUpdatingLocation()
-
-        // SOME DUMMY DATA FOR NOW
-        otherUsers.append(contentsOf:
-            (0..<10).map { _ in CLLocationCoordinate2DMake((2 * drand48() - 1) / 1000, (2 * drand48() - 1) / 1000) }
-        )
-        // // // // //
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,11 +40,11 @@ class FindDelegateViewController: UIViewController {
 
 extension FindDelegateViewController {
     
-    private func updateOtherUsersOnMap(location userLocation: CLLocation) {
-        let annotations = otherUsers.map {
-            (location: CLLocationCoordinate2D) -> MKAnnotation in
+    private func updateOtherUsersOnMap(locations: [MLocation]) {
+        let annotations = locations.map {
+            (location: MLocation) -> MKAnnotation in
             let point = MKPointAnnotation()
-            point.coordinate = location + userLocation.coordinate
+            point.coordinate = location.coordinate
             return point
         }
         mapView.removeAnnotations(mapView.annotations)
@@ -116,8 +108,13 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
         mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
         
-        // We got the user location
-        updateOtherUsersOnMap(location: location)
+        
+        BackendServices().get(LocationRequest(), data: location.coordinate.toMLocation(username: "nv516")) { (success, locations: [MLocation]) in
+            DispatchQueue.main.async {
+                // We got the user location
+                self.updateOtherUsersOnMap(locations: locations)
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
