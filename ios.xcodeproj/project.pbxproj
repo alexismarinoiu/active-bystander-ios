@@ -12,6 +12,7 @@
 		2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */; };
 		241295F420C149BC00620701 /* MLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F320C149BC00620701 /* MLocation.swift */; };
 		241295F720C16E0700620701 /* BackendServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F620C16E0700620701 /* BackendServices.swift */; };
+		241295FB20C2F0BB00620701 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295FA20C2F0BB00620701 /* Environment.swift */; };
 		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
 		2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */; };
 		2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956520BB60BA00540180 /* InboxScreenController.swift */; };
@@ -44,6 +45,7 @@
 		2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShifter.swift; sourceTree = "<group>"; };
 		241295F320C149BC00620701 /* MLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLocation.swift; sourceTree = "<group>"; };
 		241295F620C16E0700620701 /* BackendServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendServices.swift; sourceTree = "<group>"; };
+		241295FA20C2F0BB00620701 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		2488956520BB60BA00540180 /* InboxScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
 		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 				2493CDDA20BF48BE00284C2E /* Notifications.swift */,
 				241295F620C16E0700620701 /* BackendServices.swift */,
+				241295FA20C2F0BB00620701 /* Environment.swift */,
 				241295F520C16DAC00620701 /* Controllers */,
 				241295F220C1489A00620701 /* Model */,
 				24D62B1420B5A9C9001367B8 /* Assets.xcassets */,
@@ -276,6 +279,7 @@
 				2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */,
 				5ED7F9FC20BC670A000E3D9F /* SettingsController.swift in Sources */,
 				2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */,
+				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
 				2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */,
 				2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
@@ -331,6 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				AV_API_ENDPOINT = "https://av3.vangerow.uk/staging";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -431,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				AV_API_ENDPOINT = "https://av3.vangerow.uk/production";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

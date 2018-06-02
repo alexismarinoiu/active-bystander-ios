@@ -1,11 +1,5 @@
 import Foundation
 
-//#if IS_STAGING
-private let apiUrl = URL(string: "https://av3.vangerow.uk/staging")!
-//#else
-//private let apiUrl = URL(string: "https://av3.vangerow.uk/production")!
-//#endif
-
 typealias RequestType = Encodable & URLParamable & Endpointable
 typealias ResponseType = Decodable
 
@@ -13,7 +7,7 @@ struct BackendServices {
     static func get<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
         where RequestT: RequestType, ResponseT: ResponseType
     {
-        var components = URLComponents(url: apiUrl.appendingPathComponent(request.endpoint),
+        var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.endpoint),
                                        resolvingAgainstBaseURL: false)!
         components.query = request.asURLParams
 
@@ -47,7 +41,7 @@ struct BackendServices {
 // Utility Functions
 extension BackendServices {
     static func makeJSONRequest<RequestT>(_ request: RequestT, method: HTTPMethod) -> URLRequest? where RequestT: RequestType {
-        var urlRequest = URLRequest(url: apiUrl.appendingPathComponent(request.endpoint))
+        var urlRequest = URLRequest(url: Environment.endpoint.appendingPathComponent(request.endpoint))
         urlRequest.httpMethod = method.rawValue
         guard let encodedData = try? JSONEncoder().encode(request) else {
             return nil
