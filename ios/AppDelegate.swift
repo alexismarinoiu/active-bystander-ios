@@ -76,7 +76,12 @@ extension AppDelegate: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         notificationCenter.post(name: .AVLocationChangeNotification, object: self, userInfo: [0: locations])
-        BackendServices().post(LocationRequest(), data: locations.last!.coordinate.toMLocation(username: "nv516")) { (success, response: [MLocation]) in
+        guard let lastLocation = locations.last else {
+            return
+        }
+        
+        // TODO: Change MLocation generation with authentication
+        BackendServices.post(lastLocation.coordinate.toMLocation(username: "nv516")) { (success, response: MLocation?) in
             print("Location Request: \(success)")
         }
     }

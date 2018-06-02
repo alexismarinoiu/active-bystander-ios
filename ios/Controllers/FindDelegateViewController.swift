@@ -109,9 +109,13 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         
         
-        BackendServices().get(LocationRequest(), data: location.coordinate.toMLocation(username: "nv516")) { (success, locations: [MLocation]) in
+        BackendServices.get(location.coordinate.toMLocation(username: "nv516")) { (success, locations: [MLocation]?) in
+            guard success, let locations = locations else {
+                // TODO: Handle error, perhaps a periodic refresh?
+                return
+            }
+            
             DispatchQueue.main.async {
-                // We got the user location
                 self.updateOtherUsersOnMap(locations: locations)
             }
         }

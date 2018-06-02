@@ -6,67 +6,85 @@ private let apiUrl = URL(string: "https://av3.vangerow.uk/staging")!
 //private let apiUrl = URL(string: "https://av3.vangerow.uk/production")!
 //#endif
 
-enum RequestType {
-    case location
-}
+typealias RequestType = Encodable & URLParamable & Endpointable
+typealias ResponseType = Decodable
 
-protocol Request {
-    associatedtype RequestType
-    associatedtype ResponseType
+struct BackendServices {
+    static func get<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
+        where RequestT: RequestType, ResponseT: ResponseType
+    {
+        var components = URLComponents(url: apiUrl.appendingPathComponent(request.endpoint),
+                                       resolvingAgainstBaseURL: false)!
+        components.query = request.asURLParams
 
-    func get(_ request: RequestType, callback: @escaping (Bool, ResponseType) -> Void)
-    func post(_ request: RequestType, callback: @escaping (Bool, ResponseType) -> Void)
-}
+        var urlRequest = URLRequest(url: components.url!)
+        urlRequest.httpMethod = HTTPMethod.get.rawValue
 
-struct LocationRequest: Request {
-    typealias RequestType = MLocation
-    typealias ResponseType = [MLocation]
+        perform(urlRequest: urlRequest, callback: callback)
+    }
 
-    func get(_ request: MLocation, callback: @escaping (Bool, [MLocation]) -> Void) {
-        // TODO: Improve this
-        var components = URLComponents(url: apiUrl.appendingPathComponent("location"), resolvingAgainstBaseURL: false)!
-        components.query = "latitude=\(request.latitude)&longitude=\(request.longitude)&username=\(request.username)"
-        
-        var request = URLRequest(url: components.url!)
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                callback(false, [])
-                return
-            }
-            
-            guard let data = data else {
-                return
-            }
-            
-            let locations = try! JSONDecoder().decode([MLocation].self, from: data)
-            callback(true, locations)
-        }.resume()
+    static func post<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
+        where RequestT: RequestType, ResponseT: ResponseType
+    {
+        guard let urlRequest = makeJSONRequest(request, method: .post) else {
+            callback(false, nil)
+            return
+        }
+        perform(urlRequest: urlRequest, callback: callback)
     }
     
-    func post(_ request: MLocation, callback: @escaping (Bool, [MLocation]) -> Void) {
-        var urlRequest = URLRequest(url: apiUrl.appendingPathComponent("location"))
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = try! JSONEncoder().encode(request)
+    static func put<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
+        where RequestT: RequestType, ResponseT: ResponseType
+    {
+        guard let urlRequest = makeJSONRequest(request, method: .put) else {
+            callback(false, nil)
+            return
+        }
+        perform(urlRequest: urlRequest, callback: callback)
+    }
+}
+
+// Utility Functions
+extension BackendServices {
+    static func makeJSONRequest<RequestT>(_ request: RequestT, method: HTTPMethod) -> URLRequest? where RequestT: RequestType {
+        var urlRequest = URLRequest(url: apiUrl.appendingPathComponent(request.endpoint))
+        urlRequest.httpMethod = method.rawValue
+        guard let encodedData = try? JSONEncoder().encode(request) else {
+            return nil
+        }
+        
+        urlRequest.httpBody = encodedData
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            if error != nil {
-                callback(false, [])
+        return urlRequest
+    }
+    
+    static func perform<ResponseT>(urlRequest request: URLRequest, callback: @escaping (Bool, ResponseT?) -> Void)
+        where ResponseT: ResponseType
+    {
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard error == nil,
+                let data = data,
+                let decodedData = try? JSONDecoder().decode(ResponseT.self, from: data) else {
+                    callback(false, nil)
+                    return
             }
-            callback(true, [])
+
+            callback(true, decodedData)
         }.resume()
     }
 }
 
-class BackendServices {
-    func get<T: Request>(_ request: T, data: T.RequestType, callback: @escaping (Bool, T.ResponseType) -> Void) {
-        return request.get(data, callback: callback)
-    }
-    
-    func post<T: Request>(_ request: T, data: T.RequestType, callback: @escaping (Bool, T.ResponseType) -> Void) {
-        return request.post(data, callback: callback)
-    }
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
 }
 
+protocol URLParamable {
+    var asURLParams: String { get }
+}
+
+protocol Endpointable {
+    var endpoint: String { get }
+}
