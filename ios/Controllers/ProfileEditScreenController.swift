@@ -2,7 +2,7 @@ import UIKit
 import MobileCoreServices
 
 class ProfileEditScreenController: UIViewController {
-    
+
     lazy var picker: UIImagePickerController = { () -> UIImagePickerController in
         let controller = UIImagePickerController()
         controller.sourceType = .photoLibrary
@@ -21,7 +21,6 @@ class ProfileEditScreenController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
 
 // MARK: - Actions
@@ -30,12 +29,12 @@ extension ProfileEditScreenController {
     @IBAction func cancelButtonPress(_ sender: UINavigationItem) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     // Done
     @IBAction func doneButtonPress(_ sender: UINavigationItem) {
-        // TODO: Save
+        // notTODO: Save
     }
-    
+
     @IBAction func profilePicturePress(_ sender: UITapGestureRecognizer) {
         present(picker, animated: true, completion: nil)
     }
@@ -45,9 +44,9 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         picker.dismiss(animated: true, completion: nil)
-        // TODO: Implement
+        // notTODO: Implement
     }
 }

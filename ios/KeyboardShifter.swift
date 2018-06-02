@@ -1,9 +1,9 @@
 import UIKit
 
 class KeyboardShifter {
-    
-    public var delegate: KeyboardShifterDelegate?
-    
+
+    public weak var delegate: KeyboardShifterDelegate?
+
     func register() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardMoved(notification:)),
@@ -18,7 +18,7 @@ class KeyboardShifter {
                                                selector: #selector(keyboardDidHide(notification:)),
                                                name: .UIKeyboardDidHide, object: nil)
     }
-    
+
     @objc func keyboardMoved(notification: Notification) {
         guard let userInfo = notification.userInfo,
             let keyboardSizeBegin = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
@@ -27,7 +27,7 @@ class KeyboardShifter {
             let curve = (userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue else {
                 return
         }
-        
+
         let options: UIViewAnimationOptions = {
             let animationCurve = UIViewAnimationCurve(rawValue: curve) ?? .easeInOut
             return UIViewAnimationOptions(rawValue: UInt(animationCurve.rawValue) << 16)
@@ -36,19 +36,22 @@ class KeyboardShifter {
 
         delegate?.keyboard(self, shiftedBy: delta, duration: duration, options: options)
     }
-    
+
     @objc func keyboardDidShow(notification: Notification) {
         delegate?.keyboardDidShow(self)
     }
-    
+
     @objc func keyboardDidHide(notification: Notification) {
         delegate?.keyboardDidHide(self)
     }
 }
 
 // MARK: - Delegate
-protocol KeyboardShifterDelegate {
-    func keyboard(_ keyboardShifter: KeyboardShifter, shiftedBy delta: CGFloat, duration: Double, options: UIViewAnimationOptions)
+protocol KeyboardShifterDelegate: class {
+    func keyboard(_ keyboardShifter: KeyboardShifter,
+                  shiftedBy delta: CGFloat,
+                  duration: Double,
+                  options: UIViewAnimationOptions)
     func keyboardDidShow(_ keyboardShifter: KeyboardShifter)
     func keyboardDidHide(_ keyboardShifter: KeyboardShifter)
 }

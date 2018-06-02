@@ -5,7 +5,6 @@ struct MLocation: Codable {
     let latitude: Double
     let longitude: Double
     let username: String
-    
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
