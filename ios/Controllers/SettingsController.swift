@@ -1,11 +1,3 @@
-//
-//  SettingsController.swift
-//  ios
-//
-//  Created by Alexis on 28/05/2018.
-//  Copyright © 2018 avocado. All rights reserved.
-//
-
 import UIKit
 import CoreLocation
 
