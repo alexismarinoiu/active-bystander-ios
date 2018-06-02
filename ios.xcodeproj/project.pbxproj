@@ -27,6 +27,7 @@
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
 		5ED7F9FC20BC670A000E3D9F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */; };
+		80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EDCC4820C2E84B003F9852 /* SituationsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
 		5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
 		5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		80EDCC4820C2E84B003F9852 /* SituationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */,
+				5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */,
+				80EDCC4820C2E84B003F9852 /* SituationsController.swift */,
+				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
+				2488956220BB59AF00540180 /* HomeScreenController.swift */,
+				2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */,
+				2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */,
+				2488956520BB60BA00540180 /* InboxScreenController.swift */,
 				2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */,
 				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
 				2493CDDA20BF48BE00284C2E /* Notifications.swift */,
@@ -299,6 +308,7 @@
 				2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */,
 				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
 				2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */,
+				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
 				2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
 				2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */,
