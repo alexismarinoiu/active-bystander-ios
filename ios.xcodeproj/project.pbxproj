@@ -22,7 +22,7 @@
 		24D62B1320B5A9C7001367B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1120B5A9C7001367B8 /* Main.storyboard */; settings = {ASSET_TAGS = (0, ); }; };
 		24D62B1520B5A9C9001367B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1420B5A9C9001367B8 /* Assets.xcassets */; };
 		24D62B1820B5A9C9001367B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1620B5A9C9001367B8 /* LaunchScreen.storyboard */; };
-		24D62B2320B5A9C9001367B8 /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B2220B5A9C9001367B8 /* iosTests.swift */; };
+		24D62B2320B5A9C9001367B8 /* SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B2220B5A9C9001367B8 /* SampleTests.swift */; };
 		24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF531920B5AD63006B81E2 /* MapKit.framework */; };
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
@@ -58,7 +58,7 @@
 		24D62B1720B5A9C9001367B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		24D62B1920B5A9C9001367B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D62B1E20B5A9C9001367B8 /* iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		24D62B2220B5A9C9001367B8 /* iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTests.swift; sourceTree = "<group>"; };
+		24D62B2220B5A9C9001367B8 /* SampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTests.swift; sourceTree = "<group>"; };
 		24D62B2420B5A9C9001367B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24DF531920B5AD63006B81E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		24D62B2120B5A9C9001367B8 /* iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				24D62B2220B5A9C9001367B8 /* iosTests.swift */,
+				24D62B2220B5A9C9001367B8 /* SampleTests.swift */,
 				24D62B2420B5A9C9001367B8 /* Info.plist */,
 			);
 			path = iosTests;
@@ -171,6 +171,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 24D62B2720B5A9C9001367B8 /* Build configuration list for PBXNativeTarget "ios" */;
 			buildPhases = (
+				241295FC20C2F98C00620701 /* Lint */,
 				24D62B0620B5A9C7001367B8 /* Sources */,
 				24D62B0720B5A9C7001367B8 /* Frameworks */,
 				24D62B0820B5A9C7001367B8 /* Resources */,
@@ -271,6 +272,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		241295FC20C2F98C00620701 /* Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Lint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --strict\nelse\n    echo \"warning: SwiftLint not installed, install with brew install swiftlint\"\n    return 1\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		24D62B0620B5A9C7001367B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -297,7 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D62B2320B5A9C9001367B8 /* iosTests.swift in Sources */,
+				24D62B2320B5A9C9001367B8 /* SampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

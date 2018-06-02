@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 
 class SettingsController: UITableViewController {
-    
+
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
@@ -11,11 +11,11 @@ class SettingsController: UITableViewController {
 
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             locationManager = appDelegate.locationManager
-            appDelegate.notificationCenter.addObserver(self,
-                                                       selector: #selector(locationManagerChangedAuthorization(notification:)),
+            let selector = #selector(locationManagerChangedAuthorization(notification:))
+            appDelegate.notificationCenter.addObserver(self, selector: selector,
                                                        name: .AVLocationAuthorizationNotification, object: nil)
         }
-        
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
@@ -35,7 +35,7 @@ class SettingsController: UITableViewController {
         if section == 0 {
             return 1
         }
-        
+
         return 0
     }
 
@@ -43,13 +43,16 @@ class SettingsController: UITableViewController {
         let cell: UITableViewCell
         if indexPath.section == 0 && indexPath.item == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "switch", for: indexPath)
-            let switchCell = cell as! SettingsSwitchCell
+            guard let switchCell = cell as? SettingsSwitchCell else {
+                return cell
+            }
+
             locationTrackingCell = switchCell
             switchCell.kind = .locationTracking
             switchCell.titleLabel.text = switchCell.kind?.label
-            switchCell.action = { [weak lm = locationManager] (isOn: Bool) -> Void in
+            switchCell.action = { [weak locationManager] (isOn: Bool) -> Void in
                 if isOn {
-                    lm?.requestAlwaysAuthorization()
+                    locationManager?.requestAlwaysAuthorization()
                 }
                 UserDefaults.this.isLocationEnabled = isOn
             }
@@ -59,24 +62,23 @@ class SettingsController: UITableViewController {
         }
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return NSLocalizedString("General", comment: "")
         }
         return nil
     }
-    
 }
 
 extension SettingsController {
-    
+
     @objc func locationManagerChangedAuthorization(notification: Notification) {
         guard let status = notification.userInfo?[0] as? CLAuthorizationStatus else {
             return
         }
-        
-        if !CLLocationManager.locationServicesEnabled() || status != .authorizedAlways  {
+
+        if !CLLocationManager.locationServicesEnabled() || status != .authorizedAlways {
             UserDefaults.this.isLocationEnabled = false
             if locationTrackingCell?.kind == .locationTracking {
                 locationTrackingCell?.toggleSwitch.isOn = false
@@ -90,10 +92,10 @@ class SettingsSwitchCell: UITableViewCell {
     @IBOutlet weak var toggleSwitch: UISwitch!
     var action: ((Bool) -> Void)?
     var kind: Kind?
-    
+
     enum Kind {
         case locationTracking
-        
+
         var label: String {
             switch self {
             case .locationTracking:
@@ -101,7 +103,7 @@ class SettingsSwitchCell: UITableViewCell {
             }
         }
     }
-    
+
     @IBAction func switchToggled(_ sender: UISwitch) {
         action?(sender.isOn)
     }
