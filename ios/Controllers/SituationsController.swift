@@ -29,7 +29,7 @@ class SituationsController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adviceSegue" {
             guard let destination: AdviceScreenController = segue.destination as? AdviceScreenController,
-            let indexPath = situationTableView.indexPathForSelectedRow else {
+                  let indexPath = situationTableView.indexPathForSelectedRow else {
                 return
             }
 
@@ -52,7 +52,7 @@ extension SituationsController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "adviceCell", for: indexPath)
 
         let situation = situations[indexPath.row]
-        cell.textLabel?.text  = situation.id
+        cell.textLabel?.text = situation.id
         return cell
     }
 
