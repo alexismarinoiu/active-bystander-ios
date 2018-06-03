@@ -21,6 +21,7 @@
 		24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF531920B5AD63006B81E2 /* MapKit.framework */; };
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
+		8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */; };
 		809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D215F20C2F848007C264E /* FindDelegateViewController.swift */; };
 		809D216620C2F849007C264E /* LogInScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216020C2F848007C264E /* LogInScreenController.swift */; };
 		809D216720C2F849007C264E /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216120C2F849007C264E /* ProfileEditScreenController.swift */; };
@@ -59,6 +60,7 @@
 		24DF531920B5AD63006B81E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
 		5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
+		8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceScreenController.swift; sourceTree = "<group>"; };
 		809D215F20C2F848007C264E /* FindDelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindDelegateViewController.swift; sourceTree = "<group>"; };
 		809D216020C2F848007C264E /* LogInScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInScreenController.swift; sourceTree = "<group>"; };
 		809D216120C2F849007C264E /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		241295F520C16DAC00620701 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */,
 				80EDCC4820C2E84B003F9852 /* SituationsController.swift */,
 				337E944320BC578D00B0926E /* MessageScreenController.swift */,
 				809D215F20C2F848007C264E /* FindDelegateViewController.swift */,
@@ -304,6 +307,7 @@
 				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
 				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
+				8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */,
 				809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */,
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,

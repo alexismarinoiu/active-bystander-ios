@@ -1,27 +1,14 @@
 import UIKit
+import WebKit
 
-class SituationsController: UIViewController, UITableViewDataSource {
+class AdviceScreenController: UIViewController {
 
-    //number of row
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-
-    //what are the cotent of each cells
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text  = "bacon"
-        return cell
-    }
-
-    // number of column
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    @IBOutlet weak var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        webView.loadHTMLString("<html><body><p>Hello!</p></body></html>", baseURL: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -29,7 +16,6 @@ class SituationsController: UIViewController, UITableViewDataSource {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     /*
     // MARK: - Navigation
 

@@ -20,45 +20,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SwS-2z-vJ9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UHB-YA-IZF">
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="What is the stuation?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="33" translatesAutoresizingMaskIntoConstraints="NO" id="Ped-ez-xlI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
-                                        <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UHB-YA-IZF">
-                                        <rect key="frame" x="0.0" y="30.000000000000007" width="375" height="611"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="Xmd-SO-NIT" id="yz4-fd-ggm"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Xmd-SO-NIT" id="yz4-fd-ggm"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UHB-YA-IZF" firstAttribute="top" secondItem="QFN-Of-dSD" secondAttribute="top" id="6rc-IE-olc"/>
+                            <constraint firstItem="UHB-YA-IZF" firstAttribute="trailing" secondItem="QFN-Of-dSD" secondAttribute="trailing" id="8p4-OK-gpv"/>
+                            <constraint firstItem="UHB-YA-IZF" firstAttribute="bottom" secondItem="QFN-Of-dSD" secondAttribute="bottom" id="DyV-4w-OTA"/>
+                            <constraint firstItem="UHB-YA-IZF" firstAttribute="leading" secondItem="QFN-Of-dSD" secondAttribute="leading" id="UWY-AV-vX5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QFN-Of-dSD"/>
                     </view>
+                    <connections>
+                        <segue destination="PtP-35-bJy" kind="show" identifier="GoToAdvice" id="pCd-ag-uuk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qtx-lE-RwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-570.39999999999998" y="2587.6847290640394"/>
+            <point key="canvasLocation" x="-572" y="2586.9458128078818"/>
         </scene>
-        <!--View Controller-->
+        <!--Advice-->
         <scene sceneID="WLN-A8-ifZ">
             <objects>
-                <viewController id="PtP-35-bJy" sceneMemberID="viewController">
+                <viewController title="Advice" id="PtP-35-bJy" customClass="AdviceScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hbc-LY-7X2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blK-rT-IzA">
-                                <rect key="frame" x="33" y="109" width="240" height="141"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blK-rT-IzA">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -67,12 +63,21 @@
                             </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="blK-rT-IzA" firstAttribute="leading" secondItem="4Yf-nz-RWw" secondAttribute="leading" id="6ai-2N-J8W"/>
+                            <constraint firstItem="blK-rT-IzA" firstAttribute="trailing" secondItem="4Yf-nz-RWw" secondAttribute="trailing" id="BeA-C3-dyO"/>
+                            <constraint firstItem="blK-rT-IzA" firstAttribute="bottom" secondItem="4Yf-nz-RWw" secondAttribute="bottom" id="SYX-1a-9HZ"/>
+                            <constraint firstItem="blK-rT-IzA" firstAttribute="top" secondItem="4Yf-nz-RWw" secondAttribute="top" id="cim-Rb-kLX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4Yf-nz-RWw"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="blK-rT-IzA" id="WIx-nz-C7r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3R-fq-Uok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-570" y="3291"/>
+            <point key="canvasLocation" x="-571" y="3678"/>
         </scene>
         <!--Find Delegate-->
         <scene sceneID="tne-QT-ifu">
@@ -672,7 +677,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pK-va-8mT">
-                                            <rect key="frame" x="310" y="9.3333333333333357" width="51" height="31"/>
+                                            <rect key="frame" x="310" y="9.6666666666666643" width="51" height="31"/>
                                             <connections>
                                                 <action selector="switchToggled:" destination="DR8-aE-ZL6" eventType="valueChanged" id="mGS-yy-0jB"/>
                                             </connections>
@@ -739,7 +744,7 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                 <rect key="frame" x="37.666666666666657" y="328" width="300" height="381"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-S8-wmt">
-                                        <rect key="frame" x="78.333333333333343" y="93.333333333333314" width="143" height="195"/>
+                                        <rect key="frame" x="78.333333333333343" y="93.666666666666686" width="143" height="195"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPX-WL-NKd">
                                                 <rect key="frame" x="0.0" y="0.0" width="143" height="30"/>
@@ -756,11 +761,11 @@ I love helping my fellow students when they are in need. Coming from a disadvant
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdf-rC-LGb">
-                                                <rect key="frame" x="34" y="110.00000000000006" width="75" height="30"/>
+                                                <rect key="frame" x="34" y="109.99999999999994" width="75" height="30"/>
                                                 <state key="normal" title="4Ds Model"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-av-4aa">
-                                                <rect key="frame" x="10" y="165.00000000000006" width="123" height="30"/>
+                                                <rect key="frame" x="10" y="164.99999999999994" width="123" height="30"/>
                                                 <state key="normal" title="Provide Feedback"/>
                                             </button>
                                         </subviews>
