@@ -1,23 +1,36 @@
 import Foundation
 
-typealias RequestType = Encodable & URLParamable & Endpointable
-typealias ResponseType = Decodable
+protocol Request: Encodable {
+    var requestParameters: [String: CustomStringConvertible] { get }
+    var endpoint: String { get }
+}
+
+extension Request {
+    var requestParameters: [String: CustomStringConvertible] {
+        return [:]
+    }
+}
+
+typealias Response = Decodable
+
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
 
 struct BackendServices {
-    static func get<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
-        where RequestT: RequestType, ResponseT: ResponseType {
-        var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.endpoint),
-                                       resolvingAgainstBaseURL: false)!
-        components.query = request.asURLParams
-
-        var urlRequest = URLRequest(url: components.url!)
+    static func get<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response {
+        var urlRequest = URLRequest(url: makeURL(request))
         urlRequest.httpMethod = HTTPMethod.get.rawValue
 
         perform(urlRequest: urlRequest, callback: callback)
     }
 
-    static func post<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
-        where RequestT: RequestType, ResponseT: ResponseType {
+    static func post<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response {
         guard let urlRequest = makeJSONRequest(request, method: .post) else {
             callback(false, nil)
             return
@@ -25,8 +38,8 @@ struct BackendServices {
         perform(urlRequest: urlRequest, callback: callback)
     }
 
-    static func put<RequestT, ResponseT>(_ request: RequestT, callback: @escaping (Bool, ResponseT?) -> Void)
-        where RequestT: RequestType, ResponseT: ResponseType {
+    static func put<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response {
         guard let urlRequest = makeJSONRequest(request, method: .put) else {
             callback(false, nil)
             return
@@ -37,9 +50,18 @@ struct BackendServices {
 
 // Utility Functions
 extension BackendServices {
-    static func makeJSONRequest<RequestT>(_ request: RequestT, method: HTTPMethod)
-        -> URLRequest? where RequestT: RequestType {
-        var urlRequest = URLRequest(url: Environment.endpoint.appendingPathComponent(request.endpoint))
+    static func makeURL<Req>(_ request: Req) -> URL where Req: Request {
+        var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.endpoint),
+                                       resolvingAgainstBaseURL: false)!
+        components.queryItems = request.requestParameters.map {
+            URLQueryItem(name: $0.key, value: $0.value.description)
+        }
+        return components.url!
+    }
+
+    static func makeJSONRequest<Req>(_ request: Req, method: HTTPMethod)
+        -> URLRequest? where Req: Request {
+        var urlRequest = URLRequest(url: makeURL(request))
         urlRequest.httpMethod = method.rawValue
         guard let encodedData = try? JSONEncoder().encode(request) else {
             return nil
@@ -50,12 +72,12 @@ extension BackendServices {
         return urlRequest
     }
 
-    static func perform<ResponseT>(urlRequest request: URLRequest, callback: @escaping (Bool, ResponseT?) -> Void)
-        where ResponseT: ResponseType {
+    static func perform<Res>(urlRequest request: URLRequest, callback: @escaping (Bool, Res?) -> Void)
+        where Res: Response {
         URLSession.shared.dataTask(with: request) { (data, _, error) in
             guard error == nil,
                 let data = data,
-                let decodedData = try? JSONDecoder().decode(ResponseT.self, from: data) else {
+                let decodedData = try? JSONDecoder().decode(Res.self, from: data) else {
                     callback(false, nil)
                     return
             }
@@ -63,19 +85,4 @@ extension BackendServices {
             callback(true, decodedData)
         }.resume()
     }
-}
-
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-}
-
-protocol URLParamable {
-    var asURLParams: String { get }
-}
-
-protocol Endpointable {
-    var endpoint: String { get }
 }
