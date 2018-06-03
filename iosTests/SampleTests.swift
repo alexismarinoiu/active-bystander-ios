@@ -1,5 +1,5 @@
 //
-//  iosTests.swift
+//  SampleTests.swift
 //  iosTests
 //
 //  Created by Nik on 23/05/2018.
