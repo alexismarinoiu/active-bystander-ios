@@ -22,6 +22,7 @@
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
 		8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */; };
+		8097893C20C42DA70087BE98 /* MSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893B20C42DA70087BE98 /* MSituation.swift */; };
 		809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D215F20C2F848007C264E /* FindDelegateViewController.swift */; };
 		809D216620C2F849007C264E /* LogInScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216020C2F848007C264E /* LogInScreenController.swift */; };
 		809D216720C2F849007C264E /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216120C2F849007C264E /* ProfileEditScreenController.swift */; };
@@ -61,6 +62,7 @@
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
 		5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
 		8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceScreenController.swift; sourceTree = "<group>"; };
+		8097893B20C42DA70087BE98 /* MSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSituation.swift; sourceTree = "<group>"; };
 		809D215F20C2F848007C264E /* FindDelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindDelegateViewController.swift; sourceTree = "<group>"; };
 		809D216020C2F848007C264E /* LogInScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInScreenController.swift; sourceTree = "<group>"; };
 		809D216120C2F849007C264E /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				241295F320C149BC00620701 /* MLocation.swift */,
+				8097893B20C42DA70087BE98 /* MSituation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 				241295F720C16E0700620701 /* BackendServices.swift in Sources */,
+				8097893C20C42DA70087BE98 /* MSituation.swift in Sources */,
 				809D216620C2F849007C264E /* LogInScreenController.swift in Sources */,
 				809D216720C2F849007C264E /* ProfileEditScreenController.swift in Sources */,
 				2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */,
