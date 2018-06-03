@@ -41,7 +41,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="PtP-35-bJy" kind="show" identifier="showAdvice" id="LSc-N1-AXH"/>
+                                            <segue destination="PtP-35-bJy" kind="show" identifier="adviceSegue" id="LSc-N1-AXH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

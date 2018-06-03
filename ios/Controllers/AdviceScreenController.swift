@@ -2,28 +2,12 @@ import UIKit
 import WebKit
 
 class AdviceScreenController: UIViewController {
-
+    var html = "<html><header><title>ERROR</title></header><body>There's no HTML provided.</body></html>"
     @IBOutlet weak var webView: WKWebView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        webView.loadHTMLString("<html><body><p>Hello!</p></body></html>", baseURL: nil)
-        // Do any additional setup after loading the view.
+        webView.loadHTMLString(html, baseURL: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
