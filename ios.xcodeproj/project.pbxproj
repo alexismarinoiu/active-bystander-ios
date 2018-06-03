@@ -7,15 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */; };
-		2411B1AD20BD8FED00589DB9 /* LogInScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */; };
 		2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */; };
 		241295F420C149BC00620701 /* MLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F320C149BC00620701 /* MLocation.swift */; };
 		241295F720C16E0700620701 /* BackendServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F620C16E0700620701 /* BackendServices.swift */; };
 		241295FB20C2F0BB00620701 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295FA20C2F0BB00620701 /* Environment.swift */; };
-		2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956220BB59AF00540180 /* HomeScreenController.swift */; };
-		2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */; };
-		2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488956520BB60BA00540180 /* InboxScreenController.swift */; };
 		2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493CDDA20BF48BE00284C2E /* Notifications.swift */; };
 		24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C6460520B6E5C6003FA122 /* CoreLocation.framework */; };
 		24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */; };
@@ -26,7 +21,15 @@
 		24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF531920B5AD63006B81E2 /* MapKit.framework */; };
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
-		5ED7F9FC20BC670A000E3D9F /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */; };
+		8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */; };
+		8097893C20C42DA70087BE98 /* MSituation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893B20C42DA70087BE98 /* MSituation.swift */; };
+		809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D215F20C2F848007C264E /* FindDelegateViewController.swift */; };
+		809D216620C2F849007C264E /* LogInScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216020C2F848007C264E /* LogInScreenController.swift */; };
+		809D216720C2F849007C264E /* ProfileEditScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216120C2F849007C264E /* ProfileEditScreenController.swift */; };
+		809D216820C2F849007C264E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216220C2F849007C264E /* SettingsController.swift */; };
+		809D216920C2F849007C264E /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216320C2F849007C264E /* HomeScreenController.swift */; };
+		809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216420C2F849007C264E /* InboxScreenController.swift */; };
+		80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EDCC4820C2E84B003F9852 /* SituationsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,19 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
-		2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInScreenController.swift; sourceTree = "<group>"; };
 		2411B1AE20BDB64B00589DB9 /* KeyboardShifter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardShifter.swift; sourceTree = "<group>"; };
 		241295F320C149BC00620701 /* MLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLocation.swift; sourceTree = "<group>"; };
 		241295F620C16E0700620701 /* BackendServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendServices.swift; sourceTree = "<group>"; };
 		241295FA20C2F0BB00620701 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		2488956220BB59AF00540180 /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
-		2488956520BB60BA00540180 /* InboxScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
 		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24D62B0A20B5A9C7001367B8 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDelegateViewController.swift; sourceTree = "<group>"; };
 		24D62B1220B5A9C7001367B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		24D62B1420B5A9C9001367B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		24D62B1720B5A9C9001367B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,7 +61,15 @@
 		24DF531920B5AD63006B81E2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
 		5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
-		5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceScreenController.swift; sourceTree = "<group>"; };
+		8097893B20C42DA70087BE98 /* MSituation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSituation.swift; sourceTree = "<group>"; };
+		809D215F20C2F848007C264E /* FindDelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindDelegateViewController.swift; sourceTree = "<group>"; };
+		809D216020C2F848007C264E /* LogInScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInScreenController.swift; sourceTree = "<group>"; };
+		809D216120C2F849007C264E /* ProfileEditScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditScreenController.swift; sourceTree = "<group>"; };
+		809D216220C2F849007C264E /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		809D216320C2F849007C264E /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
+		809D216420C2F849007C264E /* InboxScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
+		80EDCC4820C2E84B003F9852 /* SituationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				241295F320C149BC00620701 /* MLocation.swift */,
+				8097893B20C42DA70087BE98 /* MSituation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,13 +104,15 @@
 		241295F520C16DAC00620701 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5ED7F9FB20BC670A000E3D9F /* SettingsController.swift */,
-				24D62B0F20B5A9C7001367B8 /* FindDelegateViewController.swift */,
-				2488956220BB59AF00540180 /* HomeScreenController.swift */,
-				2409D31A20BCAF3C00B09FCB /* ProfileEditScreenController.swift */,
-				2411B1AC20BD8FED00589DB9 /* LogInScreenController.swift */,
-				2488956520BB60BA00540180 /* InboxScreenController.swift */,
+				8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */,
+				80EDCC4820C2E84B003F9852 /* SituationsController.swift */,
 				337E944320BC578D00B0926E /* MessageScreenController.swift */,
+				809D215F20C2F848007C264E /* FindDelegateViewController.swift */,
+				809D216320C2F849007C264E /* HomeScreenController.swift */,
+				809D216420C2F849007C264E /* InboxScreenController.swift */,
+				809D216020C2F848007C264E /* LogInScreenController.swift */,
+				809D216120C2F849007C264E /* ProfileEditScreenController.swift */,
+				809D216220C2F849007C264E /* SettingsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -294,20 +303,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */,
 				2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */,
-				5ED7F9FC20BC670A000E3D9F /* SettingsController.swift in Sources */,
-				2488956620BB60BA00540180 /* InboxScreenController.swift in Sources */,
+				809D216820C2F849007C264E /* SettingsController.swift in Sources */,
+				809D216920C2F849007C264E /* HomeScreenController.swift in Sources */,
 				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
-				2488956420BB5AF800540180 /* FindDelegateViewController.swift in Sources */,
-				2409D31B20BCAF3C00B09FCB /* ProfileEditScreenController.swift in Sources */,
+				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
-				2488956320BB59AF00540180 /* HomeScreenController.swift in Sources */,
+				8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */,
+				809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */,
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 				241295F720C16E0700620701 /* BackendServices.swift in Sources */,
+				8097893C20C42DA70087BE98 /* MSituation.swift in Sources */,
+				809D216620C2F849007C264E /* LogInScreenController.swift in Sources */,
+				809D216720C2F849007C264E /* ProfileEditScreenController.swift in Sources */,
 				2411B1AF20BDB64B00589DB9 /* KeyboardShifter.swift in Sources */,
 				241295F420C149BC00620701 /* MLocation.swift in Sources */,
-				2411B1AD20BD8FED00589DB9 /* LogInScreenController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
