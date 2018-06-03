@@ -1,12 +1,12 @@
 import Foundation
 
 protocol Request: Encodable {
-    var requestParameters: [String: CustomStringConvertible] { get }
+    func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible]
     var endpoint: String { get }
 }
 
 extension Request {
-    var requestParameters: [String: CustomStringConvertible] {
+    func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible] {
         return [:]
     }
 }
@@ -23,7 +23,7 @@ enum HTTPMethod: String {
 struct BackendServices {
     static func get<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
         where Req: Request, Res: Response {
-        var urlRequest = URLRequest(url: makeURL(request))
+        var urlRequest = URLRequest(url: makeURL(request, for: .get))
         urlRequest.httpMethod = HTTPMethod.get.rawValue
 
         perform(urlRequest: urlRequest, callback: callback)
@@ -50,18 +50,23 @@ struct BackendServices {
 
 // Utility Functions
 extension BackendServices {
-    static func makeURL<Req>(_ request: Req) -> URL where Req: Request {
+    static func makeURL<Req>(_ request: Req, for method: HTTPMethod) -> URL where Req: Request {
         var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.endpoint),
                                        resolvingAgainstBaseURL: false)!
-        components.queryItems = request.requestParameters.map {
+        let queryItems = request.getRequestParameters(for: method).map {
             URLQueryItem(name: $0.key, value: $0.value.description)
         }
+
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+        }
+
         return components.url!
     }
 
     static func makeJSONRequest<Req>(_ request: Req, method: HTTPMethod)
         -> URLRequest? where Req: Request {
-        var urlRequest = URLRequest(url: makeURL(request))
+        var urlRequest = URLRequest(url: makeURL(request, for: method))
         urlRequest.httpMethod = method.rawValue
         guard let encodedData = try? JSONEncoder().encode(request) else {
             return nil

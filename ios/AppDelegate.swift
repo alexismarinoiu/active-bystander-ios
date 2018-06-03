@@ -7,6 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     public private(set) var locationManager: CLLocationManager?
     public let notificationCenter = NotificationCenter()
+    private var backgroundInvocation = false
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -22,13 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Check if we are running normally or in the background to receive location updates
         if let hasLocation = launchOptions?[.location] as? NSNumber,
             hasLocation.boolValue {
-            updateMonitoring()
+            backgroundInvocation = true
+            NSLog("AV: Woke up from location change")
+            updateMonitoring(significant: true)
             return true
         }
 
         // Request the location permission
         locationManager.requestAlwaysAuthorization()
-        updateMonitoring()
+        updateMonitoring(significant: false)
 
         return true
     }
@@ -42,15 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application
-        // state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of
-        // applicationWillTerminate: when the user quits.
+        updateMonitoring(significant: true)
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the
-        // changes made on entering the background.
+        updateMonitoring(significant: false)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -66,12 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
-    func updateMonitoring() {
-        if UserDefaults.this.isLocationEnabled &&
-            CLLocationManager.authorizationStatus() == .authorizedAlways &&
-            CLLocationManager.significantLocationChangeMonitoringAvailable() {
+    func updateMonitoring(significant: Bool) {
+        let enabled =
+            UserDefaults.this.isLocationEnabled && CLLocationManager.authorizationStatus() == .authorizedAlways
+        if enabled && !significant {
+            // Don't let significant location updates disturb the accurate updates
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            locationManager?.startUpdatingLocation()
+        } else if enabled && significant && CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            // Don't turn off accurate location service as this can still be used for some time
+            // Turn on the significant monitoring service so that the app gets resumed every now and then
             locationManager?.startMonitoringSignificantLocationChanges()
         } else {
+            // Turn off both location services
+            locationManager?.stopUpdatingLocation()
             locationManager?.stopMonitoringSignificantLocationChanges()
         }
     }
@@ -79,7 +86,7 @@ extension AppDelegate {
 
 extension AppDelegate: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        updateMonitoring()
+        updateMonitoring(significant: backgroundInvocation)
         notificationCenter.post(name: .AVLocationAuthorizationNotification, object: self, userInfo: [0: status])
     }
 
