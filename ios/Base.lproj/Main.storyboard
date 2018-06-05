@@ -815,7 +815,7 @@ Message Content</string>
                                     <outlet property="latestMessageLabel" destination="E8n-p2-xiY" id="w2v-ys-93K"/>
                                     <outlet property="threadImage" destination="D7R-lv-Onx" id="vVL-tE-TXR"/>
                                     <outlet property="threadTitleLabel" destination="XMo-uq-QVb" id="WyF-SP-KQO"/>
-                                    <segue destination="vRJ-kL-huW" kind="show" id="7P0-sp-54R"/>
+                                    <segue destination="vRJ-kL-huW" kind="show" identifier="InboxToMessage" id="7P0-sp-54R"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -873,7 +873,7 @@ Message Content</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-ra-oUg">
+                            <stackView contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="eQE-ra-oUg">
                                 <rect key="frame" x="30" y="568" width="315" height="110"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="College ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fkU-lM-DUG">

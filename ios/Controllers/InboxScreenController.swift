@@ -22,12 +22,12 @@ class InboxScreenController: UITableViewController {
 
         // Some dummy data for now
         messages.append(contentsOf: [
-            Message(title: "Harold Jr", latestMessage: "Hello"),
-            Message(title: "Tester Testington", latestMessage: "Another Test")
+            Message(title: "Jon Smith", latestMessage: "Thank you so much."),
+            Message(title: "Jenny Smith", latestMessage: "Bye!")
             ])
 
         requests.append(contentsOf: [
-            Message(title: "Annoying Orange", latestMessage: "Hey! Hey Apple! Hey!")
+            Message(title: "Anonymous", latestMessage: "I need help. I am about 100 metres away.")
         ])
 
         tableView.reloadData()
@@ -77,6 +77,13 @@ class InboxScreenController: UITableViewController {
         }
 
         return NSLocalizedString("Messages", comment: "")
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "InboxToMessage",
+            let tableViewCell = sender as? MessageTableViewCell {
+            segue.destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+        }
     }
 
 }

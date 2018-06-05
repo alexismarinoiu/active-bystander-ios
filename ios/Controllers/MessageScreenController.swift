@@ -13,8 +13,8 @@ class MessageScreenController: UIViewController {
     }
 
     var messages: [Message] = [
-        Message(isMe: true, text: "Hello"),
-        Message(isMe: false, text: "Hello")
+        Message(isMe: true, text: "Hello, I need help. You are about 100 metres away from me."),
+        Message(isMe: false, text: "I can help. I'll be on my way.")
     ]
 
     override func viewDidLoad() {
