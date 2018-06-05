@@ -12,6 +12,7 @@ extension UserDefaults {
         fileprivate init() {}
 
         private let locationEnabled = "avLocationEnabled"
+        private let previouslyLoggedIn = "avPreviouslyLoggedIn"
 
         var isLocationEnabled: Bool {
             get {
@@ -20,6 +21,16 @@ extension UserDefaults {
 
             set {
                 UserDefaults.standard.set(newValue, forKey: locationEnabled)
+            }
+        }
+
+        var hasPreviouslyLoggedIn: Bool {
+            get {
+                return UserDefaults.standard.bool(forKey: previouslyLoggedIn)
+            }
+
+            set {
+                UserDefaults.standard.set(newValue, forKey: previouslyLoggedIn)
             }
         }
     }

@@ -1,13 +1,18 @@
-import Foundation
+import UIKit
 
 protocol Request: Encodable {
     func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible]
+    func canRequestLogin(for method: HTTPMethod) -> Bool
     var endpoint: String { get }
 }
 
 extension Request {
     func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible] {
         return [:]
+    }
+
+    func canRequestLogin(for method: HTTPMethod) -> Bool {
+        return true
     }
 }
 
@@ -26,7 +31,7 @@ struct BackendServices {
         var urlRequest = URLRequest(url: makeURL(request, for: .get))
         urlRequest.httpMethod = HTTPMethod.get.rawValue
 
-        perform(urlRequest: urlRequest, callback: callback)
+        perform(urlRequest: urlRequest, requestLogin: request.canRequestLogin(for: .get), callback: callback)
     }
 
     static func post<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
@@ -35,7 +40,7 @@ struct BackendServices {
             callback(false, nil)
             return
         }
-        perform(urlRequest: urlRequest, callback: callback)
+        perform(urlRequest: urlRequest, requestLogin: request.canRequestLogin(for: .post), callback: callback)
     }
 
     static func put<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
@@ -44,7 +49,7 @@ struct BackendServices {
             callback(false, nil)
             return
         }
-        perform(urlRequest: urlRequest, callback: callback)
+        perform(urlRequest: urlRequest, requestLogin: request.canRequestLogin(for: .put), callback: callback)
     }
 }
 
@@ -77,9 +82,26 @@ extension BackendServices {
         return urlRequest
     }
 
-    static func perform<Res>(urlRequest request: URLRequest, callback: @escaping (Bool, Res?) -> Void)
-        where Res: Response {
-        URLSession.shared.dataTask(with: request) { (data, _, error) in
+    static func perform<Res>(urlRequest request: URLRequest,
+                             requestLogin login: Bool,
+                             callback: @escaping (Bool, Res?) -> Void) where Res: Response {
+        #if DEBUG
+        print("Requesting: \(request.httpMethod ?? "not found") \(request.url?.absoluteString ?? "not found")")
+        #endif
+
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: request) { (data, status, error) in
+            guard let http = status as? HTTPURLResponse,
+                http.statusCode != 401 else { // Authorization Error
+                if login {
+                    DispatchQueue.main.async {
+                        (UIApplication.shared.delegate as? AppDelegate)?.showLoginViewController()
+                    }
+                }
+                callback(false, nil)
+                return
+            }
+
             guard error == nil,
                 let data = data,
                 let decodedData = try? JSONDecoder().decode(Res.self, from: data) else {

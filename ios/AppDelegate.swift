@@ -31,8 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Request the location permission
         locationManager.requestAlwaysAuthorization()
-        updateMonitoring(significant: false)
 
+        notificationCenter.addObserver(self, selector: #selector(didUserLoginAuthorizationUpdate(_:)),
+                                       name: .AVAuthStatusChangeNotification, object: nil)
         return true
     }
 
@@ -60,6 +61,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate.
         // See also applicationDidEnterBackground:.
+    }
+
+    @objc func didUserLoginAuthorizationUpdate(_ notification: Notification) {
+        guard let status = notification.userInfo?[0] as? UserAuth.Status else {
+            return
+        }
+
+        if status == .loggedIn {
+            updateMonitoring(significant: false)
+        } else {
+            locationManager?.stopUpdatingLocation()
+            locationManager?.stopMonitoringSignificantLocationChanges()
+        }
     }
 
 }
@@ -109,5 +123,29 @@ extension AppDelegate: CLLocationManagerDelegate {
             manager.stopMonitoringSignificantLocationChanges()
             return
         }
+    }
+}
+
+extension AppDelegate {
+    func showLoginViewController() {
+        guard !backgroundInvocation else {
+            return
+        }
+
+        // Base navigation controller
+        guard let rootNav = UIApplication.shared.keyWindow?.rootViewController as? UINavigationController else {
+            return
+        }
+
+        // Ensure that the LogInScreen doesn't show twice
+        guard !rootNav.childViewControllers.contains(where: { (controller) -> Bool in
+            return controller is LogInScreenController
+        }), let storyboard = rootNav.storyboard else {
+            return
+        }
+
+        rootNav.setViewControllers([
+            storyboard.instantiateViewController(withIdentifier: "LoginController")
+        ], animated: true)
     }
 }
