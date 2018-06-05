@@ -33,6 +33,7 @@
 		809D216920C2F849007C264E /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216320C2F849007C264E /* HomeScreenController.swift */; };
 		809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216420C2F849007C264E /* InboxScreenController.swift */; };
 		80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EDCC4820C2E84B003F9852 /* SituationsController.swift */; };
+		B3D337F920C6E419001D0FB1 /* FourDDescriptionScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		809D216320C2F849007C264E /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		809D216420C2F849007C264E /* InboxScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
 		80EDCC4820C2E84B003F9852 /* SituationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationsController.swift; sourceTree = "<group>"; };
+		B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDDescriptionScreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				337E944320BC578D00B0926E /* MessageScreenController.swift */,
 				809D215F20C2F848007C264E /* FindDelegateViewController.swift */,
 				809D216320C2F849007C264E /* HomeScreenController.swift */,
+				B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */,
 				809D216420C2F849007C264E /* InboxScreenController.swift */,
 				809D216020C2F848007C264E /* LogInScreenController.swift */,
 				2486CB4720C6012C007DF229 /* ProfileScreenController.swift */,
@@ -320,6 +323,7 @@
 				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
 				2447449520C5A1A1007A1B26 /* UserAuth.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
+				B3D337F920C6E419001D0FB1 /* FourDDescriptionScreenController.swift in Sources */,
 				8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */,
 				809D216520C2F849007C264E /* FindDelegateViewController.swift in Sources */,
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
