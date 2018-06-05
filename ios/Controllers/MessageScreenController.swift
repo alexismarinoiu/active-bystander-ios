@@ -23,6 +23,13 @@ class MessageScreenController: UIViewController {
         messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBegan))
+        messageTableView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func tapBegan () {
+        self.view.endEditing(true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
