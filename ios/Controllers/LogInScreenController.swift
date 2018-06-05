@@ -41,31 +41,24 @@ class LogInScreenController: UIViewController {
 extension LogInScreenController {
     func updateDisplay(with status: UserAuth.Status) {
         switch status {
-        case .loggedOut:
-            loginStack.isHidden = false
-
-            statusSpinnerContainer.isOpaque = false
+        case .loggedOut: // Hide the spinner, show the login stack
             statusSpinnerContainer.layer.opacity = 1
 
             UIView.animate(withDuration: 0.5, animations: { [weak statusSpinnerContainer] in
                 statusSpinnerContainer?.layer.opacity = 0
-            }, completion: { [weak statusSpinnerContainer] (_) in
-                statusSpinnerContainer?.isOpaque = true
+            }, completion: { [weak statusSpinnerContainer] _ in
                 statusSpinnerContainer?.isHidden = true
                 statusSpinnerContainer?.layer.opacity = 1
             })
             return
-        case .pendingValidation:
-            statusSpinnerContainer.isOpaque = false
+        case .pendingValidation: // Show the spinner, hide the login stack
             statusSpinnerContainer.isHidden = false
             statusSpinnerContainer.layer.opacity = 0
 
             UIView.animate(withDuration: 0.5, animations: { [weak statusSpinnerContainer] in
                 statusSpinnerContainer?.layer.opacity = 1
-                }, completion: { [weak loginStack, weak statusSpinnerContainer] (_) in
-                    statusSpinnerContainer?.isOpaque = true
-                    statusSpinnerContainer?.layer.opacity = 1
-                    loginStack?.isHidden = true
+            }, completion: { [weak statusSpinnerContainer] _ in
+                statusSpinnerContainer?.layer.opacity = 1
             })
             return
         default:
