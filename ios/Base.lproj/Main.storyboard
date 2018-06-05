@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -710,16 +709,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwY-0O-qmQ">
-                                <rect key="frame" x="22" y="110" width="331" height="331"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="375"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="mdq-1Z-2F0">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Lqq-Kf-A7s">
-                                                <rect key="frame" x="0.0" y="0.0" width="331" height="165.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="187.66666666666666"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZo-6J-zpS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="165.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="187.66666666666666"/>
                                                         <color key="backgroundColor" red="0.0" green="0.23921568627450979" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Direct Action">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -729,7 +728,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rb4-oh-PZ4">
-                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="165.66666666666666"/>
+                                                        <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="187.66666666666666"/>
                                                         <color key="backgroundColor" red="0.0" green="0.72469067573547363" blue="0.77705353498458862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Delay">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -741,10 +740,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="KYY-g0-hCp">
-                                                <rect key="frame" x="0.0" y="165.66666666666669" width="331" height="165.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="187.66666666666669" width="375" height="187.33333333333331"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdg-wj-duC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="165.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="187.33333333333334"/>
                                                         <color key="backgroundColor" red="0.0" green="0.064867682754993439" blue="0.2160007655620575" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Distraction">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -754,7 +753,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAK-l5-Aze">
-                                                        <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="165.33333333333334"/>
+                                                        <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="187.33333333333334"/>
                                                         <color key="backgroundColor" red="0.93961799144744873" green="0.17568907141685486" blue="0.30334869027137756" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Delegation">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -775,7 +774,7 @@
                                         </constraints>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ablogo" translatesAutoresizingMaskIntoConstraints="NO" id="TZg-eR-8S9">
-                                        <rect key="frame" x="100.66666666666669" y="100.66666666666666" width="130" height="130"/>
+                                        <rect key="frame" x="122.66666666666669" y="123" width="130" height="130"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TZg-eR-8S9" secondAttribute="height" multiplier="1:1" id="RbP-ql-p1U"/>
                                             <constraint firstAttribute="width" constant="130" id="UMu-pa-6px"/>
@@ -792,39 +791,52 @@
                                     <constraint firstAttribute="bottom" secondItem="mdq-1Z-2F0" secondAttribute="bottom" id="uqF-BG-OQt"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="-80" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-S8-wmt">
-                                <rect key="frame" x="20" y="471" width="335" height="258"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lq-CD-JaK">
+                                <rect key="frame" x="20" y="463" width="335" height="266"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPX-WL-NKd">
-                                        <rect key="frame" x="96" y="0.0" width="143" height="139.33333333333334"/>
-                                        <state key="normal" title="Assess The Situation"/>
-                                        <connections>
-                                            <segue destination="Xmd-SO-NIT" kind="show" id="10D-Pl-z7a"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTR-qR-Ibn">
-                                        <rect key="frame" x="120" y="59.333333333333385" width="95" height="139.33333333333337"/>
-                                        <state key="normal" title="Find Delegate"/>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="GZ0-SU-fOo"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-av-4aa">
-                                        <rect key="frame" x="106" y="118.66666666666664" width="123" height="139.33333333333337"/>
-                                        <state key="normal" title="Provide Feedback"/>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="C6I-S8-wmt">
+                                        <rect key="frame" x="77" y="59.666666666666629" width="182" height="148"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPX-WL-NKd">
+                                                <rect key="frame" x="0.0" y="0.0" width="182" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Assess The Situation"/>
+                                                <connections>
+                                                    <segue destination="Xmd-SO-NIT" kind="show" id="10D-Pl-z7a"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTR-qR-Ibn">
+                                                <rect key="frame" x="30.666666666666671" y="56" width="121.00000000000001" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Find Delegate"/>
+                                                <connections>
+                                                    <segue destination="BYZ-38-t0r" kind="show" id="GZ0-SU-fOo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HK-av-4aa">
+                                                <rect key="frame" x="13" y="112" width="156" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Provide Feedback"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="C6I-S8-wmt" firstAttribute="centerY" secondItem="0lq-CD-JaK" secondAttribute="centerY" id="hR7-f3-Ftm"/>
+                                    <constraint firstItem="C6I-S8-wmt" firstAttribute="centerX" secondItem="0lq-CD-JaK" secondAttribute="centerX" id="sCY-IM-PTa"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="C6I-S8-wmt" firstAttribute="leading" secondItem="JwI-0W-3cV" secondAttribute="leading" constant="20" id="8Yv-d8-xwn"/>
-                            <constraint firstItem="C6I-S8-wmt" firstAttribute="top" secondItem="vwY-0O-qmQ" secondAttribute="bottom" constant="30" id="BPV-1b-hTQ"/>
-                            <constraint firstItem="JwI-0W-3cV" firstAttribute="trailing" secondItem="C6I-S8-wmt" secondAttribute="trailing" constant="20" id="MCg-71-wwK"/>
-                            <constraint firstItem="vwY-0O-qmQ" firstAttribute="leadingMargin" secondItem="JwI-0W-3cV" secondAttribute="leading" constant="30" id="W9h-0l-zGM"/>
-                            <constraint firstItem="JwI-0W-3cV" firstAttribute="trailing" secondItem="vwY-0O-qmQ" secondAttribute="trailingMargin" constant="30" id="WtF-Nw-HxG"/>
-                            <constraint firstItem="JwI-0W-3cV" firstAttribute="bottom" secondItem="C6I-S8-wmt" secondAttribute="bottomMargin" id="iRw-mQ-ptV"/>
-                            <constraint firstItem="vwY-0O-qmQ" firstAttribute="topMargin" secondItem="JwI-0W-3cV" secondAttribute="top" constant="30" id="iW0-KB-7c8"/>
+                            <constraint firstItem="0lq-CD-JaK" firstAttribute="top" secondItem="vwY-0O-qmQ" secondAttribute="bottom" id="GUX-ij-zck"/>
+                            <constraint firstItem="0lq-CD-JaK" firstAttribute="leading" secondItem="JwI-0W-3cV" secondAttribute="leading" constant="20" id="JG1-6R-byc"/>
+                            <constraint firstAttribute="trailing" secondItem="vwY-0O-qmQ" secondAttribute="trailing" id="XVt-1G-eMx"/>
+                            <constraint firstItem="JwI-0W-3cV" firstAttribute="bottom" secondItem="0lq-CD-JaK" secondAttribute="bottom" id="a6i-h0-ZTf"/>
+                            <constraint firstItem="JwI-0W-3cV" firstAttribute="trailing" secondItem="0lq-CD-JaK" secondAttribute="trailing" constant="20" id="kf0-5f-trt"/>
+                            <constraint firstItem="vwY-0O-qmQ" firstAttribute="top" secondItem="JwI-0W-3cV" secondAttribute="top" id="lgx-mA-E8u"/>
+                            <constraint firstItem="vwY-0O-qmQ" firstAttribute="leading" secondItem="JwI-0W-3cV" secondAttribute="leading" id="vXc-Ev-tPc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JwI-0W-3cV"/>
                     </view>
