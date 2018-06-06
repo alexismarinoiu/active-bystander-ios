@@ -8,8 +8,6 @@ class SituationsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Environment.backend.read(MSituationRequest()) { (_, _: [MSituation]?) in
-        }
         Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
             guard success, let situations = situations else {
                 return
