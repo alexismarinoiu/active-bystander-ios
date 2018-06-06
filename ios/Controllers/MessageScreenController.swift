@@ -6,6 +6,10 @@ class MessageScreenController: UIViewController {
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var textInput: UITextField!
+    @IBOutlet weak var bottomStack: UIStackView!
+
+    private var keyboardHeight = CGFloat(0)
+    private var keyboardIsShowing = false
 
     struct Message {
         let isMe: Bool
@@ -23,13 +27,6 @@ class MessageScreenController: UIViewController {
         messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBegan))
-        messageTableView.addGestureRecognizer(tapGesture)
-    }
-
-    @objc func tapBegan () {
-        self.view.endEditing(true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -46,32 +43,66 @@ class MessageScreenController: UIViewController {
     }
 
     @IBAction func sendPressed(_ sender: Any) {
-        if textInput.text?.isEmpty == true {
+        guard textInput.text?.isEmpty != true,
+            let text = textInput.text else {
             return
         }
 
-        messages.append(contentsOf: [Message(isMe: true, text: textInput.text!)])
+        messages.append(Message(isMe: true, text: text))
         self.messageTableView.reloadData()
         textInput.text = ""
     }
 
+    @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
+        textInput.resignFirstResponder()
+    }
 }
 
 extension MessageScreenController: KeyboardShifterDelegate {
-    func keyboard(_ keyboardShifter: KeyboardShifter,
-                  shiftedBy delta: CGFloat,
-                  duration: Double,
-                  options: UIViewAnimationOptions) {
-        view.frame.origin.y += delta
+    func keyboard(_ keyboardShifter: KeyboardShifter, willShow sizeBegin: CGRect, sizeEnd: CGRect,
+                  duration: Double, options: UIViewAnimationOptions) {
+        guard let window = view.window else {
+            return
+        }
 
-        UIView.animate(withDuration: duration,
-                       delay: 0,
-                       options: options,
-                       animations: {},
+        if keyboardIsShowing {
+            keyboardHeight = sizeEnd.height
+        } else {
+            // Record the keyboard height
+            keyboardHeight += sizeEnd.height
+        }
+
+        // Does not support hardware keyboards
+        view.frame.origin.y = -keyboardHeight + (window.frame.maxY - bottomStack.frame.maxY)
+
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
                        completion: { [weak view = view] _ in
-                        view?.layoutIfNeeded()
+            view?.layoutIfNeeded()
         })
     }
+
+    func keyboardDidShow(_ keyboardShifter: KeyboardShifter) {
+        keyboardHeight = 0
+        keyboardIsShowing = true
+    }
+
+    func keyboard(_ keyboardShifter: KeyboardShifter, willHide sizeBegin: CGRect, sizeEnd: CGRect,
+                  duration: Double, options: UIViewAnimationOptions) {
+        // Does not support hardware keyboards
+        view.frame.origin.y = CGFloat(0)
+
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
+                       completion: { [weak view = view] _ in
+            view?.layoutIfNeeded()
+        })
+
+        view.layoutIfNeeded()
+    }
+
+    func keyboardDidHide(_ keyboardShifter: KeyboardShifter) {
+        keyboardIsShowing = false
+    }
+
 }
 
 extension MessageScreenController: UITableViewDataSource {

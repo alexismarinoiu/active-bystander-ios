@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = {
             let window = UIWindow()
+            window.backgroundColor = .white
             window.rootViewController = storyboard.instantiateInitialViewController()
             window.makeKeyAndVisible()
             return window

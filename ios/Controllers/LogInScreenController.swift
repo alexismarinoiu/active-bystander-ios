@@ -14,6 +14,8 @@ class LogInScreenController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
 
     var isInitialDismiss = true
+    private var keyboardHeight = CGFloat(0)
+    private var keyboardIsShowing = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,11 @@ class LogInScreenController: UIViewController {
         passwordField.resignFirstResponder()
         // Run the login action
         login()
+    }
+
+    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        usernameField.resignFirstResponder()
+        passwordField.resignFirstResponder()
     }
 }
 
@@ -88,22 +95,44 @@ extension LogInScreenController {
 
 extension LogInScreenController: KeyboardShifterDelegate {
 
-    func keyboard(_ keyboardShifter: KeyboardShifter,
-                  shiftedBy delta: CGFloat,
-                  duration: Double,
-                  options: UIViewAnimationOptions) {
+    func keyboard(_ keyboardShifter: KeyboardShifter, willShow sizeBegin: CGRect, sizeEnd: CGRect,
+                  duration: Double, options: UIViewAnimationOptions) {
+        if keyboardIsShowing {
+            keyboardHeight = sizeEnd.height
+        } else {
+            // Record the keyboard height
+            keyboardHeight += sizeEnd.height
+        }
 
-        view.frame.origin.y += delta
-        topConstraint?.constant -= delta
+        // Does not support hardware keyboards
+        view.frame.origin.y = -keyboardHeight
 
-        UIView.animate(withDuration: duration,
-                       delay: 0,
-                       options: options,
-                       animations: {},
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
                        completion: { [weak view = view] _ in
-                           self.logo.layoutIfNeeded()
-                           view?.layoutIfNeeded()
-                       })
+            view?.layoutIfNeeded()
+        })
+    }
+
+    func keyboardDidShow(_ keyboardShifter: KeyboardShifter) {
+        keyboardIsShowing = true
+        keyboardHeight = 0
+    }
+
+    func keyboard(_ keyboardShifter: KeyboardShifter, willHide sizeBegin: CGRect, sizeEnd: CGRect,
+                  duration: Double, options: UIViewAnimationOptions) {
+        // Does not support hardware keyboards
+        view.frame.origin.y = CGFloat(0)
+
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
+                       completion: { [weak view = view] _ in
+            view?.layoutIfNeeded()
+        })
+
+        view.layoutIfNeeded()
+    }
+
+    func keyboardDidHide(_ keyboardShifter: KeyboardShifter) {
+        keyboardIsShowing = false
     }
 }
 
