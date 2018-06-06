@@ -3,11 +3,11 @@ import Foundation
 struct AuthStatusRequest: Encodable { }
 
 extension AuthStatusRequest: Request {
-    var endpoint: String {
+    var resource: String {
         return "status"
     }
 
-    func canRequestLogin(for method: HTTPMethod) -> Bool {
+    func getCanRequestLogin(for type: CrudType) -> Bool {
         return false
     }
 }

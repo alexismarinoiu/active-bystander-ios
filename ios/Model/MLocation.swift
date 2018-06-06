@@ -12,8 +12,8 @@ struct MLocation: Codable {
 }
 
 extension MLocation: Request {
-    func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible] {
-        if method == .get {
+    func getParameters(for type: CrudType) -> [String: CustomStringConvertible] {
+        if type == .read {
             return [
                 "latitude": latitude,
                 "longitude": longitude,
@@ -24,7 +24,7 @@ extension MLocation: Request {
         return [:]
     }
 
-    var endpoint: String {
+    var resource: String {
         return "location"
     }
 }

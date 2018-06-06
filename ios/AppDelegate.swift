@@ -112,7 +112,7 @@ extension AppDelegate: CLLocationManagerDelegate {
 
         // notTODO: Change MLocation generation with authentication
         let request = lastLocation.coordinate.toMLocation(username: "nv516")
-        BackendServices.put(request) { (success, _: MLocation?) in
+        Environment.backend.update(request) { (success, _: MLocation?) in
             print("Location Request: \(success)")
         }
     }
