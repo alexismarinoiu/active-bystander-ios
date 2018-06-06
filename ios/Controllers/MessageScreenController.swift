@@ -61,15 +61,19 @@ class MessageScreenController: UIViewController {
 extension MessageScreenController: KeyboardShifterDelegate {
     func keyboard(_ keyboardShifter: KeyboardShifter, willShow sizeBegin: CGRect, sizeEnd: CGRect,
                   duration: Double, options: UIViewAnimationOptions) {
-        guard !keyboardIsShowing else {
+        guard let window = view.window else {
             return
         }
 
-        // Record the keyboard height
-        keyboardHeight += sizeEnd.height
+        if keyboardIsShowing {
+            keyboardHeight = sizeEnd.height
+        } else {
+            // Record the keyboard height
+            keyboardHeight += sizeEnd.height
+        }
 
         // Does not support hardware keyboards
-        view.frame.origin.y = -keyboardHeight + (view.frame.maxY - bottomStack.frame.maxY)
+        view.frame.origin.y = -keyboardHeight + (window.frame.maxY - bottomStack.frame.maxY)
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
                        completion: { [weak view = view] _ in
