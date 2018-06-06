@@ -8,6 +8,13 @@ class FindDelegateViewController: UIViewController {
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var connectButtonBottomConstraint: NSLayoutConstraint!
     private var connectButtonHidden: Bool = true
+    private var labelAlert: UIAlertController!
+
+    var labels = [
+        "label1",
+        "label2",
+        "label3"
+    ]
 
     /// Viewport specified in metres
     private let viewport: CLLocationDistance = 70
@@ -19,6 +26,8 @@ class FindDelegateViewController: UIViewController {
         super.viewDidLoad()
 
         connectButton.layer.cornerRadius = 5
+
+        setupLabelAlert()
 
         mapView.layoutMargins = mapView.safeAreaInsets
         mapView.showsUserLocation = true
@@ -36,6 +45,15 @@ class FindDelegateViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func setupLabelAlert() {
+        labelAlert = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
+                                       preferredStyle: .alert)
+        for label in labels {
+            labelAlert.addAction(UIAlertAction(title: label, style: .default, handler: nil))
+        }
+        labelAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
     }
 }
 
@@ -93,6 +111,10 @@ extension FindDelegateViewController {
             self.connectButton.isHidden = true
             self.connectButtonHidden = true
         })
+    }
+
+    @IBAction func sendPressed(_ sender: Any) {
+        self.present(labelAlert, animated: true, completion: nil)
     }
 
 }
