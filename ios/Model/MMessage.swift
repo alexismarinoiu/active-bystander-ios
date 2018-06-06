@@ -8,16 +8,19 @@ struct MMessage: Codable {
     let threadId: String
 }
 
-extension MMessage: Request {
-    func getRequestParameters(for method: HTTPMethod) -> [String : CustomStringConvertible] {
-        if method == .get {
-            return ["threadId": threadId]
-        }
+struct MMessageRequest: Encodable {
+    let threadId: String
 
-        return [:]
+    init(threadId: String) {
+        self.threadId = threadId
     }
 
+    func encode(to encoder: Encoder) throws {
+    }
+}
+
+extension MMessageRequest: Request {
     var endpoint: String {
-        return "thread"
+        return "thread/\(threadId)"
     }
 }

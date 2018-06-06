@@ -2,12 +2,12 @@ import UIKit
 
 class InboxScreenController: UITableViewController {
     // notTODO: Part of the model, should be moved at some point
-
     struct Message {
         let title: String
         let latestMessage: String
     }
 
+    private var threads: [MThread] = []
     var messages: [Message] = []
     var requests: [Message] = []
 

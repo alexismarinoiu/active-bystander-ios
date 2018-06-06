@@ -11,8 +11,10 @@ struct MThread: Codable {
     }
 }
 
-extension MThread: Request {
-    func getRequestParameters(for method: HTTPMethod) -> [String : CustomStringConvertible] {
+struct MThreadRequest: Encodable {}
+
+extension MThreadRequest: Request {
+    func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible] {
         if method == .get {
             return [:]
         }
@@ -24,5 +26,3 @@ extension MThread: Request {
         return "thread"
     }
 }
-
-
