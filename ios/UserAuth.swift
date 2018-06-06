@@ -20,7 +20,7 @@ class UserAuth {
             }
         }
     }
-    private static var protectionSpace = URLProtectionSpace(host: Environment.endpoint.host!,
+    internal static var protectionSpace = URLProtectionSpace(host: Environment.endpoint.host!,
                                                             port: 443,
                                                             protocol: Environment.endpoint.scheme!,
                                                             realm: Environment.realm,
@@ -60,6 +60,9 @@ class UserAuth {
                 // Make the credential permanent
                 let newCredential = URLCredential(user: username, password: password, persistence: .permanent)
                 URLCredentialStorage.shared.setDefaultCredential(newCredential, for: UserAuth.protectionSpace)
+            } else {
+                // Delete the credential
+                URLCredentialStorage.shared.remove(credential, for: UserAuth.protectionSpace)
             }
 
             completionHandler?(status)
@@ -68,6 +71,7 @@ class UserAuth {
 
     func logOut() {
         UserDefaults.this.hasPreviouslyLoggedIn = false
+        status = .loggedOut
         guard let credential = URLCredentialStorage.shared.defaultCredential(for: UserAuth.protectionSpace) else {
             return
         }

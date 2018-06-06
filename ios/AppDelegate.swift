@@ -1,7 +1,6 @@
 import UIKit
 import CoreLocation
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -28,6 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             updateMonitoring(significant: true)
             return true
         }
+
+        // Set up the window and storyboard
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        window = {
+            let window = UIWindow()
+            window.rootViewController = storyboard.instantiateInitialViewController()
+            window.makeKeyAndVisible()
+            return window
+        }()
 
         // Request the location permission
         locationManager.requestAlwaysAuthorization()
