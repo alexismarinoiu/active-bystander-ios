@@ -443,16 +443,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AAPBC93DAB;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.avocado.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Bystander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ab36160f-47fd-4098-bd39-d8d00a8f9a1f";
+				PROVISIONING_PROFILE_SPECIFIER = Bystander;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -539,16 +541,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AAPBC93DAB;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = QJQGH9NF7F;
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = uk.avocado.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.imperial.Bystander;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ab36160f-47fd-4098-bd39-d8d00a8f9a1f";
+				PROVISIONING_PROFILE_SPECIFIER = Bystander;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
