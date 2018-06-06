@@ -16,4 +16,5 @@ struct Environment {
     }()
 
     static var userAuth = UserAuth()
+    static var backend: BackendService = HttpBackendService()
 }

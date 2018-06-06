@@ -34,7 +34,7 @@ class UserAuth {
     func updateStatus(_ completionHandler: ((Status) -> Void)?) {
         status = .pendingValidation
 
-        BackendServices.get(AuthStatusRequest()) { [weak self] (success, response: AuthStatusResponse?) in
+        Environment.backend.read(AuthStatusRequest()) { [weak self] (success, response: AuthStatusResponse?) in
             guard success, let response = response, response.status else {
                 DispatchQueue.main.async {
                     self?.status = .loggedOut

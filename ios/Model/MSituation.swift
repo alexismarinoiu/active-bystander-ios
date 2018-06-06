@@ -5,7 +5,7 @@ struct MSituationRequest: Encodable {
 }
 
 extension MSituationRequest: Request {
-    var endpoint: String {
+    var resource: String {
         return "situation"
     }
 }

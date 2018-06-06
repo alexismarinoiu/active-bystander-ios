@@ -108,7 +108,8 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
         mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
 
-        BackendServices.get(location.coordinate.toMLocation(username: "nv516")) { (success, locations: [MLocation]?) in
+        let mLocation = location.coordinate.toMLocation(username: "nv516")
+        Environment.backend.read(mLocation) { (success, locations: [MLocation]?) in
             guard success, let locations = locations else {
                 // notTODO: Handle error, perhaps a periodic refresh?
                 return
