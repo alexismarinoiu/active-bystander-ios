@@ -2,6 +2,7 @@ import UIKit
 
 class MessageScreenController: UIViewController {
 
+    var thread: MThread?
     private var shifter = KeyboardShifter()
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!

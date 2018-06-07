@@ -2,9 +2,8 @@ import UIKit
 
 class InboxScreenController: UITableViewController {
     // notTODO: Part of the model, should be moved at some point
-
     struct Message {
-        let title: String
+        let thread: MThread
         let latestMessage: String
     }
 
@@ -14,23 +13,13 @@ class InboxScreenController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        reloadTheInboxScreen()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 
-        // Some dummy data for now
-        messages.append(contentsOf: [
-            Message(title: "Jon Smith", latestMessage: "Thank you so much."),
-            Message(title: "Jenny Smith", latestMessage: "Bye!")
-            ])
-
-        requests.append(contentsOf: [
-            Message(title: "Anonymous", latestMessage: "I need help. I am about 100 metres away.")
-        ])
-
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,7 +51,7 @@ class InboxScreenController: UITableViewController {
         }
 
         let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
-        messageCell.threadTitleLabel.text = message.title
+        messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         if let image = UIImage(named: "oldman") {
             messageCell.setThreadImage(image)
@@ -81,11 +70,53 @@ class InboxScreenController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InboxToMessage",
+            let destination: MessageScreenController = segue.destination as? MessageScreenController,
+            let indexPath = tableView.indexPathForSelectedRow,
             let tableViewCell = sender as? MessageTableViewCell {
-            segue.destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+            destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+
+            destination.thread = (indexPath.section == 1 ? messages : requests)[indexPath.row].thread
         }
     }
 
+    private func appendMessage(thread: MThread, completionHandler: (() -> Void)?) {
+        Environment.backend.read(MMessageRequest(threadId: thread.threadId,
+                                                 queryLastMessage: true)) { (success, last: MMessage?) in
+            guard success, let lastMessage = last else {
+                return
+            }
+
+            self.messages.append(Message(thread: thread, latestMessage: lastMessage.content))
+            completionHandler?()
+        }
+    }
+
+    func reloadTheInboxScreen() {
+        Environment.backend.read(MThreadRequest()) { [weak `self` = self] (success, threads: [MThread]?) in
+            guard success, let threads = threads else {
+                return
+            }
+
+            let group = DispatchGroup()
+            for thread in threads {
+                if thread.status == .accepted {
+                    group.enter()
+                    self?.appendMessage(thread: thread) {
+                        group.leave()
+                    }
+                } else {
+                    self?.requests.append(Message(thread: thread,
+                                                  latestMessage: "I need help. I am about 100 metres away."))
+                }
+            }
+
+            group.wait()
+
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
 }
 
 class MessageTableViewCell: UITableViewCell {
