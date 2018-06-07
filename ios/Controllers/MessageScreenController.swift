@@ -18,6 +18,7 @@ class MessageScreenController: UIViewController {
     }
 
     private(set) var messages: [Message] = []
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +27,26 @@ class MessageScreenController: UIViewController {
         shifter.delegate = self
         shifter.register()
 
-        refreshMessages()
+        self.refreshMessages()
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        // Start the polling timer
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
+            self?.refreshMessages()
+        }
+
         let contentOffset = messageTableView.contentSize.height - messageTableView.bounds.size.height
         if contentOffset > 0 {
             let bottomOffset = CGPoint(x: 0, y: contentOffset)
             messageTableView.setContentOffset(bottomOffset, animated: true)
         }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        // End the polling timer
+        timer?.invalidate()
+        timer = nil
     }
 
     override func didReceiveMemoryWarning() {
