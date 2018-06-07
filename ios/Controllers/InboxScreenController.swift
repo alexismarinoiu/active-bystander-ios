@@ -13,24 +13,7 @@ class InboxScreenController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Environment.backend.read(MThreadRequest()) { [weak `self` = self] (success, threads: [MThread]?) in
-            guard success, let threads = threads else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                for thread in threads {
-                    if thread.status == MThread.Status.accepted {
-                        self?.appendMessage(thread: thread)
-                    } else {
-                        self?.messages.append(
-                            Message(title: thread.title, latestMessage: "I need help. I am about 100 metres away."))
-                    }
-                }
-
-                self?.tableView.reloadData()
-            }
-        }
+        reloadTheInboxScreen()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -92,18 +75,43 @@ class InboxScreenController: UITableViewController {
         }
     }
 
-    func appendMessage(thread: MThread) {
-        Environment.backend.read(MMessageRequest(threadId: thread.threadId)) { (success, lastMessage: MMessage?) in
-            guard success, let lastMessage = lastMessage else {
+    func appendMessage(thread: MThread, completionHandler: (() -> Void)?) {
+        Environment.backend.read(MMessageRequest(threadId: thread.threadId, flag: true)) { (success, last: MMessage?) in
+            guard success, let lastMessage = last else {
                 return
             }
 
-            DispatchQueue.main.async {
-                self.messages.append(Message(title: thread.title, latestMessage: lastMessage.content))
-            }
+            self.messages.append(Message(title: thread.title, latestMessage: lastMessage.content))
+            completionHandler?()
         }
     }
 
+    func reloadTheInboxScreen() {
+        Environment.backend.read(MThreadRequest()) { [weak `self` = self] (success, threads: [MThread]?) in
+            guard success, let threads = threads else {
+                return
+            }
+
+            let group = DispatchGroup()
+            for thread in threads {
+                if thread.status == .accepted {
+                    group.enter()
+                    self?.appendMessage(thread: thread) {
+                        group.leave()
+                    }
+                } else {
+                    self?.requests.append(Message(title: thread.title,
+                                                  latestMessage: "I need help. I am about 100 metres away."))
+                }
+            }
+
+            group.wait()
+
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
+    }
 }
 
 class MessageTableViewCell: UITableViewCell {

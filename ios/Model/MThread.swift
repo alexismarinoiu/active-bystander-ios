@@ -17,13 +17,4 @@ extension MThreadRequest: Request {
     var resource: String {
         return "thread"
     }
-
-    func getRequestParameters(for type: CrudType) -> [String: CustomStringConvertible] {
-        if type == .read {
-            return [:]
-        }
-
-        return [:]
-    }
-
 }
