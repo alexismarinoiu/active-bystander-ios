@@ -15,6 +15,7 @@ class MessageScreenController: UIViewController {
     struct Message {
         let isMe: Bool
         let text: String
+        let sequenceNumber: Int
     }
 
     private(set) var messages: [Message] = []
@@ -60,13 +61,22 @@ class MessageScreenController: UIViewController {
             return
         }
 
-        messages.append(Message(isMe: true, text: text))
-        self.messageTableView.reloadData()
         textInput.text = ""
+
+        let request = MMessageSendRequest(seq: lastSequenceNumber, content: text, threadId: thread.threadId)
+        Environment.backend.update(request) { (success, message: MMessage?) in
+            if !success {
+                print("Sending message failed: \(message.debugDescription)")
+            }
+        }
     }
 
     @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
         textInput.resignFirstResponder()
+    }
+
+    private var lastSequenceNumber: Int {
+        return messages.reversed().lazy.filter { $0.isMe }.map { $0.sequenceNumber }.first ?? 0
     }
 }
 
@@ -88,7 +98,7 @@ extension MessageScreenController {
             }
 
             self.messages = loadedMessages.map {
-                Message(isMe: $0.sender == Environment.userAuth.username, text: $0.content)
+                Message(isMe: $0.sender == Environment.userAuth.username, text: $0.content, sequenceNumber: $0.seq)
             }
 
             DispatchQueue.main.async { [weak `self` = self] in
