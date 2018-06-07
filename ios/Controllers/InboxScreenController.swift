@@ -7,8 +7,10 @@ class InboxScreenController: UITableViewController {
         let latestMessage: String
     }
 
-    var messages: [Message] = []
-    var requests: [Message] = []
+    private var messages: [Message] = []
+    private var requests: [Message] = []
+
+    private var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,17 @@ class InboxScreenController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
+            self?.reloadTheInboxScreen()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        timer?.invalidate()
+        timer = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,6 +110,10 @@ class InboxScreenController: UITableViewController {
             }
 
             let group = DispatchGroup()
+
+            self?.messages = []
+            self?.requests = []
+
             for thread in threads {
                 if thread.status == .accepted {
                     group.enter()
