@@ -15,6 +15,12 @@ struct Environment {
         // swiftlint:enable force_cast
     }()
 
+    static var liveAuth: Bool = {
+        // swiftlint:disable force_cast
+        return (Bundle.main.infoDictionary!["AV_API_LIVE_AUTH"] as! String).lowercased() == "yes"
+        // swiftlint:enable force_cast
+    }()
+
     static var userAuth = UserAuth()
     static var backend: BackendService = HttpBackendService()
 }

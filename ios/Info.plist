@@ -6,6 +6,8 @@
 	<string>$(AV_API_AUTHENTICATION_REALM)</string>
 	<key>AV_API_ENDPOINT</key>
 	<string>$(AV_API_ENDPOINT)</string>
+	<key>AV_API_LIVE_AUTH</key>
+	<string>$(AV_API_LIVE_AUTH)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -36,6 +38,17 @@
 	<array>
 		<string>location</string>
 	</array>
+  <key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
