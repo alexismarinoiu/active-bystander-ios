@@ -75,13 +75,13 @@ class InboxScreenController: UITableViewController {
             let tableViewCell = sender as? MessageTableViewCell {
             destination.navigationItem.title = tableViewCell.threadTitleLabel.text
 
-            destination.thread = indexPath.section == 1 ? messages[indexPath.row].thread
-                                                        : requests[indexPath.row].thread
+            destination.thread = (indexPath.section == 1 ? messages : requests)[indexPath.row].thread
         }
     }
 
-    func appendMessage(thread: MThread, completionHandler: (() -> Void)?) {
-        Environment.backend.read(MMessageRequest(threadId: thread.threadId, flag: true)) { (success, last: MMessage?) in
+    private func appendMessage(thread: MThread, completionHandler: (() -> Void)?) {
+        Environment.backend.read(MMessageRequest(threadId: thread.threadId,
+                                                 queryLastMessage: true)) { (success, last: MMessage?) in
             guard success, let lastMessage = last else {
                 return
             }

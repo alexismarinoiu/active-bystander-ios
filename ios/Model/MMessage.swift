@@ -10,11 +10,11 @@ struct MMessage: Codable {
 
 struct MMessageRequest: Encodable {
     let threadId: String
-    let flag: Bool
+    let queryLastMessage: Bool
 
-    init(threadId: String, flag: Bool) {
+    init(threadId: String, queryLastMessage: Bool) {
         self.threadId = threadId
-        self.flag = flag
+        self.queryLastMessage = queryLastMessage
     }
 
     func encode(to encoder: Encoder) throws {
@@ -23,7 +23,7 @@ struct MMessageRequest: Encodable {
 
 extension MMessageRequest: Request {
     var resource: String {
-        return flag ? "thread/\(threadId)/last-message" : "thread/\(threadId)"
+        return queryLastMessage ? "thread/\(threadId)/last-message" : "thread/\(threadId)"
     }
 
 }
