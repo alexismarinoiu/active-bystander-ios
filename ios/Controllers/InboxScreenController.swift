@@ -62,6 +62,11 @@ class InboxScreenController: UITableViewController {
         }
 
         let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
+        if indexPath.section == 0 {
+            messageCell.setupAcceptButtons()
+        } else {
+            messageCell.hideButtons()
+        }
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         if let image = UIImage(named: "oldman") {
@@ -139,6 +144,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var threadTitleLabel: UILabel!
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var threadImage: UIImageView!
+    @IBOutlet weak var crossButton: UIButton!
+    @IBOutlet weak var tickButton: UIButton!
 
     /// Helper method to set the image of the thread and
     //  round it off in the process
@@ -154,5 +161,15 @@ class MessageTableViewCell: UITableViewCell {
         UIGraphicsEndImageContext()
 
         threadImage.image = finalImage
+    }
+
+    func setupAcceptButtons() {
+        crossButton.layer.cornerRadius = 15
+        tickButton.layer.cornerRadius = 15
+    }
+
+    func hideButtons() {
+        crossButton.isHidden = true
+        tickButton.isHidden = true
     }
 }
