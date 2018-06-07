@@ -34,6 +34,12 @@ class UserAuth {
     func updateStatus(_ completionHandler: ((Status) -> Void)?) {
         status = .pendingValidation
 
+        guard Environment.liveAuth else {
+            status = .loggedIn
+            completionHandler?(.loggedIn)
+            return
+        }
+
         Environment.backend.read(AuthStatusRequest()) { [weak self] (success, response: AuthStatusResponse?) in
             guard success, let response = response, response.status else {
                 DispatchQueue.main.async {
@@ -78,5 +84,9 @@ class UserAuth {
 
         URLCredentialStorage.shared.remove(credential, for: UserAuth.protectionSpace)
         (UIApplication.shared.delegate as? AppDelegate)?.showLoginViewController()
+    }
+
+    func loggedInUser() -> String? {
+        return URLCredentialStorage.shared.defaultCredential(for: UserAuth.protectionSpace)?.user
     }
 }

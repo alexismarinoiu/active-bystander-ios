@@ -94,8 +94,17 @@ extension HttpBackendService {
         print("Requesting: \(request.httpMethod ?? "not found") \(request.url?.absoluteString ?? "not found")")
         #endif
 
+        let newRequest: URLRequest
+        if !Environment.liveAuth, let username = Environment.userAuth.loggedInUser() {
+            var request = request
+            request.addValue(username, forHTTPHeaderField: "AV-User")
+            newRequest = request
+        } else {
+            newRequest = request
+        }
+
         let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: request) { (data, status, error) in
+        session.dataTask(with: newRequest) { (data, status, error) in
             guard let http = status as? HTTPURLResponse,
                 http.statusCode != 401 else { // Authorization Error
                     if login {

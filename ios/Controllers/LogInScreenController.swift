@@ -25,8 +25,12 @@ class LogInScreenController: UIViewController {
         usernameField.addTarget(self, action: #selector(textFieldDidChange), for: UIControlEvents.editingChanged)
         passwordField.addTarget(self, action: #selector(textFieldDidChange), for: UIControlEvents.editingChanged)
 
-        Environment.userAuth.updateStatus { [weak `self` = self] (status) in
-            self?.updateDisplay(with: status, isInitial: true)
+        if Environment.liveAuth {
+            Environment.userAuth.updateStatus { [weak `self` = self] (status) in
+                self?.updateDisplay(with: status, isInitial: true)
+            }
+        } else {
+            updateDisplay(with: .loggedOut, isInitial: true)
         }
     }
 
