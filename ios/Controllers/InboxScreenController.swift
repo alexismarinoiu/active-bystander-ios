@@ -111,24 +111,22 @@ class InboxScreenController: UITableViewController {
                 return
             }
 
-            let group = DispatchGroup()
-
             self?.messages = []
             self?.requests = []
 
             for thread in threads {
                 if thread.status == .accepted {
+                    let group = DispatchGroup()
                     group.enter()
                     self?.appendMessage(thread: thread) {
                         group.leave()
                     }
+                    group.wait()
                 } else {
                     self?.requests.append(Message(thread: thread,
                                                   latestMessage: "I need help. I am about 100 metres away."))
                 }
             }
-
-            group.wait()
 
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
