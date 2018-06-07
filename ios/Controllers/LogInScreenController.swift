@@ -13,7 +13,6 @@ class LogInScreenController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
 
-    var isInitialDismiss = true
     private var keyboardHeight = CGFloat(0)
     private var keyboardIsShowing = false
 
@@ -27,7 +26,7 @@ class LogInScreenController: UIViewController {
         passwordField.addTarget(self, action: #selector(textFieldDidChange), for: UIControlEvents.editingChanged)
 
         Environment.userAuth.updateStatus { [weak `self` = self] (status) in
-            self?.updateDisplay(with: status)
+            self?.updateDisplay(with: status, isInitial: true)
         }
     }
 
@@ -46,10 +45,19 @@ class LogInScreenController: UIViewController {
 }
 
 extension LogInScreenController {
-    func updateDisplay(with status: UserAuth.Status) {
+    func updateDisplay(with status: UserAuth.Status, isInitial initial: Bool) {
         switch status {
         case .loggedOut: // Hide the spinner, show the login stack
             statusSpinnerContainer.layer.opacity = 1
+
+            if !initial {
+                _ = [usernameField, passwordField].map { (field: UITextField!) in
+                    field.borderStyle = .roundedRect
+                    field.layer.borderColor = UIColor.red.withAlphaComponent(0.5).cgColor
+                    field.layer.borderWidth = 1
+                    field.layer.cornerRadius = 5.0
+                }
+            }
 
             UIView.animate(withDuration: 0.5, animations: { [weak statusSpinnerContainer] in
                 statusSpinnerContainer?.layer.opacity = 0
@@ -87,9 +95,9 @@ extension LogInScreenController {
         }
 
         Environment.userAuth.logIn(with: username, password: password) { [weak `self` = self] (status) in
-            self?.updateDisplay(with: status)
+            self?.updateDisplay(with: status, isInitial: false)
         }
-        updateDisplay(with: Environment.userAuth.status)
+        updateDisplay(with: Environment.userAuth.status, isInitial: false)
     }
 }
 
