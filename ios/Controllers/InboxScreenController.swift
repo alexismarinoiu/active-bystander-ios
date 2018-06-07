@@ -23,14 +23,14 @@ class InboxScreenController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.reloadTheInboxScreen()
-        }
+//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
+//            self?.reloadTheInboxScreen()
+//        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        timer?.invalidate()
-        timer = nil
+//        timer?.invalidate()
+//        timer = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,6 +94,9 @@ class InboxScreenController: UITableViewController {
         Environment.backend.read(MMessageRequest(threadId: thread.threadId,
                                                  queryLastMessage: true)) { (success, last: MMessage?) in
             guard success, let lastMessage = last else {
+                self.messages.append(Message(thread: thread,
+                                             latestMessage: NSLocalizedString("No Messages Sent", comment: "")))
+                completionHandler?()
                 return
             }
 

@@ -124,6 +124,6 @@ extension HttpBackendService {
             }
 
             callback(true, decodedData)
-            }.resume()
+        }.resume()
     }
 }
