@@ -111,6 +111,13 @@ class InboxScreenController: UITableViewController {
         return NSLocalizedString("Messages", comment: "")
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("let's delete")
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InboxToMessage",
             let destination: MessageScreenController = segue.destination as? MessageScreenController,
