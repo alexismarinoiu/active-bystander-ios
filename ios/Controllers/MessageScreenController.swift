@@ -2,7 +2,7 @@ import UIKit
 
 class MessageScreenController: UIViewController {
 
-    var thread: MThread?
+    var thread: MThread!
     private var shifter = KeyboardShifter()
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var sendButton: UIButton!
@@ -17,10 +17,7 @@ class MessageScreenController: UIViewController {
         let text: String
     }
 
-    var messages: [Message] = [
-        Message(isMe: true, text: "Hello, I need help. You are about 100 metres away from me."),
-        Message(isMe: false, text: "I can help. I'll be on my way.")
-    ]
+    private(set) var messages: [Message] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +25,8 @@ class MessageScreenController: UIViewController {
         messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
+
+        refreshMessages()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -56,6 +55,31 @@ class MessageScreenController: UIViewController {
 
     @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
         textInput.resignFirstResponder()
+    }
+}
+
+extension MessageScreenController {
+    func refreshMessages() {
+        let messageRequest = MMessageRequest(threadId: thread.threadId, queryLastMessage: false)
+        Environment.backend.read(messageRequest) { [weak weakSelf = self] (status, loadedMessages: [MMessage]?) in
+            guard let `self` = weakSelf else {
+                return
+            }
+
+            guard status, let loadedMessages = loadedMessages else {
+                self.messages = []
+                self.messageTableView.reloadData()
+                return
+            }
+
+            self.messages = loadedMessages.map {
+                Message(isMe: $0.sender == Environment.userAuth.username, text: $0.content)
+            }
+
+            DispatchQueue.main.async { [weak `self` = self] in
+                self?.messageTableView.reloadData()
+            }
+        }
     }
 }
 

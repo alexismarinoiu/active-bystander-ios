@@ -20,6 +20,7 @@ class UserAuth {
             }
         }
     }
+    private(set) var username: String?
     internal static var protectionSpace = URLProtectionSpace(host: Environment.endpoint.host!,
                                                             port: 443,
                                                             protocol: Environment.endpoint.scheme!,
@@ -34,16 +35,11 @@ class UserAuth {
     func updateStatus(_ completionHandler: ((Status) -> Void)?) {
         status = .pendingValidation
 
-        guard Environment.liveAuth else {
-            status = .loggedIn
-            completionHandler?(.loggedIn)
-            return
-        }
-
         Environment.backend.read(AuthStatusRequest()) { [weak self] (success, response: AuthStatusResponse?) in
             guard success, let response = response, response.status else {
                 DispatchQueue.main.async {
                     self?.status = .loggedOut
+                    self?.username = nil
                     UserDefaults.this.hasPreviouslyLoggedIn = false
                     completionHandler?(.loggedOut)
                 }
@@ -52,6 +48,7 @@ class UserAuth {
 
             DispatchQueue.main.async {
                 self?.status = .loggedIn
+                self?.username = response.username
                 UserDefaults.this.hasPreviouslyLoggedIn = true
                 completionHandler?(.loggedIn)
             }
@@ -59,6 +56,10 @@ class UserAuth {
     }
 
     func logIn(with username: String, password: String, completionHandler: ((Status) -> Void)?) {
+        if !Environment.liveAuth {
+            self.username = username
+        }
+
         let credential = URLCredential(user: username, password: password, persistence: .forSession)
         URLCredentialStorage.shared.setDefaultCredential(credential, for: UserAuth.protectionSpace)
         updateStatus { (status) in
@@ -84,9 +85,5 @@ class UserAuth {
 
         URLCredentialStorage.shared.remove(credential, for: UserAuth.protectionSpace)
         (UIApplication.shared.delegate as? AppDelegate)?.showLoginViewController()
-    }
-
-    func loggedInUser() -> String? {
-        return URLCredentialStorage.shared.defaultCredential(for: UserAuth.protectionSpace)?.user
     }
 }

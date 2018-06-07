@@ -95,7 +95,7 @@ extension HttpBackendService {
         #endif
 
         let newRequest: URLRequest
-        if !Environment.liveAuth, let username = Environment.userAuth.loggedInUser() {
+        if !Environment.liveAuth, let username = Environment.userAuth.username {
             var request = request
             request.addValue(username, forHTTPHeaderField: "AV-User")
             newRequest = request

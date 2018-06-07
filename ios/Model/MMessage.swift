@@ -1,13 +1,5 @@
 import Foundation
 
-struct MMessage: Codable {
-    let sender: String
-    let seq: Int
-    let timestamp: String
-    let content: String
-    let threadId: String
-}
-
 struct MMessageRequest: Encodable {
     let threadId: String
     let queryLastMessage: Bool
@@ -25,5 +17,12 @@ extension MMessageRequest: Request {
     var resource: String {
         return queryLastMessage ? "thread/\(threadId)/last-message" : "thread/\(threadId)"
     }
+}
 
+struct MMessage: Codable {
+    let sender: String
+    let seq: Int
+    let timestamp: String
+    let content: String
+    let threadId: String
 }
