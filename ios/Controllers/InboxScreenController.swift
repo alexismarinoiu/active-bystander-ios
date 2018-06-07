@@ -1,7 +1,6 @@
 import UIKit
 
 class InboxScreenController: UITableViewController {
-    // notTODO: Part of the model, should be moved at some point
     struct Message {
         let thread: MThread
         let latestMessage: String
