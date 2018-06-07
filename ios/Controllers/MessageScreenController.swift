@@ -72,8 +72,9 @@ extension MessageScreenController: KeyboardShifterDelegate {
             keyboardHeight += sizeEnd.height
         }
 
-        // Does not support hardware keyboards
-        view.frame.origin.y = -keyboardHeight + (window.frame.maxY - bottomStack.frame.maxY)
+        let shiftAmount = -keyboardHeight + (window.frame.maxY - bottomStack.frame.maxY)
+        messageTableView.contentInset.top = -shiftAmount
+        view.frame.origin.y = shiftAmount
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
                        completion: { [weak view = view] _ in
@@ -88,7 +89,7 @@ extension MessageScreenController: KeyboardShifterDelegate {
 
     func keyboard(_ keyboardShifter: KeyboardShifter, willHide sizeBegin: CGRect, sizeEnd: CGRect,
                   duration: Double, options: UIViewAnimationOptions) {
-        // Does not support hardware keyboards
+        messageTableView.contentInset.top = 0
         view.frame.origin.y = CGFloat(0)
 
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {},
