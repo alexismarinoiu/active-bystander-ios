@@ -8,6 +8,11 @@ class FindDelegateViewController: UIViewController {
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var connectButtonBottomConstraint: NSLayoutConstraint!
     private var connectButtonHidden: Bool = true
+    private var labelAlert: UIAlertController
+        = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
+                            preferredStyle: .alert)
+
+    private var labels: [MSituation] = []
 
     /// Viewport specified in metres
     private let viewport: CLLocationDistance = 70
@@ -19,6 +24,21 @@ class FindDelegateViewController: UIViewController {
         super.viewDidLoad()
 
         connectButton.layer.cornerRadius = 5
+
+        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
+            guard success, let situations = situations else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.labels = situations
+                for label in (self?.labels)! {
+                    self?.labelAlert.addAction(UIAlertAction(title: label.id, style: .default, handler: nil))
+                }
+                self?.labelAlert.addAction(UIAlertAction(title: "Other", style: .default, handler: nil))
+                self?.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            }
+        }
 
         mapView.layoutMargins = mapView.safeAreaInsets
         mapView.showsUserLocation = true
@@ -93,6 +113,10 @@ extension FindDelegateViewController {
             self.connectButton.isHidden = true
             self.connectButtonHidden = true
         })
+    }
+
+    @IBAction func sendPressed(_ sender: Any) {
+        self.present(labelAlert, animated: true, completion: nil)
     }
 
 }
