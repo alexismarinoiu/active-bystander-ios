@@ -8,7 +8,9 @@ class FindDelegateViewController: UIViewController {
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var connectButtonBottomConstraint: NSLayoutConstraint!
     private var connectButtonHidden: Bool = true
-    private var labelAlert: UIAlertController!
+    private let labelAlert: UIAlertController
+        = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
+                            preferredStyle: .alert)
 
     var labels = [
         "label1",
@@ -47,9 +49,7 @@ class FindDelegateViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func setupLabelAlert() {
-        labelAlert = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
-                                       preferredStyle: .alert)
+    private func setupLabelAlert() {
         for label in labels {
             labelAlert.addAction(UIAlertAction(title: label, style: .default, handler: nil))
         }
@@ -114,7 +114,7 @@ extension FindDelegateViewController {
     }
 
     @IBAction func sendPressed(_ sender: Any) {
-        self.present(labelAlert, animated: true, completion: nil)
+        present(labelAlert, animated: true, completion: nil)
     }
 
 }
