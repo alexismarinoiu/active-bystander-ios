@@ -23,14 +23,14 @@ class InboxScreenController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-//            self?.reloadTheInboxScreen()
-//        }
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
+            self?.reloadTheInboxScreen()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-//        timer?.invalidate()
-//        timer = nil
+        timer?.invalidate()
+        timer = nil
     }
 
     override func didReceiveMemoryWarning() {
