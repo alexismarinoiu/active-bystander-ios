@@ -26,3 +26,16 @@ struct MMessage: Codable {
     let content: String
     let threadId: String
 }
+
+struct MMessageSendRequest: Encodable {
+    let seq: Int
+    let content: String
+
+    let threadId: String // notTODO: Ensure that this does not get encoded
+}
+
+extension MMessageSendRequest: Request {
+    var resource: String {
+        return "thread/\(threadId)"
+    }
+}
