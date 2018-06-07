@@ -12,11 +12,7 @@ class FindDelegateViewController: UIViewController {
         = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
                             preferredStyle: .alert)
 
-    var labels = [
-        "label1",
-        "label2",
-        "label3"
-    ]
+    private var labels: [MSituation] = []
 
     /// Viewport specified in metres
     private let viewport: CLLocationDistance = 70
@@ -29,7 +25,20 @@ class FindDelegateViewController: UIViewController {
 
         connectButton.layer.cornerRadius = 5
 
-        setupLabelAlert()
+        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
+            guard success, let situations = situations else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.labels = situations
+                for label in (self?.labels)! {
+                    self?.labelAlert.addAction(UIAlertAction(title: label.id, style: .default, handler: nil))
+                }
+                self?.labelAlert.addAction(UIAlertAction(title: "Other", style: .default, handler: nil))
+                self?.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            }
+        }
 
         mapView.layoutMargins = mapView.safeAreaInsets
         mapView.showsUserLocation = true
@@ -47,13 +56,6 @@ class FindDelegateViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    private func setupLabelAlert() {
-        for label in labels {
-            labelAlert.addAction(UIAlertAction(title: label, style: .default, handler: nil))
-        }
-        labelAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
     }
 }
 
