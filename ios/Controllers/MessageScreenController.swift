@@ -80,7 +80,10 @@ extension MessageScreenController {
 
             guard status, let loadedMessages = loadedMessages else {
                 self.messages = []
-                self.messageTableView.reloadData()
+
+                DispatchQueue.main.async {
+                    self.messageTableView.reloadData()
+                }
                 return
             }
 
