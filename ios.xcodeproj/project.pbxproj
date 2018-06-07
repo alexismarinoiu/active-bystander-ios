@@ -127,11 +127,11 @@
 			children = (
 				8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */,
 				80EDCC4820C2E84B003F9852 /* SituationsController.swift */,
+				809D216420C2F849007C264E /* InboxScreenController.swift */,
 				337E944320BC578D00B0926E /* MessageScreenController.swift */,
 				809D215F20C2F848007C264E /* FindDelegateViewController.swift */,
 				809D216320C2F849007C264E /* HomeScreenController.swift */,
 				B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */,
-				809D216420C2F849007C264E /* InboxScreenController.swift */,
 				809D216020C2F848007C264E /* LogInScreenController.swift */,
 				2486CB4720C6012C007DF229 /* ProfileScreenController.swift */,
 				809D216120C2F849007C264E /* ProfileEditScreenController.swift */,

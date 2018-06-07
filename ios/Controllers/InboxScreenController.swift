@@ -3,7 +3,7 @@ import UIKit
 class InboxScreenController: UITableViewController {
     // notTODO: Part of the model, should be moved at some point
     struct Message {
-        let title: String
+        let thread: MThread
         let latestMessage: String
     }
 
@@ -51,7 +51,7 @@ class InboxScreenController: UITableViewController {
         }
 
         let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
-        messageCell.threadTitleLabel.text = message.title
+        messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         if let image = UIImage(named: "oldman") {
             messageCell.setThreadImage(image)
@@ -70,8 +70,13 @@ class InboxScreenController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InboxToMessage",
+            let destination: MessageScreenController = segue.destination as? MessageScreenController,
+            let indexPath = tableView.indexPathForSelectedRow,
             let tableViewCell = sender as? MessageTableViewCell {
-            segue.destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+            destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+
+            destination.thread = indexPath.section == 1 ? messages[indexPath.row].thread
+                                                        : requests[indexPath.row].thread
         }
     }
 
@@ -81,7 +86,7 @@ class InboxScreenController: UITableViewController {
                 return
             }
 
-            self.messages.append(Message(title: thread.title, latestMessage: lastMessage.content))
+            self.messages.append(Message(thread: thread, latestMessage: lastMessage.content))
             completionHandler?()
         }
     }
@@ -100,7 +105,7 @@ class InboxScreenController: UITableViewController {
                         group.leave()
                     }
                 } else {
-                    self?.requests.append(Message(title: thread.title,
+                    self?.requests.append(Message(thread: thread,
                                                   latestMessage: "I need help. I am about 100 metres away."))
                 }
             }
