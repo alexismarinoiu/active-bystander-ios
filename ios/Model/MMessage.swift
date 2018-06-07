@@ -20,7 +20,8 @@ struct MMessageRequest: Encodable {
 }
 
 extension MMessageRequest: Request {
-    var endpoint: String {
+    var resource: String {
         return "thread/\(threadId)"
     }
+
 }

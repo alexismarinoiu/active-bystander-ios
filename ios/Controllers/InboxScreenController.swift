@@ -7,30 +7,36 @@ class InboxScreenController: UITableViewController {
         let latestMessage: String
     }
 
-    private var threads: [MThread] = []
     var messages: [Message] = []
     var requests: [Message] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Environment.backend.read(MThreadRequest()) { [weak `self` = self] (success, threads: [MThread]?) in
+            guard success, let threads = threads else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                for thread in threads {
+                    if thread.status == MThread.Status.accepted {
+                        self?.appendMessage(thread: thread)
+                    } else {
+                        self?.messages.append(
+                            Message(title: thread.title, latestMessage: "I need help. I am about 100 metres away."))
+                    }
+                }
+
+                self?.tableView.reloadData()
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 
-        // Some dummy data for now
-        messages.append(contentsOf: [
-            Message(title: "Jon Smith", latestMessage: "Thank you so much."),
-            Message(title: "Jenny Smith", latestMessage: "Bye!")
-            ])
-
-        requests.append(contentsOf: [
-            Message(title: "Anonymous", latestMessage: "I need help. I am about 100 metres away.")
-        ])
-
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,6 +89,18 @@ class InboxScreenController: UITableViewController {
         if segue.identifier == "InboxToMessage",
             let tableViewCell = sender as? MessageTableViewCell {
             segue.destination.navigationItem.title = tableViewCell.threadTitleLabel.text
+        }
+    }
+
+    func appendMessage(thread: MThread) {
+        Environment.backend.read(MMessageRequest(threadId: thread.threadId)) { (success, lastMessage: MMessage?) in
+            guard success, let lastMessage = lastMessage else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self.messages.append(Message(title: thread.title, latestMessage: lastMessage.content))
+            }
         }
     }
 

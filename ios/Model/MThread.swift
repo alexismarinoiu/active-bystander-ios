@@ -14,15 +14,16 @@ struct MThread: Codable {
 struct MThreadRequest: Encodable {}
 
 extension MThreadRequest: Request {
-    func getRequestParameters(for method: HTTPMethod) -> [String: CustomStringConvertible] {
-        if method == .get {
+    var resource: String {
+        return "thread"
+    }
+
+    func getRequestParameters(for type: CrudType) -> [String: CustomStringConvertible] {
+        if type == .read {
             return [:]
         }
 
         return [:]
     }
 
-    var endpoint: String {
-        return "thread"
-    }
 }
