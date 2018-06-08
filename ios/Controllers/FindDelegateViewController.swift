@@ -143,7 +143,13 @@ extension FindDelegateViewController {
                 return
             }
 
-            // Take to new screen
+            DispatchQueue.main.async {
+                // Take to new screen
+                guard let tabController = self.navigationController?.tabBarController else {
+                    return
+                }
+                tabController.selectedIndex = 1
+            }
         }
     }
 
