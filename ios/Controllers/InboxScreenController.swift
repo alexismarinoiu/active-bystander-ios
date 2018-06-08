@@ -14,6 +14,10 @@ class InboxScreenController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .addObserver(self, selector: #selector(transitionToThread(notification:)),
+                         name: .AVInboxThreadRequestNotification, object: nil)
+
         reloadTheInboxScreen()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -137,6 +141,17 @@ class InboxScreenController: UITableViewController {
                 self?.tableView.reloadData()
             }
         }
+    }
+
+    @objc func transitionToThread(notification: Notification) {
+//        guard let messageScreen =
+//            storyboard?.instantiateViewController(withIdentifier: "MessageScreen") as? MessageScreenController,
+//            let thread = notification.userInfo?[0] as? MThread else {
+//            return
+//        }
+//
+//        messageScreen.thread = thread
+//        present(messageScreen, animated: true, completion: nil)
     }
 }
 

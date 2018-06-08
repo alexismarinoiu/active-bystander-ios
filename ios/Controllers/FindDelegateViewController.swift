@@ -41,8 +41,11 @@ class FindDelegateViewController: UIViewController {
                     self.labelAlert.addAction(UIAlertAction(title: label.id, style: .default,
                                                             handler: self.situationActionHandler))
                 }
-                self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default, handler: nil))
-                self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
+                                                        handler: self.situationActionHandler))
+                self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    self.labelAlert.dismiss(animated: true, completion: nil)
+                }))
             }
         }
 
@@ -149,6 +152,8 @@ extension FindDelegateViewController {
                     return
                 }
                 tabController.selectedIndex = 1
+                (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+                    .post(name: .AVInboxThreadRequestNotification, object: nil, userInfo: [0: thread])
             }
         }
     }
