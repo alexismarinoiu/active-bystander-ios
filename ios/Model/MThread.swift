@@ -18,3 +18,15 @@ extension MThreadRequest: Request {
         return "thread"
     }
 }
+
+struct MThreadConnectRequest: Encodable {
+    let latitude: Double
+    let longitude: Double
+    let username: String
+}
+
+extension MThreadConnectRequest: Request {
+    var resource: String {
+        return "thread"
+    }
+}
