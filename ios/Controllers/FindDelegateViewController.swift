@@ -17,6 +17,7 @@ class FindDelegateViewController: UIViewController {
     /// Viewport specified in metres
     private let viewport: CLLocationDistance = 70
     private static let helperMarkerIdent = "marker"
+    private var selectedMarker: MLocationPointAnnotation?
 
     private var locationManager = CLLocationManager()
 
@@ -31,12 +32,20 @@ class FindDelegateViewController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                self?.labels = situations
-                for label in (self?.labels)! {
-                    self?.labelAlert.addAction(UIAlertAction(title: label.id, style: .default, handler: nil))
+                guard let `self` = self else {
+                    return
                 }
-                self?.labelAlert.addAction(UIAlertAction(title: "Other", style: .default, handler: nil))
-                self?.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+                self.labels = situations
+                for label in self.labels {
+                    self.labelAlert.addAction(UIAlertAction(title: label.id, style: .default,
+                                                            handler: self.situationActionHandler))
+                }
+                self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
+                                                        handler: self.situationActionHandler))
+                self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                    self.labelAlert.dismiss(animated: true, completion: nil)
+                }))
             }
         }
 
@@ -63,8 +72,9 @@ extension FindDelegateViewController {
 
     private func updateOtherUsersOnMap(locations: [MLocation]) {
         let annotations = locations.map { (location: MLocation) -> MKAnnotation in
-            let point = MKPointAnnotation()
+            let point = MLocationPointAnnotation()
             point.coordinate = location.coordinate
+            point.user = location.username
             return point
         }
         mapView.removeAnnotations(mapView.annotations)
@@ -115,8 +125,37 @@ extension FindDelegateViewController {
         })
     }
 
-    @IBAction func sendPressed(_ sender: Any) {
+    @IBAction func connectPressed(_ sender: Any) {
         self.present(labelAlert, animated: true, completion: nil)
+    }
+
+    private func situationActionHandler(_ alertAction: UIAlertAction) {
+        connectToSelectedUser()
+    }
+
+    private func connectToSelectedUser() {
+        guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.user else {
+            return
+        }
+
+        let connectRequest = MThreadConnectRequest(latitude: selectedMarker.coordinate.latitude,
+                                                   longitude: selectedMarker.coordinate.longitude,
+                                                   username: userToConnectTo)
+        Environment.backend.update(connectRequest) { (success, thread: MThread?) in
+            guard success, let thread = thread else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                // Take to new screen
+                guard let tabController = self.navigationController?.tabBarController else {
+                    return
+                }
+                tabController.selectedIndex = 1
+                (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+                    .post(name: .AVInboxThreadRequestNotification, object: nil, userInfo: [0: thread])
+            }
+        }
     }
 
 }
@@ -193,14 +232,16 @@ extension FindDelegateViewController: MKMapViewDelegate {
             return
         }
 
-        if view.annotation is MKPointAnnotation {
+        if let annotation = view.annotation as? MLocationPointAnnotation {
             showConnectButton()
+            selectedMarker = annotation
         }
     }
 
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        if view.annotation is MKPointAnnotation {
+        if view.annotation as? MLocationPointAnnotation == nil {
             hideConnectButton()
+            selectedMarker = nil
         }
     }
 }
@@ -210,4 +251,8 @@ extension CLLocationCoordinate2D {
     static func + (_ lhs: CLLocationCoordinate2D, _ rhs: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         return CLLocationCoordinate2DMake(lhs.latitude + rhs.latitude, lhs.longitude + rhs.longitude)
     }
+}
+
+class MLocationPointAnnotation: MKPointAnnotation {
+    var user: String?
 }

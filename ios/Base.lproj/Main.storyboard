@@ -156,7 +156,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="sendPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pcw-zu-0pX"/>
+                                    <action selector="connectPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pcw-zu-0pX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -202,7 +202,7 @@
         <!--Message Screen Controller-->
         <scene sceneID="ZkG-OX-GFv">
             <objects>
-                <viewController id="vRJ-kL-huW" customClass="MessageScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageScreen" id="vRJ-kL-huW" customClass="MessageScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8fm-hv-h70">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
