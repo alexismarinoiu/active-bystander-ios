@@ -11,6 +11,12 @@ struct MThread: Codable {
     }
 }
 
+extension MThread: Equatable {
+    static func == (_ lhs: MThread, _ rhs: MThread) -> Bool {
+        return lhs.status == rhs.status && lhs.threadId == rhs.threadId && lhs.title == rhs.title
+    }
+}
+
 struct MThreadRequest: Encodable {}
 
 extension MThreadRequest: Request {
