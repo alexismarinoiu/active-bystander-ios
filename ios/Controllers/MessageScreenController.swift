@@ -65,7 +65,7 @@ class MessageScreenController: UIViewController {
         // Increment the sequence number
         let newSeq = lastSequenceNumber + 1
         messages.append(Message(isMe: true, text: "", sequenceNumber: newSeq))
-        // Correct updating of sequece number
+        // Correct updating of sequence number
         let request = MMessageSendRequest(seq: newSeq, content: text, threadId: thread.threadId)
         Environment.backend.update(request) { (success, message: MMessage?) in
             if !success {
