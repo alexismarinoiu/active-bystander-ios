@@ -63,7 +63,11 @@ class MessageScreenController: UIViewController {
 
         textInput.text = ""
 
-        let request = MMessageSendRequest(seq: lastSequenceNumber, content: text, threadId: thread.threadId)
+        // Increment the sequence number
+        let newSeq = lastSequenceNumber + 1
+        messages.append(Message(isMe: true, text: "", sequenceNumber: newSeq))
+        // Correct updating of sequece number
+        let request = MMessageSendRequest(seq: newSeq, content: text, threadId: thread.threadId)
         Environment.backend.update(request) { (success, message: MMessage?) in
             if !success {
                 print("Sending message failed: \(message.debugDescription)")
@@ -89,20 +93,24 @@ extension MessageScreenController {
             }
 
             guard status, let loadedMessages = loadedMessages else {
-                self.messages = []
-
                 DispatchQueue.main.async {
+                    self.messages = []
                     self.messageTableView.reloadData()
                 }
                 return
             }
 
-            self.messages = loadedMessages.map {
+            let newMessages = loadedMessages.map {
                 Message(isMe: $0.sender == Environment.userAuth.username, text: $0.content, sequenceNumber: $0.seq)
             }
 
             DispatchQueue.main.async { [weak `self` = self] in
-                self?.messageTableView.reloadData()
+                guard let `self` = self, self.messages != newMessages else {
+                    return
+                }
+
+                self.messages = newMessages
+                self.messageTableView.reloadData()
             }
         }
     }
@@ -179,4 +187,10 @@ extension MessageScreenController: UITableViewDataSource {
 class MessageScreenMessageView: UITableViewCell {
     @IBOutlet var textField: UILabel!
     @IBOutlet var textView: UIView!
+}
+
+extension MessageScreenController.Message: Equatable {
+    static func == (_ lhs: MessageScreenController.Message, _ rhs: MessageScreenController.Message) -> Bool {
+        return lhs.isMe == rhs.isMe && lhs.sequenceNumber == rhs.sequenceNumber && lhs.text == rhs.text
+    }
 }
