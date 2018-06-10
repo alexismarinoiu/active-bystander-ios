@@ -290,6 +290,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
+                                    <outlet property="dataSource" destination="vRJ-kL-huW" id="OfO-5t-brb"/>
+                                    <outlet property="delegate" destination="vRJ-kL-huW" id="G71-kb-x3e"/>
                                     <outletCollection property="gestureRecognizers" destination="ju6-DC-dea" appends="YES" id="K9Z-Iv-EuT"/>
                                 </connections>
                             </tableView>

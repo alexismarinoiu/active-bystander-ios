@@ -21,26 +21,25 @@ class MessageScreenController: UIViewController {
     private(set) var messages: [Message] = []
     private var timer: Timer?
 
+    private var cellHeights = [CGFloat]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
 
-        self.refreshMessages()
+        self.refreshMessages { [weak `self` = self] in
+            self?.scrollToBottom(animated: false)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         // Start the polling timer
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.refreshMessages()
-        }
-
-        let contentOffset = messageTableView.contentSize.height - messageTableView.bounds.size.height
-        if contentOffset > 0 {
-            let bottomOffset = CGPoint(x: 0, y: contentOffset)
-            messageTableView.setContentOffset(bottomOffset, animated: true)
+            self?.refreshMessages {
+                self?.scrollToBottom(animated: true)
+            }
         }
     }
 
@@ -78,14 +77,10 @@ class MessageScreenController: UIViewController {
     @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
         textInput.resignFirstResponder()
     }
-
-    private var lastSequenceNumber: Int {
-        return messages.reversed().lazy.filter { $0.isMe }.map { $0.sequenceNumber }.first ?? 0
-    }
 }
 
 extension MessageScreenController {
-    func refreshMessages() {
+    func refreshMessages(_ didReload: (() -> Void)? = nil) {
         let messageRequest = MMessageRequest(threadId: thread.threadId, queryLastMessage: false)
         Environment.backend.read(messageRequest) { [weak weakSelf = self] (status, loadedMessages: [MMessage]?) in
             guard let `self` = weakSelf else {
@@ -111,8 +106,38 @@ extension MessageScreenController {
 
                 self.messages = newMessages
                 self.messageTableView.reloadData()
+                didReload?()
             }
         }
+    }
+
+    private var lastSequenceNumber: Int {
+        return messages.reversed().lazy.filter { $0.isMe }.map { $0.sequenceNumber }.first ?? 0
+    }
+
+    private func scrollToBottom(animated: Bool) {
+        messageTableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0),
+                                     at: .bottom, animated: animated)
+    }
+}
+
+extension MessageScreenController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row >= cellHeights.count {
+            // Extend the array
+            cellHeights.append(contentsOf: [CGFloat](repeating: UITableViewAutomaticDimension,
+                                                     count: indexPath.row + 1 - cellHeights.count))
+        }
+
+        cellHeights[indexPath.row] = cell.bounds.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row >= cellHeights.count {
+            return UITableViewAutomaticDimension
+        }
+
+        return cellHeights[indexPath.row]
     }
 }
 
