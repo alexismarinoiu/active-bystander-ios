@@ -172,14 +172,16 @@ class InboxScreenController: UITableViewController {
     }
 
     @objc func transitionToThread(notification: Notification) {
-//        guard let messageScreen =
-//            storyboard?.instantiateViewController(withIdentifier: "MessageScreen") as? MessageScreenController,
-//            let thread = notification.userInfo?[0] as? MThread else {
-//            return
-//        }
-//
-//        messageScreen.thread = thread
-//        present(messageScreen, animated: true, completion: nil)
+        guard let messageScreen =
+            storyboard?.instantiateViewController(withIdentifier: "MessageScreen") as? MessageScreenController,
+            let thread = notification.userInfo?[0] as? MThread else {
+            return
+        }
+
+        messageScreen.thread = thread
+        messageScreen.title = thread.title
+        navigationController?.popToRootViewController(animated: false)
+        navigationController?.pushViewController(messageScreen, animated: true)
     }
 }
 
