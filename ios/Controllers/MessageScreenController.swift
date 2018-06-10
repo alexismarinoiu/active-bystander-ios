@@ -21,26 +21,25 @@ class MessageScreenController: UIViewController {
     private(set) var messages: [Message] = []
     private var timer: Timer?
 
+    private var cellHeights = [CGFloat]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        messageTableView.dataSource = self
         shifter.delegate = self
         shifter.register()
 
-        self.refreshMessages()
+        self.refreshMessages { [weak `self` = self] in
+            self?.scrollToBottom(animated: false)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         // Start the polling timer
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.refreshMessages()
-        }
-
-        let contentOffset = messageTableView.contentSize.height - messageTableView.bounds.size.height
-        if contentOffset > 0 {
-            let bottomOffset = CGPoint(x: 0, y: contentOffset)
-            messageTableView.setContentOffset(bottomOffset, animated: true)
+            self?.refreshMessages {
+                self?.scrollToBottom(animated: true)
+            }
         }
     }
 
@@ -63,7 +62,11 @@ class MessageScreenController: UIViewController {
 
         textInput.text = ""
 
-        let request = MMessageSendRequest(seq: lastSequenceNumber, content: text, threadId: thread.threadId)
+        // Increment the sequence number
+        let newSeq = lastSequenceNumber + 1
+        messages.append(Message(isMe: true, text: "", sequenceNumber: newSeq))
+        // Correct updating of sequece number
+        let request = MMessageSendRequest(seq: newSeq, content: text, threadId: thread.threadId)
         Environment.backend.update(request) { (success, message: MMessage?) in
             if !success {
                 print("Sending message failed: \(message.debugDescription)")
@@ -74,14 +77,10 @@ class MessageScreenController: UIViewController {
     @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
         textInput.resignFirstResponder()
     }
-
-    private var lastSequenceNumber: Int {
-        return messages.reversed().lazy.filter { $0.isMe }.map { $0.sequenceNumber }.first ?? 0
-    }
 }
 
 extension MessageScreenController {
-    func refreshMessages() {
+    func refreshMessages(_ didReload: (() -> Void)? = nil) {
         let messageRequest = MMessageRequest(threadId: thread.threadId, queryLastMessage: false)
         Environment.backend.read(messageRequest) { [weak weakSelf = self] (status, loadedMessages: [MMessage]?) in
             guard let `self` = weakSelf else {
@@ -89,22 +88,56 @@ extension MessageScreenController {
             }
 
             guard status, let loadedMessages = loadedMessages else {
-                self.messages = []
-
                 DispatchQueue.main.async {
+                    self.messages = []
                     self.messageTableView.reloadData()
                 }
                 return
             }
 
-            self.messages = loadedMessages.map {
+            let newMessages = loadedMessages.map {
                 Message(isMe: $0.sender == Environment.userAuth.username, text: $0.content, sequenceNumber: $0.seq)
             }
 
             DispatchQueue.main.async { [weak `self` = self] in
-                self?.messageTableView.reloadData()
+                guard let `self` = self, self.messages != newMessages else {
+                    return
+                }
+
+                self.messages = newMessages
+                self.messageTableView.reloadData()
+                didReload?()
             }
         }
+    }
+
+    private var lastSequenceNumber: Int {
+        return messages.reversed().lazy.filter { $0.isMe }.map { $0.sequenceNumber }.first ?? 0
+    }
+
+    private func scrollToBottom(animated: Bool) {
+        messageTableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0),
+                                     at: .bottom, animated: animated)
+    }
+}
+
+extension MessageScreenController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row >= cellHeights.count {
+            // Extend the array
+            cellHeights.append(contentsOf: [CGFloat](repeating: UITableViewAutomaticDimension,
+                                                     count: indexPath.row + 1 - cellHeights.count))
+        }
+
+        cellHeights[indexPath.row] = cell.bounds.height
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row >= cellHeights.count {
+            return UITableViewAutomaticDimension
+        }
+
+        return cellHeights[indexPath.row]
     }
 }
 
@@ -179,4 +212,10 @@ extension MessageScreenController: UITableViewDataSource {
 class MessageScreenMessageView: UITableViewCell {
     @IBOutlet var textField: UILabel!
     @IBOutlet var textView: UIView!
+}
+
+extension MessageScreenController.Message: Equatable {
+    static func == (_ lhs: MessageScreenController.Message, _ rhs: MessageScreenController.Message) -> Bool {
+        return lhs.isMe == rhs.isMe && lhs.sequenceNumber == rhs.sequenceNumber && lhs.text == rhs.text
+    }
 }

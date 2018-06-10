@@ -3,11 +3,13 @@ import UIKit
 class InboxScreenController: UITableViewController {
     struct Message {
         let thread: MThread
-        let latestMessage: String
+        var latestMessage: String?
     }
 
     private var messages: [Message] = []
     private var requests: [Message] = []
+    private let pendingQueue = DispatchQueue(label: "uk.avocado.Bystander.InboxPending", qos: .userInitiated,
+                                             attributes: [], autoreleaseFrequency: .inherit, target: nil)
 
     private var timer: Timer?
 
@@ -18,17 +20,12 @@ class InboxScreenController: UITableViewController {
             .addObserver(self, selector: #selector(transitionToThread(notification:)),
                          name: .AVInboxThreadRequestNotification, object: nil)
 
-        reloadTheInboxScreen()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        reloadInboxScreen()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.reloadTheInboxScreen()
+            self?.reloadInboxScreen()
         }
     }
 
@@ -97,46 +94,79 @@ class InboxScreenController: UITableViewController {
         }
     }
 
-    private func appendMessage(thread: MThread, completionHandler: (() -> Void)?) {
+    private func getLastMessage(for thread: MThread, completionHandler: ((String) -> Void)?) {
         Environment.backend.read(MMessageRequest(threadId: thread.threadId,
                                                  queryLastMessage: true)) { (success, last: MMessage?) in
             guard success, let lastMessage = last else {
-                self.messages.append(Message(thread: thread,
-                                             latestMessage: NSLocalizedString("No Messages Sent", comment: "")))
-                completionHandler?()
+                completionHandler?(NSLocalizedString("No Messages Sent", comment: ""))
                 return
             }
 
-            self.messages.append(Message(thread: thread, latestMessage: lastMessage.content))
-            completionHandler?()
+            completionHandler?(lastMessage.content)
         }
     }
 
-    func reloadTheInboxScreen() {
+    func reloadInboxScreen() {
         Environment.backend.read(MThreadRequest()) { [weak `self` = self] (success, threads: [MThread]?) in
             guard success, let threads = threads else {
                 return
             }
 
-            self?.messages = []
-            self?.requests = []
+            var pendingMessages = [Message]()
+            var pendingRequests = [Message]()
 
+            let group = DispatchGroup()
             for thread in threads {
-                if thread.status == .accepted {
-                    let group = DispatchGroup()
-                    group.enter()
-                    self?.appendMessage(thread: thread) {
+                var index = -1
+                // Create the messages in the order of threads to prevent reordering
+                self?.pendingQueue.sync {
+                    if thread.status == .accepted {
+                        pendingMessages.append(Message(thread: thread, latestMessage: nil))
+                        index = pendingMessages.count - 1
+                    } else {
+                        pendingRequests.append(Message(thread: thread, latestMessage: nil))
+                        index = pendingRequests.count - 1
+                    }
+                }
+
+                group.enter()
+                self?.getLastMessage(for: thread, completionHandler: { (message) in
+                    // We enqueue appends to the pending queue to avoid concurrent accesses
+                    // while allowing fetches to happen concurrently
+                    self?.pendingQueue.async {
+                        if thread.status == .accepted {
+                            pendingMessages[index].latestMessage = message
+                        } else {
+                            pendingRequests[index].latestMessage = message
+                        }
                         group.leave()
                     }
-                    group.wait()
-                } else {
-                    self?.requests.append(Message(thread: thread,
-                                                  latestMessage: "I need help. I am about 100 metres away."))
-                }
+                })
             }
 
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
+            group.wait()
+            self?.pendingQueue.sync {
+                DispatchQueue.main.sync {
+                    // Reassign messages array only on main thread.
+                    guard let `self` = self else {
+                        return
+                    }
+
+                    var shouldReload = false
+                    if self.messages != pendingMessages {
+                        self.messages = pendingMessages
+                        shouldReload = true
+                    }
+
+                    if self.requests != pendingRequests {
+                        self.requests = pendingRequests
+                        shouldReload = true
+                    }
+
+                    if shouldReload {
+                        self.tableView.reloadData()
+                    }
+                }
             }
         }
     }
@@ -185,4 +215,11 @@ class MessageTableViewCell: UITableViewCell {
         crossButton.isHidden = true
         tickButton.isHidden = true
     }
+}
+
+extension InboxScreenController.Message: Equatable {
+    static func == (lhs: InboxScreenController.Message, rhs: InboxScreenController.Message) -> Bool {
+        return lhs.latestMessage == rhs.latestMessage && lhs.thread == rhs.thread
+    }
+
 }
