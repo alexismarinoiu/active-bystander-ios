@@ -411,7 +411,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6tk-cy-3DH">
                                             <rect key="frame" x="8" y="8" width="359" height="160"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-5k-GKE">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-5k-GKE">
                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="160" id="AOS-gf-a6n"/>
@@ -419,8 +419,8 @@
                                                         <constraint firstAttribute="width" constant="160" id="g25-gS-VdJ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Harold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
-                                                    <rect key="frame" x="285" y="128.66666666666666" width="74" height="31.333333333333343"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Firstname Lastname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8l-Pw-dDX">
+                                                    <rect key="frame" x="170" y="128.66666666666666" width="189" height="31.333333333333343"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -503,7 +503,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWG-PF-73I">
                                                                 <rect key="frame" x="67.666666666666686" y="0.0" width="240" height="240"/>
                                                                 <subviews>
-                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oldman" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
+                                                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile" translatesAutoresizingMaskIntoConstraints="NO" id="Znx-yJ-QBU">
                                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                                                                         <gestureRecognizers/>
                                                                         <constraints>
@@ -563,7 +563,7 @@
                                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Harold" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hta-iK-byd">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Firstname Lastname" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hta-iK-byd">
                                                         <rect key="frame" x="0.0" y="18.333333333333371" width="375" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1132,11 +1132,11 @@ Message Content</string>
     </scenes>
     <resources>
         <image name="ablogo" width="349" height="349"/>
+        <image name="default-profile" width="166" height="166"/>
         <image name="icon-camera" width="80" height="80"/>
         <image name="icon-home" width="20" height="20"/>
         <image name="icon-inbox" width="20" height="20"/>
         <image name="icon-profile" width="20" height="20"/>
-        <image name="oldman" width="133" height="133"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8fv-Gx-qgz"/>
