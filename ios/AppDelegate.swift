@@ -1,11 +1,13 @@
 import UIKit
 import CoreLocation
+import UserNotifications
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     public private(set) var locationManager: CLLocationManager?
     public let notificationCenter = NotificationCenter()
+    public let userNotifications = UNUserNotificationCenter.current()
     private var backgroundInvocation = false
 
     func application(_ application: UIApplication,
@@ -40,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Request the location permission
         locationManager.requestAlwaysAuthorization()
+        // swiftlint:disable unused_closure_parameter
+        userNotifications.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+        }
+        // swiftlint:enable unused_closure_parameter
 
         notificationCenter.addObserver(self, selector: #selector(didUserLoginAuthorizationUpdate(_:)),
                                        name: .AVAuthStatusChangeNotification, object: nil)
@@ -72,6 +78,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // See also applicationDidEnterBackground:.
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("Registering with device token \(deviceToken)")
+        let request = MNotificationRegistration(token: deviceToken.base64EncodedString())
+        Environment.backend.update(request) { (success, registration: MNotificationRegistration?) in
+            print(success, registration as Any)
+        }
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register \(error)")
+    }
+
     @objc func didUserLoginAuthorizationUpdate(_ notification: Notification) {
         guard let status = notification.userInfo?[0] as? UserAuth.Status else {
             return
@@ -79,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if status == .loggedIn {
             updateMonitoring(significant: false)
+            UIApplication.shared.registerForRemoteNotifications()
         } else {
             locationManager?.stopUpdatingLocation()
             locationManager?.stopMonitoringSignificantLocationChanges()
