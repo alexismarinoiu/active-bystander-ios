@@ -13,12 +13,29 @@ class InboxScreenController: UITableViewController {
 
     private var timer: Timer?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(style: UITableViewStyle) {
+        super.init(style: style)
+        postInit()
+    }
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        postInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        postInit()
+    }
+
+    private func postInit() {
         (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
             .addObserver(self, selector: #selector(transitionToThread(notification:)),
                          name: .AVInboxThreadRequestNotification, object: nil)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         reloadInboxScreen()
     }
