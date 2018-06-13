@@ -1,7 +1,14 @@
 import UIKit
 import MobileCoreServices
 
+class ProfileEditScreenNavigationController: UINavigationController {
+
+}
+
 class ProfileEditScreenController: UIViewController {
+
+    @IBOutlet weak var tableView: UITableView!
+    var helpArea: [String] = []
 
     lazy var picker: UIImagePickerController = { () -> UIImagePickerController in
         let controller = UIImagePickerController()
@@ -13,6 +20,7 @@ class ProfileEditScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -20,6 +28,42 @@ class ProfileEditScreenController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension ProfileEditScreenController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
+        cell.textLabel?.text = helpArea[indexPath.row]
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return helpArea.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Help Area"
+        default:
+            return ""
+        }
+    }
+}
+
+extension ProfileEditScreenController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard tableView.cellForRow(at: indexPath) != nil else {
+            return
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
+        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark {
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+        }
     }
 }
 

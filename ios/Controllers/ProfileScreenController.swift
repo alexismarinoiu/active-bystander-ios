@@ -22,6 +22,16 @@ class ProfileScreenController: UIViewController {
                                                        name: .AVLocationAuthorizationNotification, object: nil)
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editingSegue" {
+            guard let destination = segue.destination as? ProfileEditScreenNavigationController,
+                let editController = destination.topViewController as? ProfileEditScreenController else {
+                    return
+            }
+            editController.helpArea = self.helpArea
+        }
+    }
 }
 
 extension ProfileScreenController: UITableViewDataSource {
