@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         userNotifications.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
         }
         // swiftlint:enable unused_closure_parameter
+        userNotifications.delegate = self
 
         notificationCenter.addObserver(self, selector: #selector(didUserLoginAuthorizationUpdate(_:)),
                                        name: .AVAuthStatusChangeNotification, object: nil)
@@ -92,20 +93,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if application.applicationState == .active {
-            return
-        }
-
         guard let threadId = userInfo["threadId"] as? String,
             let title = userInfo["title"] as? String,
             let statusString = userInfo["status"] as? String,
             let status = MThread.Status(rawValue: statusString) else {
+            completionHandler(.failed)
             return
         }
 
         let thread = MThread(threadId: threadId, status: status, title: title)
-        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
-            .post(name: .AVInboxTabScreenRequestNotification, object: nil, userInfo: [0: thread])
+
+        notificationCenter.post(name: .AVInboxTabScreenRequestNotification, object: nil, userInfo: [0: thread])
+        completionHandler(.newData)
     }
 
     @objc func didUserLoginAuthorizationUpdate(_ notification: Notification) {
@@ -193,5 +192,24 @@ extension AppDelegate {
         rootNav.setViewControllers([
             storyboard.instantiateViewController(withIdentifier: "LoginController")
         ], animated: true)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler:
+                                @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        guard let threadId = userInfo["threadId"] as? String,
+            let title = userInfo["title"] as? String,
+            let statusString = userInfo["status"] as? String,
+            let status = MThread.Status(rawValue: statusString) else {
+            completionHandler([])
+            return
+        }
+        let thread = MThread(threadId: threadId, status: status, title: title)
+        notificationCenter.post(name: .AVInboxActiveMessageNotification, object: nil,
+                                userInfo: [0: thread, 1: completionHandler])
+        completionHandler([.alert])
     }
 }
