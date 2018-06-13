@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Request the location permission
         locationManager.requestAlwaysAuthorization()
+
         // swiftlint:disable unused_closure_parameter
         userNotifications.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
         }
@@ -81,13 +82,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("Registering with device token \(deviceToken)")
         let request = MNotificationRegistration(token: deviceToken.base64EncodedString())
-        Environment.backend.update(request) { (success, registration: MNotificationRegistration?) in
-            print(success, registration as Any)
+        Environment.backend.update(request) { (_, _: MNotificationRegistration?) in
         }
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register \(error)")
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if application.applicationState == .active {
+            return
+        }
+
+        guard let threadId = userInfo["threadId"] as? String,
+            let title = userInfo["title"] as? String,
+            let statusString = userInfo["status"] as? String,
+            let status = MThread.Status(rawValue: statusString) else {
+            return
+        }
+
+        let thread = MThread(threadId: threadId, status: status, title: title)
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .post(name: .AVInboxTabScreenRequestNotification, object: nil, userInfo: [0: thread])
     }
 
     @objc func didUserLoginAuthorizationUpdate(_ notification: Notification) {
