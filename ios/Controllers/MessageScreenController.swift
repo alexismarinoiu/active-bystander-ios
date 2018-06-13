@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 class MessageScreenController: UIViewController {
 
@@ -19,7 +20,6 @@ class MessageScreenController: UIViewController {
     }
 
     private(set) var messages: [Message] = []
-    private var timer: Timer?
 
     private var cellHeights = [CGFloat]()
 
@@ -35,18 +35,15 @@ class MessageScreenController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        // Start the polling timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.refreshMessages {
-                self?.scrollToBottom(animated: true)
-            }
-        }
+        // Register for active notification updates
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .addObserver(self, selector: #selector(remoteNotificationReceived(notification:)),
+                         name: .AVInboxActiveMessageNotification, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        // End the polling timer
-        timer?.invalidate()
-        timer = nil
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .removeObserver(self, name: .AVInboxActiveMessageNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,15 +64,34 @@ class MessageScreenController: UIViewController {
         messages.append(Message(isMe: true, text: "", sequenceNumber: newSeq))
         // Correct updating of sequence number
         let request = MMessageSendRequest(seq: newSeq, content: text, threadId: thread.threadId)
-        Environment.backend.update(request) { (success, message: MMessage?) in
+        Environment.backend.update(request) { [weak `self` = self] (success, message: MMessage?) in
             if !success {
                 print("Sending message failed: \(message.debugDescription)")
+            }
+
+            self?.refreshMessages {
+                self?.scrollToBottom(animated: true)
             }
         }
     }
 
     @IBAction func messageViewPressed(_ sender: UITapGestureRecognizer) {
         textInput.resignFirstResponder()
+    }
+
+    @objc func remoteNotificationReceived(notification: Notification) {
+        guard let thread = notification.userInfo?[0] as? MThread,
+            thread.threadId == self.thread.threadId,
+            let notificationCompletionHandler =
+            notification.userInfo?[1] as? ((UNNotificationPresentationOptions) -> Void) else {
+            return
+        }
+
+        // Suppress alerts if this is the active thread
+        notificationCompletionHandler([])
+        self.refreshMessages { [weak `self` = self] in
+            self?.scrollToBottom(animated: true)
+        }
     }
 }
 
@@ -121,6 +137,7 @@ extension MessageScreenController {
     }
 }
 
+// MARK: - Table View Delegate
 extension MessageScreenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row >= cellHeights.count {
@@ -141,6 +158,7 @@ extension MessageScreenController: UITableViewDelegate {
     }
 }
 
+// MARK: - Keyboard Shifting Delegate
 extension MessageScreenController: KeyboardShifterDelegate {
     func keyboard(_ keyboardShifter: KeyboardShifter, willShow sizeBegin: CGRect, sizeEnd: CGRect,
                   duration: Double, options: UIViewAnimationOptions) {
@@ -189,6 +207,7 @@ extension MessageScreenController: KeyboardShifterDelegate {
 
 }
 
+// MARK: - Table View Data Source
 extension MessageScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let msg = messages[indexPath.item]

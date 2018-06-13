@@ -1,4 +1,5 @@
 import UIKit
+import UserNotifications
 
 class InboxScreenController: UITableViewController {
     struct Message {
@@ -10,8 +11,6 @@ class InboxScreenController: UITableViewController {
     private var requests: [Message] = []
     private let pendingQueue = DispatchQueue(label: "uk.avocado.Bystander.InboxPending", qos: .userInitiated,
                                              attributes: [], autoreleaseFrequency: .inherit, target: nil)
-
-    private var timer: Timer?
 
     override init(style: UITableViewStyle) {
         super.init(style: style)
@@ -41,14 +40,15 @@ class InboxScreenController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak `self` = self] _ in
-            self?.reloadInboxScreen()
-        }
+        // Register for active notification updates
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .addObserver(self, selector: #selector(remoteNotificationReceived(notification:)),
+                         name: .AVInboxActiveMessageNotification, object: nil)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        timer?.invalidate()
-        timer = nil
+        (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
+            .removeObserver(self, name: .AVInboxActiveMessageNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -199,6 +199,16 @@ class InboxScreenController: UITableViewController {
         messageScreen.title = thread.title
         navigationController?.popToRootViewController(animated: false)
         navigationController?.pushViewController(messageScreen, animated: true)
+    }
+
+    @objc func remoteNotificationReceived(notification: Notification) {
+        if let notificationCompletionHandler =
+            notification.userInfo?[1] as? ((UNNotificationPresentationOptions) -> Void) {
+            // Suppress notification from showing up
+            notificationCompletionHandler([])
+        }
+
+        reloadInboxScreen()
     }
 }
 
