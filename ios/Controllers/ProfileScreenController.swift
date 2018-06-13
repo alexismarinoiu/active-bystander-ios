@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 
 class ProfileScreenController: UIViewController {
-    private let helpArea = ["Sexual Harassment", "Verbal Assault", "Racism"]
+    var helpAreas: [String] = []
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
@@ -29,20 +29,29 @@ class ProfileScreenController: UIViewController {
                 let editController = destination.topViewController as? ProfileEditScreenController else {
                     return
             }
-            editController.helpArea = self.helpArea
+
+            editController.delegate = self
+            editController.selectedHelpAreas = self.helpAreas
         }
+    }
+}
+
+extension ProfileScreenController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension ProfileScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? helpArea.count : 1
+        // if the section is not 0, then it is General which only has one row
+        return section == 0 ? helpAreas.count : 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
-            cell.textLabel?.text = helpArea[indexPath.row]
+            cell.textLabel?.text = helpAreas[indexPath.row]
             return cell
         }
 
@@ -76,6 +85,7 @@ extension ProfileScreenController: UITableViewDataSource {
             return "General"
         }
     }
+
 }
 
 extension ProfileScreenController {
@@ -90,5 +100,12 @@ extension ProfileScreenController {
                 locationTrackingCell?.toggleSwitch.isOn = false
             }
         }
+    }
+}
+
+extension ProfileScreenController: ProfileEditScreenControllerDelegate {
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [String]) {
+        self.helpAreas = helpAreas
+        helpAreaTable.reloadData()
     }
 }

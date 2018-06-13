@@ -8,7 +8,10 @@ class ProfileEditScreenNavigationController: UINavigationController {
 class ProfileEditScreenController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var helpArea: [String] = []
+    private var allHelpAreas: [String] = []
+    var selectedHelpAreas: [String] = []
+
+    public weak var delegate: ProfileEditScreenControllerDelegate?
 
     lazy var picker: UIImagePickerController = { () -> UIImagePickerController in
         let controller = UIImagePickerController()
@@ -20,7 +23,16 @@ class ProfileEditScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
+        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
+            guard success, let situations = situations else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                self?.allHelpAreas = situations.map {$0.id}
+                self?.tableView.reloadData()
+            }
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -34,12 +46,18 @@ class ProfileEditScreenController: UIViewController {
 extension ProfileEditScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
-        cell.textLabel?.text = helpArea[indexPath.row]
+        let helpAreaText = allHelpAreas[indexPath.row]
+
+        cell.textLabel?.text = helpAreaText
+        if selectedHelpAreas.contains(helpAreaText) {
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+        }
+
         return cell
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return helpArea.count
+        return allHelpAreas.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -59,10 +77,17 @@ extension ProfileEditScreenController: UITableViewDelegate {
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
-        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCellAccessoryType.checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+
+        if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
+            selectedHelpAreas = selectedHelpAreas.filter {$0 != cell.textLabel?.text}
+            cell.accessoryType = UITableViewCellAccessoryType.none
         } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            if !selectedHelpAreas.contains((cell.textLabel?.text)!) {selectedHelpAreas.append((cell.textLabel?.text)!)}
         }
     }
 }
@@ -76,7 +101,8 @@ extension ProfileEditScreenController {
 
     // Done
     @IBAction func doneButtonPress(_ sender: UINavigationItem) {
-        // notTODO: Save
+        delegate?.profileEditScreenController(self, updateHelpAreas: selectedHelpAreas)
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func profilePicturePress(_ sender: UITapGestureRecognizer) {
@@ -93,4 +119,8 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
         picker.dismiss(animated: true, completion: nil)
         // notTODO: Implement
     }
+}
+
+protocol ProfileEditScreenControllerDelegate: class {
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [String])
 }
