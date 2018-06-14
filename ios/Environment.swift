@@ -9,6 +9,12 @@ struct Environment {
         // swiftlint:enable force_cast
     }()
 
+    static var base: URL = {
+        // swiftlint:disable force_cast
+        return URL(string: Bundle.main.infoDictionary!["AV_API_BASE"] as! String)!
+        // swiftlint:enable force_cast
+    }()
+
     static var realm: String = {
         // swiftlint:disable force_cast
         return Bundle.main.infoDictionary!["AV_API_AUTHENTICATION_REALM"] as! String
