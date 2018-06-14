@@ -265,6 +265,18 @@ class MessageTableViewCell: UITableViewCell {
     }
 
     @IBAction func rejectThreadPressed(_ sender: UIButton) {
+        guard let threadId = threadId else {
+            return
+        }
+        Environment.backend.delete(MDeclineRequest(threadId)) { [weak `self` = self] (_, thread: MThread?) in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                self.hideButtons()
+                self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
+            }
+        }
     }
 }
 
