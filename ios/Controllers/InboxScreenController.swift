@@ -114,8 +114,12 @@ class InboxScreenController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Send delete request to the backend
-            print("let's delete")
+            Environment.backend.delete(MThreadConversationDeleteRequest(
+                threadId: messages[indexPath.row].thread.threadId)) {(success, thread: MThread?) in
+                if !success {
+                    print("Deleting conversation failed: \(thread.debugDescription)")
+                }
+            }
         }
     }
 

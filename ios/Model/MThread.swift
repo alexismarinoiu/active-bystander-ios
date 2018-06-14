@@ -38,3 +38,17 @@ extension MThreadConnectRequest: Request {
         return "thread"
     }
 }
+
+struct MThreadConversationDeleteRequest: Encodable {
+    let threadId: String
+
+    init(threadId: String) {
+        self.threadId = threadId
+    }
+}
+
+extension MThreadConversationDeleteRequest: Request {
+    var resource: String {
+        return "thread/\(threadId)/self"
+    }
+}
