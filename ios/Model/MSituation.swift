@@ -15,4 +15,5 @@ struct MSituation: Decodable {
     let id: String
     // swiftlint:enable identifier_name
     let html: String
+    let group: String
 }
