@@ -4,6 +4,8 @@
 <dict>
 	<key>AV_API_AUTHENTICATION_REALM</key>
 	<string>$(AV_API_AUTHENTICATION_REALM)</string>
+	<key>AV_API_BASE</key>
+	<string>$(AV_API_BASE)</string>
 	<key>AV_API_ENDPOINT</key>
 	<string>$(AV_API_ENDPOINT)</string>
 	<key>AV_API_LIVE_AUTH</key>

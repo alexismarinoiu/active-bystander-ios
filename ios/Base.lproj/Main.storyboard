@@ -532,7 +532,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="displayNameLabel" destination="r8l-Pw-dDX" id="hgf-rV-yw3"/>
                         <outlet property="helpAreaTable" destination="O35-SO-LDW" id="90v-bh-sVc"/>
+                        <outlet property="profilePicture" destination="9o0-5k-GKE" id="c6v-bc-Uzh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>

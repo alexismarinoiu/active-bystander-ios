@@ -431,6 +431,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api-staging.activebystander.org";
 				AV_API_ENDPOINT = "https://api-staging.activebystander.org/v1";
 				AV_API_LIVE_AUTH = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -537,6 +538,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api-staging.activebystander.org";
 				AV_API_ENDPOINT = "http://localhost:8081";
 				AV_API_LIVE_AUTH = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -643,6 +645,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api.activebystander.org";
 				AV_API_ENDPOINT = "https://api.activebystander.org/v1";
 				AV_API_LIVE_AUTH = YES;
 				CLANG_ANALYZER_NONNULL = YES;

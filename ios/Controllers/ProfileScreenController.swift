@@ -7,11 +7,9 @@ class ProfileScreenController: UIViewController {
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
+    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var helpAreaTable: UITableView!
-
-    @IBAction func logOutButtonPress(_ sender: UIButton) {
-        Environment.userAuth.logOut()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +36,40 @@ class ProfileScreenController: UIViewController {
         }
     }
 
+    @IBAction func logOutButtonPress(_ sender: UIButton) {
+        Environment.userAuth.logOut()
+    }
+
     func refreshProfile() {
-        // swiftlint:disable unused_closure_parameter
-        Environment.backend.read(MProfileRequest()) { (success, profile: MProfile?) in
+        Environment.backend.read(MProfileRequest()) { [weak `self` = self] (success, profile: MProfile?) in
+            guard success, let profile = profile else {
+                return
+            }
+
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+
+                self.helpAreas = profile.helpAreas
+                self.displayNameLabel.text = profile.displayName
+
+                if let profilePictureURLString = profile.profileImage,
+                    let image = ProfileScreenController.staticImage(profilePictureURLString) {
+                    self.profilePicture.image = image
+                }
+            }
+
         }
-        // swiftlint:enable unused_closure_parameter
+    }
+
+    private static func staticImage(_ path: String) -> UIImage? {
+        let url = Environment.base.appendingPathComponent(path)
+        guard let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+
+        return UIImage(data: data)
     }
 }
 
