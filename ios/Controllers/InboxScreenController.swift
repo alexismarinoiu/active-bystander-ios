@@ -89,6 +89,7 @@ class InboxScreenController: UITableViewController {
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
+        messageCell.delegate = self
 
         return cell
     }
@@ -220,6 +221,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var tickButton: UIButton!
     var threadId: String?
+    weak var delegate: MessageTableViewCellDelegate?
 
     /// Helper method to set the image of the thread and
     //  round it off in the process
@@ -251,16 +253,28 @@ class MessageTableViewCell: UITableViewCell {
         guard let threadId = threadId else {
             return
         }
-        Environment.backend.update(MAcceptRequest(threadId)) { [weak `self` = self] (success, thread: MThread?) in
+        Environment.backend.update(MAcceptRequest(threadId)) { [weak `self` = self] (_, thread: MThread?) in
             DispatchQueue.main.async {
-                self?.hideButtons()
+                guard let `self` = self else {
+                    return
+                }
+                self.hideButtons()
+                self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
             }
-            print(success, thread as Any)
-            // notTODO: updating the parent
         }
     }
 
     @IBAction func rejectThreadPressed(_ sender: UIButton) {
+    }
+}
+
+protocol MessageTableViewCellDelegate: class {
+    func messageTableViewCell(_ cell: MessageTableViewCell, didRespondToRequest thread: MThread?)
+}
+
+extension InboxScreenController: MessageTableViewCellDelegate {
+    func messageTableViewCell(_ cell: MessageTableViewCell, didRespondToRequest thread: MThread?) {
+        reloadInboxScreen()
     }
 }
 
