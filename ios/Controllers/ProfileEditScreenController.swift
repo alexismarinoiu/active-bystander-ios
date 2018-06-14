@@ -91,12 +91,17 @@ extension ProfileEditScreenController: UITableViewDelegate {
 
             cell.accessoryType = UITableViewCellAccessoryType.none
         } else {
-            //implement the POST call
-            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            let request = MHelpArea(situation: situation.title, situationId: situation.id)
+            Environment.backend.create(request) { (success, helpArea: MHelpArea?) in
+                guard success, let helpArea = helpArea else {
+                    return
+                }
 
-            if selectedHelpAreas.index(where: { $0.situationId == situation.id }) != nil {
-                selectedHelpAreas.append(MHelpArea(situation: situation.title, situationId: situation.id))
+                DispatchQueue.main.async {
+                    self.selectedHelpAreas.append(helpArea)
+                }
             }
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
     }
 }
