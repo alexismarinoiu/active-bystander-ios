@@ -14,7 +14,7 @@ class SituationsController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                self?.situations = situations
+                self?.situations = situations.sorted {$0.situation < $1.situation}
                 self?.situationTableView.reloadData()
             }
         }
@@ -52,7 +52,7 @@ extension SituationsController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "adviceCell", for: indexPath)
 
         let situation = situations[indexPath.row]
-        cell.textLabel?.text = situation.id
+        cell.textLabel?.text = situation.situation
         return cell
     }
 
