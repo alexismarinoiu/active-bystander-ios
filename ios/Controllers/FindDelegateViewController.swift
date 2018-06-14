@@ -38,7 +38,7 @@ class FindDelegateViewController: UIViewController {
 
                 self.labels = situations
                 for label in self.labels {
-                    self.labelAlert.addAction(UIAlertAction(title: label.situation, style: .default,
+                    self.labelAlert.addAction(UIAlertAction(title: label.title, style: .default,
                                                             handler: self.situationActionHandler))
                 }
                 self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,

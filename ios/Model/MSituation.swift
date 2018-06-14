@@ -11,7 +11,7 @@ extension MSituationRequest: Request {
 }
 
 struct MSituation: Decodable {
-    let situation: String
-    let html: String
-    let group: String?
+    let title: String
+    let html: String?
+    let children: [MSituation]
 }
