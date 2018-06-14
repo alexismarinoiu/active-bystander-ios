@@ -419,6 +419,15 @@
                                                 <constraint firstAttribute="width" constant="160" id="g25-gS-VdJ"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv. 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-SL-gXA">
+                                            <rect key="frame" x="150" y="234.66666666666669" width="75" height="20.333333333333343"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="75" id="wYW-SA-TNH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.20027270913124084" blue="0.35262119770050049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -426,7 +435,10 @@
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="r8l-Pw-dDX" secondAttribute="trailing" constant="67" id="HmO-XC-lcb"/>
                                         <constraint firstItem="9o0-5k-GKE" firstAttribute="leading" relation="lessThanOrEqual" secondItem="GBw-2g-Y9f" secondAttribute="leading" constant="107.5" id="U1r-hq-IId"/>
                                         <constraint firstItem="r8l-Pw-dDX" firstAttribute="leading" relation="lessThanOrEqual" secondItem="GBw-2g-Y9f" secondAttribute="leading" constant="67" id="bzW-0O-IaK"/>
+                                        <constraint firstAttribute="bottom" secondItem="SAa-SL-gXA" secondAttribute="bottom" constant="15" id="d0I-HQ-8pK"/>
                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="9o0-5k-GKE" secondAttribute="trailing" constant="107.5" id="mfF-Om-q59"/>
+                                        <constraint firstAttribute="trailing" secondItem="SAa-SL-gXA" secondAttribute="trailing" constant="150" id="oQD-jH-dsQ"/>
+                                        <constraint firstItem="SAa-SL-gXA" firstAttribute="leading" secondItem="GBw-2g-Y9f" secondAttribute="leading" constant="150" id="qHI-Xt-OeK"/>
                                         <constraint firstItem="9o0-5k-GKE" firstAttribute="top" secondItem="GBw-2g-Y9f" secondAttribute="top" constant="32" id="yxZ-Et-QKU"/>
                                         <constraint firstAttribute="bottom" secondItem="r8l-Pw-dDX" secondAttribute="bottom" constant="38.670000000000002" id="zHf-aC-p3d"/>
                                     </constraints>
