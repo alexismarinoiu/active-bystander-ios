@@ -55,7 +55,12 @@ struct HttpBackendService: BackendService {
     }
 
     func delete<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void) where Req: Request, Res: Response {
-        // notTODO: Not Implemented
+        guard let urlRequest = makeJSONRequest(request, method: .delete) else {
+            callback(false, nil)
+            return
+        }
+
+        perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .delete), callback: callback)
     }
 }
 

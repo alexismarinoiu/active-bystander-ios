@@ -4,7 +4,7 @@ import MobileCoreServices
 class ProfileEditScreenController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var allHelpAreas = [MHelpArea]()
+    private var allSituations = [MSituation]()
     var selectedHelpAreas = [MHelpArea]()
 
     public weak var delegate: ProfileEditScreenControllerDelegate?
@@ -19,7 +19,16 @@ class ProfileEditScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
+            guard success, let situations = situations else {
+                return
+            }
 
+            DispatchQueue.main.async {
+                self?.allSituations = (situations.flatMap { $0.children }).sorted { $0.title < $1.title }
+                self?.tableView.reloadData()
+            }
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -32,10 +41,10 @@ class ProfileEditScreenController: UIViewController {
 extension ProfileEditScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
-        let helpArea = allHelpAreas[indexPath.row]
+        let situation = allSituations[indexPath.row]
 
-        cell.textLabel?.text = helpArea.situation
-        if (selectedHelpAreas.contains { $0.situationId == helpArea.situationId }) {
+        cell.textLabel?.text = situation.title
+        if (selectedHelpAreas.contains { $0.situationId == situation.id }) {
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
 
@@ -43,7 +52,7 @@ extension ProfileEditScreenController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allHelpAreas.count
+        return allSituations.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -68,10 +77,15 @@ extension ProfileEditScreenController: UITableViewDelegate {
             return
         }
 
+        let situation = allSituations[indexPath.row]
         if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
-            //implement DELETE HTTP call
-            // notTODO: Don't check on string!
-            if let index = selectedHelpAreas.index(where: { $0.situation == cell.textLabel?.text }) {
+            let request = MHelpAreaRequest(situation: situation.title, situationId: situation.id)
+            Environment.backend.delete(request) { (success, _: MHelpArea?) in
+                guard success else {
+                    return
+                }
+            }
+            if let index = selectedHelpAreas.index(where: { $0.situationId == situation.id }) {
                 selectedHelpAreas.remove(at: index)
             }
 
@@ -80,10 +94,8 @@ extension ProfileEditScreenController: UITableViewDelegate {
             //implement the POST call
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
 
-            // notTODO: Don't check on string!
-            if let text = cell.textLabel?.text,
-                let helpArea = selectedHelpAreas.filter({ $0.situation == text }).first {
-                selectedHelpAreas.append(helpArea)
+            if selectedHelpAreas.index(where: { $0.situationId == situation.id }) != nil {
+                selectedHelpAreas.append(MHelpArea(situation: situation.title, situationId: situation.id))
             }
         }
     }
