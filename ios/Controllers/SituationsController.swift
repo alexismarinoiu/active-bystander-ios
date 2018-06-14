@@ -2,22 +2,26 @@ import UIKit
 
 class SituationsController: UIViewController {
 
-    private var situations: [MSituation] = []
+    var situations: [MSituation] = []
     @IBOutlet weak var situationTableView: UITableView!
+    var fetchFlag: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
-            guard success, let situations = situations else {
-                return
-            }
+        if fetchFlag {
+            Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
+                guard success, let situations = situations else {
+                    return
+                }
 
-            DispatchQueue.main.async {
-                self?.situations = situations
-                self?.situationTableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.situations = situations
+                    self?.situationTableView.reloadData()
+                }
             }
         }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,13 +32,24 @@ class SituationsController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "adviceSegue" {
-            guard let destination: AdviceScreenController = segue.destination as? AdviceScreenController,
+            guard let destination = segue.destination as? AdviceScreenController,
                   let indexPath = situationTableView.indexPathForSelectedRow else {
                 return
             }
 
-            let situation = situations[indexPath.item]
-            destination.html = situation.html
+            let situation = situations[indexPath.row]
+            destination.html = situation.html!
+        }
+
+        if segue.identifier == "groupSegue" {
+            guard let destination = segue.destination as? SituationsController,
+                let indexPath = situationTableView.indexPathForSelectedRow else {
+                return
+            }
+
+            let situation = situations[indexPath.row]
+            destination.fetchFlag = false
+            destination.situations = situation.children
         }
     }
 
@@ -49,10 +64,15 @@ extension SituationsController: UITableViewDataSource {
 
     //what are the cotent of each cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "adviceCell", for: indexPath)
-
         let situation = situations[indexPath.row]
-        cell.textLabel?.text = situation.id
+        let cell: UITableViewCell
+        if situation.children.count == 0 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "adviceCell", for: indexPath)
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
+        }
+
+        cell.textLabel?.text = situation.title
         return cell
     }
 

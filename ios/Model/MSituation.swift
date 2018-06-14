@@ -12,8 +12,9 @@ extension MSituationRequest: Request {
 
 struct MSituation: Decodable {
     // swiftlint:disable identifier_name
-    let id: String
+    let id: Int
     // swiftlint:enable identifier_name
-    let html: String
-    let group: String
+    let title: String
+    let html: String?
+    let children: [MSituation]
 }

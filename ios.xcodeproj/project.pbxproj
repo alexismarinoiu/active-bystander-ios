@@ -22,6 +22,7 @@
 		2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493CDDA20BF48BE00284C2E /* Notifications.swift */; };
 		24A44B4C20D083F800FD0502 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A44B4B20D083F800FD0502 /* MainTabBarController.swift */; };
 		24A4A37520D2D879005B79FD /* MAcceptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4A37420D2D878005B79FD /* MAcceptRequest.swift */; };
+		24A4A37920D2E948005B79FD /* MProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A4A37820D2E948005B79FD /* MProfile.swift */; };
 		24C6460620B6E5C6003FA122 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C6460520B6E5C6003FA122 /* CoreLocation.framework */; };
 		24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */; };
 		24D62B1320B5A9C7001367B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D62B1120B5A9C7001367B8 /* Main.storyboard */; settings = {ASSET_TAGS = (0, ); }; };
@@ -41,6 +42,7 @@
 		809D216820C2F849007C264E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216220C2F849007C264E /* SettingsController.swift */; };
 		809D216920C2F849007C264E /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216320C2F849007C264E /* HomeScreenController.swift */; };
 		809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216420C2F849007C264E /* InboxScreenController.swift */; };
+		80E1662820D2B5EE00118F28 /* MHelpArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E1662720D2B5EE00118F28 /* MHelpArea.swift */; };
 		80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EDCC4820C2E84B003F9852 /* SituationsController.swift */; };
 		B3D337F920C6E419001D0FB1 /* FourDDescriptionScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,7 @@
 		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		24A44B4B20D083F800FD0502 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		24A4A37420D2D878005B79FD /* MAcceptRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAcceptRequest.swift; sourceTree = "<group>"; };
+		24A4A37820D2E948005B79FD /* MProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MProfile.swift; sourceTree = "<group>"; };
 		24C6460520B6E5C6003FA122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24D62B0A20B5A9C7001367B8 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D62B0D20B5A9C7001367B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		809D216220C2F849007C264E /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		809D216320C2F849007C264E /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		809D216420C2F849007C264E /* InboxScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
+		80E1662720D2B5EE00118F28 /* MHelpArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHelpArea.swift; sourceTree = "<group>"; };
 		80EDCC4820C2E84B003F9852 /* SituationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationsController.swift; sourceTree = "<group>"; };
 		B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDDescriptionScreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +132,8 @@
 				804FC1F720C81FF3003816A5 /* MThread.swift */,
 				804FC1F920C82432003816A5 /* MMessage.swift */,
 				24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */,
+				80E1662720D2B5EE00118F28 /* MHelpArea.swift */,
+				24A4A37820D2E948005B79FD /* MProfile.swift */,
 				24A4A37420D2D878005B79FD /* MAcceptRequest.swift */,
 				2468C83F20D335E0000F42AB /* MDeclineRequest.swift */,
 			);
@@ -367,6 +373,7 @@
 				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
 				2450353620C841B5001283CD /* TestDelegate.swift in Sources */,
 				24A44B4C20D083F800FD0502 /* MainTabBarController.swift in Sources */,
+				24A4A37920D2E948005B79FD /* MProfile.swift in Sources */,
 				2447449520C5A1A1007A1B26 /* UserAuth.swift in Sources */,
 				24A4A37520D2D879005B79FD /* MAcceptRequest.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
@@ -376,6 +383,7 @@
 				24551F7920CF013E00AE7D62 /* MNotificationRegistration.swift in Sources */,
 				804FC1F820C81FF3003816A5 /* MThread.swift in Sources */,
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
+				80E1662820D2B5EE00118F28 /* MHelpArea.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 				2447449720C5A2C8007A1B26 /* MAuthStatus.swift in Sources */,
 				241295F720C16E0700620701 /* BackendService.swift in Sources */,
@@ -431,6 +439,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api-staging.activebystander.org";
 				AV_API_ENDPOINT = "https://api-staging.activebystander.org/v1";
 				AV_API_LIVE_AUTH = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -537,6 +546,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api-staging.activebystander.org";
 				AV_API_ENDPOINT = "http://localhost:8081";
 				AV_API_LIVE_AUTH = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -643,6 +653,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				AV_API_AUTHENTICATION_REALM = AVABAUTH1;
+				AV_API_BASE = "https://api.activebystander.org";
 				AV_API_ENDPOINT = "https://api.activebystander.org/v1";
 				AV_API_LIVE_AUTH = YES;
 				CLANG_ANALYZER_NONNULL = YES;

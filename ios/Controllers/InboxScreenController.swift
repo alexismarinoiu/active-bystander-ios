@@ -80,10 +80,7 @@ class InboxScreenController: UITableViewController {
         }
 
         let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
-        if indexPath.section == 0 {
-            messageCell.setupAcceptButtons()
-            messageCell.threadId = message.thread.threadId
-        } else {
+        if indexPath.section != 0 {
             messageCell.hideButtons()
         }
         messageCell.threadTitleLabel.text = message.thread.title
@@ -218,8 +215,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var threadTitleLabel: UILabel!
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var threadImage: UIImageView!
-    @IBOutlet weak var crossButton: UIButton!
-    @IBOutlet weak var tickButton: UIButton!
+    @IBOutlet weak var buttonItems: UIView!
+
     var threadId: String?
     weak var delegate: MessageTableViewCellDelegate?
 
@@ -239,14 +236,8 @@ class MessageTableViewCell: UITableViewCell {
         threadImage.image = finalImage
     }
 
-    func setupAcceptButtons() {
-        crossButton.layer.cornerRadius = 15
-        tickButton.layer.cornerRadius = 15
-    }
-
     func hideButtons() {
-        crossButton.isHidden = true
-        tickButton.isHidden = true
+        buttonItems.isHidden = true
     }
 
     @IBAction func acceptThreadPressed(_ sender: UIButton) {
@@ -295,4 +286,23 @@ extension InboxScreenController.Message: Equatable {
         return lhs.latestMessage == rhs.latestMessage && lhs.thread == rhs.thread
     }
 
+}
+
+class ButtonItemContainerView: UIView {
+    @IBOutlet weak var tickButton: UIButton! {
+        didSet {
+            tickButton.layer.borderColor = tickButton.backgroundColor?.cgColor
+            tickButton.layer.borderWidth = 1
+            tickButton.layer.cornerRadius = 5
+            tickButton.layer.borderColor = #colorLiteral(red: 0.02745098039, green: 0.8274509804, blue: 0.3019607843, alpha: 1)
+        }
+    }
+    @IBOutlet weak var crossButton: UIButton! {
+        didSet {
+            crossButton.layer.borderColor = crossButton.backgroundColor?.cgColor
+            crossButton.layer.borderWidth = 1
+            crossButton.layer.cornerRadius = 5
+            crossButton.layer.borderColor = #colorLiteral(red: 0.9607843137, green: 0, blue: 0.03529411765, alpha: 1)
+        }
+    }
 }
