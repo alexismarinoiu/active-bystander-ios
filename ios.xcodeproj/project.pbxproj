@@ -17,6 +17,7 @@
 		2450353420C84091001283CD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2450353320C84091001283CD /* main.swift */; };
 		2450353620C841B5001283CD /* TestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2450353520C841B5001283CD /* TestDelegate.swift */; };
 		24551F7920CF013E00AE7D62 /* MNotificationRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */; };
+		2468C84020D335E0000F42AB /* MDeclineRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2468C83F20D335E0000F42AB /* MDeclineRequest.swift */; };
 		2486CB4820C6012C007DF229 /* ProfileScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486CB4720C6012C007DF229 /* ProfileScreenController.swift */; };
 		2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2493CDDA20BF48BE00284C2E /* Notifications.swift */; };
 		24A44B4C20D083F800FD0502 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A44B4B20D083F800FD0502 /* MainTabBarController.swift */; };
@@ -65,6 +66,7 @@
 		2450353320C84091001283CD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2450353520C841B5001283CD /* TestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDelegate.swift; sourceTree = "<group>"; };
 		24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNotificationRegistration.swift; sourceTree = "<group>"; };
+		2468C83F20D335E0000F42AB /* MDeclineRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDeclineRequest.swift; sourceTree = "<group>"; };
 		2486CB4720C6012C007DF229 /* ProfileScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenController.swift; sourceTree = "<group>"; };
 		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		24A44B4B20D083F800FD0502 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				804FC1F920C82432003816A5 /* MMessage.swift */,
 				24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */,
 				24A4A37420D2D878005B79FD /* MAcceptRequest.swift */,
+				2468C83F20D335E0000F42AB /* MDeclineRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2468C84020D335E0000F42AB /* MDeclineRequest.swift in Sources */,
 				809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */,
 				2493CDDB20BF48BE00284C2E /* Notifications.swift in Sources */,
 				2450353420C84091001283CD /* main.swift in Sources */,
