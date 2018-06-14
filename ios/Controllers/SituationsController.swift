@@ -14,7 +14,7 @@ class SituationsController: UIViewController {
             }
 
             DispatchQueue.main.async {
-                self?.situations = situations
+                self?.situations = situations.sorted {$0.id < $1.id}
                 self?.situationTableView.reloadData()
             }
         }
