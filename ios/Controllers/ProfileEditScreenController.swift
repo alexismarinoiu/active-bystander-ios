@@ -83,9 +83,11 @@ extension ProfileEditScreenController: UITableViewDelegate {
         }
 
         if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
+            //implement DELETE HTTP call
             selectedHelpAreas = selectedHelpAreas.filter {$0 != cell.textLabel?.text}
             cell.accessoryType = UITableViewCellAccessoryType.none
         } else {
+            //implement the POST call
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
             if !selectedHelpAreas.contains((cell.textLabel?.text)!) {selectedHelpAreas.append((cell.textLabel?.text)!)}
         }

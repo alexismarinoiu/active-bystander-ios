@@ -39,6 +39,7 @@
 		809D216820C2F849007C264E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216220C2F849007C264E /* SettingsController.swift */; };
 		809D216920C2F849007C264E /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216320C2F849007C264E /* HomeScreenController.swift */; };
 		809D216A20C2F849007C264E /* InboxScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809D216420C2F849007C264E /* InboxScreenController.swift */; };
+		80E1662820D2B5EE00118F28 /* MHelpArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E1662720D2B5EE00118F28 /* MHelpArea.swift */; };
 		80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EDCC4820C2E84B003F9852 /* SituationsController.swift */; };
 		B3D337F920C6E419001D0FB1 /* FourDDescriptionScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		809D216220C2F849007C264E /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		809D216320C2F849007C264E /* HomeScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		809D216420C2F849007C264E /* InboxScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxScreenController.swift; sourceTree = "<group>"; };
+		80E1662720D2B5EE00118F28 /* MHelpArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHelpArea.swift; sourceTree = "<group>"; };
 		80EDCC4820C2E84B003F9852 /* SituationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SituationsController.swift; sourceTree = "<group>"; };
 		B3D337F820C6E419001D0FB1 /* FourDDescriptionScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourDDescriptionScreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 				804FC1F720C81FF3003816A5 /* MThread.swift */,
 				804FC1F920C82432003816A5 /* MMessage.swift */,
 				24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */,
+				80E1662720D2B5EE00118F28 /* MHelpArea.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				24551F7920CF013E00AE7D62 /* MNotificationRegistration.swift in Sources */,
 				804FC1F820C81FF3003816A5 /* MThread.swift in Sources */,
 				337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */,
+				80E1662820D2B5EE00118F28 /* MHelpArea.swift in Sources */,
 				24D62B0E20B5A9C7001367B8 /* AppDelegate.swift in Sources */,
 				2447449720C5A2C8007A1B26 /* MAuthStatus.swift in Sources */,
 				241295F720C16E0700620701 /* BackendService.swift in Sources */,
