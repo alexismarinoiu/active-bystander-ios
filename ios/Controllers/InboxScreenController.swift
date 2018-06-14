@@ -119,6 +119,7 @@ class InboxScreenController: UITableViewController {
                 if !success {
                     print("Deleting conversation failed: \(thread.debugDescription)")
                 }
+                self.reloadInboxScreen()
             }
         }
     }
