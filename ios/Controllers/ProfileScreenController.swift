@@ -2,7 +2,8 @@ import UIKit
 import CoreLocation
 
 class ProfileScreenController: UIViewController {
-    var helpAreas: [String] = []
+    var helpAreas = [MHelpArea]()
+
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
@@ -21,11 +22,13 @@ class ProfileScreenController: UIViewController {
             appDelegate.notificationCenter.addObserver(self, selector: selector,
                                                        name: .AVLocationAuthorizationNotification, object: nil)
         }
+
+        refreshProfile()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editingSegue" {
-            guard let destination = segue.destination as? ProfileEditScreenNavigationController,
+            guard let destination = segue.destination as? UINavigationController,
                 let editController = destination.topViewController as? ProfileEditScreenController else {
                     return
             }
@@ -33,6 +36,13 @@ class ProfileScreenController: UIViewController {
             editController.delegate = self
             editController.selectedHelpAreas = self.helpAreas
         }
+    }
+
+    func refreshProfile() {
+        // swiftlint:disable unused_closure_parameter
+        Environment.backend.read(MProfileRequest()) { (success, profile: MProfile?) in
+        }
+        // swiftlint:enable unused_closure_parameter
     }
 }
 
@@ -51,7 +61,7 @@ extension ProfileScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
-            cell.textLabel?.text = helpAreas[indexPath.row]
+            cell.textLabel?.text = helpAreas[indexPath.row].situation
             return cell
         }
 
@@ -104,7 +114,8 @@ extension ProfileScreenController {
 }
 
 extension ProfileScreenController: ProfileEditScreenControllerDelegate {
-    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [String]) {
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController,
+                                     updateHelpAreas helpAreas: [MHelpArea]) {
         self.helpAreas = helpAreas
         helpAreaTable.reloadData()
     }

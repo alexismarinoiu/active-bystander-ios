@@ -1,15 +1,11 @@
 import UIKit
 import MobileCoreServices
 
-class ProfileEditScreenNavigationController: UINavigationController {
-
-}
-
 class ProfileEditScreenController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var allHelpAreas: [String] = []
-    var selectedHelpAreas: [String] = []
+    private var allHelpAreas = [MHelpArea]()
+    var selectedHelpAreas = [MHelpArea]()
 
     public weak var delegate: ProfileEditScreenControllerDelegate?
 
@@ -23,16 +19,6 @@ class ProfileEditScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
-            guard success, let situations = situations else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                self?.allHelpAreas = situations.map {$0.id}
-                self?.tableView.reloadData()
-            }
-        }
 
         // Do any additional setup after loading the view.
     }
@@ -46,10 +32,10 @@ class ProfileEditScreenController: UIViewController {
 extension ProfileEditScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "helpAreaCell", for: indexPath)
-        let helpAreaText = allHelpAreas[indexPath.row]
+        let helpArea = allHelpAreas[indexPath.row]
 
-        cell.textLabel?.text = helpAreaText
-        if selectedHelpAreas.contains(helpAreaText) {
+        cell.textLabel?.text = helpArea.situation
+        if (selectedHelpAreas.contains { $0.situationId == helpArea.situationId }) {
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
         }
 
@@ -84,12 +70,21 @@ extension ProfileEditScreenController: UITableViewDelegate {
 
         if cell.accessoryType == UITableViewCellAccessoryType.checkmark {
             //implement DELETE HTTP call
-            selectedHelpAreas = selectedHelpAreas.filter {$0 != cell.textLabel?.text}
+            // notTODO: Don't check on string!
+            if let index = selectedHelpAreas.index(where: { $0.situation == cell.textLabel?.text }) {
+                selectedHelpAreas.remove(at: index)
+            }
+
             cell.accessoryType = UITableViewCellAccessoryType.none
         } else {
             //implement the POST call
             cell.accessoryType = UITableViewCellAccessoryType.checkmark
-            if !selectedHelpAreas.contains((cell.textLabel?.text)!) {selectedHelpAreas.append((cell.textLabel?.text)!)}
+
+            // notTODO: Don't check on string!
+            if let text = cell.textLabel?.text,
+                let helpArea = selectedHelpAreas.filter({ $0.situation == text }).first {
+                selectedHelpAreas.append(helpArea)
+            }
         }
     }
 }
@@ -124,5 +119,5 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
 }
 
 protocol ProfileEditScreenControllerDelegate: class {
-    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [String])
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [MHelpArea])
 }
