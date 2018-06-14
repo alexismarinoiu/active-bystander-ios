@@ -60,7 +60,7 @@ extension ProfileEditScreenController: UITableViewDataSource {
         case 0:
             return "I can help with..."
         default:
-            return ""
+            return nil
         }
     }
 }
