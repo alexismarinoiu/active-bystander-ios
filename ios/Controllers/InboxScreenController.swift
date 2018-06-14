@@ -114,6 +114,7 @@ class InboxScreenController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // Send delete request to the backend
             print("let's delete")
         }
     }
