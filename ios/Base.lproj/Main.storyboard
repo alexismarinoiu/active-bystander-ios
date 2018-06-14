@@ -419,7 +419,7 @@
                                                 <constraint firstAttribute="width" constant="160" id="g25-gS-VdJ"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv. 3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-SL-gXA">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAa-SL-gXA">
                                             <rect key="frame" x="150" y="234.66666666666669" width="75" height="20.333333333333343"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="75" id="wYW-SA-TNH"/>
