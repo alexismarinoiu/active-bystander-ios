@@ -13,7 +13,6 @@ class ProfileScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        helpAreaTable.reloadData()
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             locationManager = appDelegate.locationManager
             let selector = #selector(locationManagerChangedAuthorization(notification:))
@@ -52,6 +51,7 @@ class ProfileScreenController: UIViewController {
                 }
 
                 self.helpAreas = profile.helpAreas
+                self.helpAreaTable.reloadData()
                 self.displayNameLabel.text = profile.displayName
 
                 if let profilePictureURLString = profile.profileImage,
