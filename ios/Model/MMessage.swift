@@ -8,14 +8,15 @@ struct MMessageRequest: Encodable {
         self.threadId = threadId
         self.queryLastMessage = queryLastMessage
     }
-
-    func encode(to encoder: Encoder) throws {
-    }
 }
 
 extension MMessageRequest: Request {
     var resource: String {
         return queryLastMessage ? "thread/\(threadId)/last-message" : "thread/\(threadId)"
+    }
+
+    func hasEmptyBody(for type: CrudType) -> Bool {
+        return true
     }
 }
 

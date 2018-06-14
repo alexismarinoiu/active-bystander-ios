@@ -252,14 +252,15 @@ class MessageTableViewCell: UITableViewCell {
             return
         }
         Environment.backend.update(MAcceptRequest(threadId)) { [weak `self` = self] (success, thread: MThread?) in
-            self?.hideButtons()
+            DispatchQueue.main.async {
+                self?.hideButtons()
+            }
             print(success, thread as Any)
             // notTODO: updating the parent
         }
     }
 
     @IBAction func rejectThreadPressed(_ sender: UIButton) {
-
     }
 }
 

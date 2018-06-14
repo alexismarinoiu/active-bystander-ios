@@ -76,15 +76,21 @@ extension HttpBackendService {
     }
 
     func makeJSONRequest<Req: Request>(_ request: Req, method: HttpMethod) -> URLRequest? {
-            var urlRequest = URLRequest(url: makeURL(request, for: method))
-            urlRequest.httpMethod = method.rawValue
+        var urlRequest = URLRequest(url: makeURL(request, for: method))
+        urlRequest.httpMethod = method.rawValue
+
+        if request.hasEmptyBody(for: method.toCrud) {
             guard let encodedData = try? JSONEncoder().encode(request) else {
                 return nil
             }
 
             urlRequest.httpBody = encodedData
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            return urlRequest
+        } else {
+            urlRequest.httpBody = "{}".data(using: .utf8)
+        }
+
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        return urlRequest
     }
 
     func perform<Res: Response>(urlRequest request: URLRequest,
