@@ -117,7 +117,7 @@ extension ProfileScreenController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Help Area"
+            return "I can help with..."
         default:
             return "General"
         }
