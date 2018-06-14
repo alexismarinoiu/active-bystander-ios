@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2qp-NX-5hf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2qp-NX-5hf">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -940,6 +940,9 @@ Message Content</string>
                                             <state key="normal" title="✓">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="acceptThreadPressed:" destination="Fuc-M0-yVb" eventType="touchUpInside" id="Swl-H4-ljd"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-F5-Hpz">
                                             <rect key="frame" x="289" y="35.666666666666664" width="30" height="29.999999999999993"/>
@@ -951,6 +954,9 @@ Message Content</string>
                                             <state key="normal" title="⨯">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="rejectThreadPressed:" destination="Fuc-M0-yVb" eventType="touchUpInside" id="XTq-Uf-7UO"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>

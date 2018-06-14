@@ -82,6 +82,7 @@ class InboxScreenController: UITableViewController {
         let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
         if indexPath.section == 0 {
             messageCell.setupAcceptButtons()
+            messageCell.threadId = message.thread.threadId
         } else {
             messageCell.hideButtons()
         }
@@ -218,6 +219,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var threadImage: UIImageView!
     @IBOutlet weak var crossButton: UIButton!
     @IBOutlet weak var tickButton: UIButton!
+    var threadId: String?
 
     /// Helper method to set the image of the thread and
     //  round it off in the process
@@ -243,6 +245,21 @@ class MessageTableViewCell: UITableViewCell {
     func hideButtons() {
         crossButton.isHidden = true
         tickButton.isHidden = true
+    }
+
+    @IBAction func acceptThreadPressed(_ sender: UIButton) {
+        guard let threadId = threadId else {
+            return
+        }
+        Environment.backend.update(MAcceptRequest(threadId)) { [weak `self` = self] (success, thread: MThread?) in
+            self?.hideButtons()
+            print(success, thread as Any)
+            // notTODO: updating the parent
+        }
+    }
+
+    @IBAction func rejectThreadPressed(_ sender: UIButton) {
+
     }
 }
 
