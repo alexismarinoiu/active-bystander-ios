@@ -111,6 +111,21 @@ class InboxScreenController: UITableViewController {
         return NSLocalizedString("Messages", comment: "")
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let request = MThreadConversationDeleteRequest(threadId: messages[indexPath.row].thread.threadId)
+            Environment.backend.delete(request) { [weak `self` = self] (success, thread: MThread?) in
+                guard success, thread != nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.reloadInboxScreen()
+                }
+            }
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "InboxToMessage",
             let destination: MessageScreenController = segue.destination as? MessageScreenController,
