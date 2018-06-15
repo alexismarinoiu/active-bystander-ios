@@ -49,7 +49,7 @@ class SituationsController: UIViewController {
 
             let situation = situations[indexPath.row]
             destination.fetchFlag = false
-            destination.situations = situation.children
+            destination.situations = situation.children.sorted { $0.title < $1.title }
         }
     }
 
