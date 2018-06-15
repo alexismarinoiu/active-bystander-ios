@@ -624,30 +624,8 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="37F-HL-PGp"/>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pyq-0h-h67" userLabel="Name Stack">
-                                <rect key="frame" x="0.0" y="346.33333333333331" width="375" height="48.333333333333314"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71a-43-YTj">
-                                        <rect key="frame" x="0.0" y="0.0" width="33" height="14.333333333333334"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Firstname Lastname" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hta-iK-byd">
-                                        <rect key="frame" x="0.0" y="18.333333333333371" width="375" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="hta-iK-byd" firstAttribute="leading" secondItem="t4P-7g-M6G" secondAttribute="leading" id="lVe-co-mkO"/>
-                                    <constraint firstItem="t4P-7g-M6G" firstAttribute="trailing" secondItem="hta-iK-byd" secondAttribute="trailing" id="oed-OY-eYL"/>
-                                </constraints>
-                                <viewLayoutGuide key="safeArea" id="t4P-7g-M6G"/>
-                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kL4-bc-MBD">
-                                <rect key="frame" x="0.0" y="394.66666666666674" width="375" height="383.33333333333326"/>
+                                <rect key="frame" x="0.0" y="346.33333333333326" width="375" height="431.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="helpAreaCell" textLabel="jdb-9j-Rn8" style="IBUITableViewCellStyleDefault" id="6oH-DC-4dm">
@@ -676,15 +654,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pyq-0h-h67" firstAttribute="leading" secondItem="o0g-Qt-Lwm" secondAttribute="leading" id="0mg-nX-FbG"/>
-                            <constraint firstItem="o0g-Qt-Lwm" firstAttribute="trailing" secondItem="pyq-0h-h67" secondAttribute="trailing" id="8xY-rF-FyS"/>
+                            <constraint firstItem="kL4-bc-MBD" firstAttribute="bottom" secondItem="o0g-Qt-Lwm" secondAttribute="bottom" id="1tW-qH-Ix6"/>
                             <constraint firstItem="kL4-bc-MBD" firstAttribute="leading" secondItem="o0g-Qt-Lwm" secondAttribute="leading" id="GHu-aQ-xdF"/>
                             <constraint firstItem="yCc-kC-bBn" firstAttribute="top" secondItem="o0g-Qt-Lwm" secondAttribute="top" id="IjE-ok-iiv"/>
-                            <constraint firstItem="pyq-0h-h67" firstAttribute="top" secondItem="yCc-kC-bBn" secondAttribute="bottom" id="NlP-Dj-cea"/>
-                            <constraint firstItem="kL4-bc-MBD" firstAttribute="top" secondItem="pyq-0h-h67" secondAttribute="bottom" id="TXP-GN-1lX"/>
                             <constraint firstItem="yCc-kC-bBn" firstAttribute="leading" secondItem="o0g-Qt-Lwm" secondAttribute="leading" id="UtU-xd-BNq"/>
                             <constraint firstItem="yCc-kC-bBn" firstAttribute="leading" secondItem="o0g-Qt-Lwm" secondAttribute="leading" id="ZKn-Py-oVM"/>
                             <constraint firstItem="kL4-bc-MBD" firstAttribute="trailing" secondItem="o0g-Qt-Lwm" secondAttribute="trailing" id="adv-0C-54o"/>
+                            <constraint firstItem="kL4-bc-MBD" firstAttribute="top" secondItem="yCc-kC-bBn" secondAttribute="bottom" id="bQh-Ab-nzh"/>
                             <constraint firstItem="yCc-kC-bBn" firstAttribute="trailing" secondItem="o0g-Qt-Lwm" secondAttribute="trailing" id="rmA-89-iJ2"/>
                             <constraint firstItem="o0g-Qt-Lwm" firstAttribute="bottom" secondItem="kL4-bc-MBD" secondAttribute="bottom" id="wdU-aq-E5l"/>
                             <constraint firstItem="yCc-kC-bBn" firstAttribute="trailing" secondItem="o0g-Qt-Lwm" secondAttribute="trailing" id="z1h-oY-yBB"/>
