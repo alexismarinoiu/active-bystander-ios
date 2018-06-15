@@ -74,14 +74,17 @@ class InboxScreenController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
-        guard let messageCell = cell as? MessageTableViewCell else {
-            return cell
+        let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
+        let type: String
+        if indexPath.section != 0 {
+            type = "message"
+        } else {
+            type = "messagePending"
         }
 
-        let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
-        if indexPath.section != 0 {
-            messageCell.hideButtons()
+        let cell = tableView.dequeueReusableCell(withIdentifier: type, for: indexPath)
+        guard let messageCell = cell as? MessageTableViewCell else {
+            return cell
         }
 
         messageCell.threadId = message.thread.threadId
@@ -217,7 +220,7 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var threadTitleLabel: UILabel!
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var threadImage: UIImageView!
-    @IBOutlet weak var buttonItems: UIView!
+    @IBOutlet weak var buttonItems: UIView?
 
     var threadId: String?
     weak var delegate: MessageTableViewCellDelegate?
@@ -238,10 +241,6 @@ class MessageTableViewCell: UITableViewCell {
         threadImage.image = finalImage
     }
 
-    func hideButtons() {
-        buttonItems.isHidden = true
-    }
-
     @IBAction func acceptThreadPressed(_ sender: UIButton) {
         guard let threadId = threadId else {
             return
@@ -251,7 +250,6 @@ class MessageTableViewCell: UITableViewCell {
                 guard let `self` = self else {
                     return
                 }
-                self.hideButtons()
                 self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
             }
         }
@@ -266,7 +264,6 @@ class MessageTableViewCell: UITableViewCell {
                 guard let `self` = self else {
                     return
                 }
-                self.hideButtons()
                 self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
             }
         }
