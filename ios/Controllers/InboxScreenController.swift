@@ -83,6 +83,8 @@ class InboxScreenController: UITableViewController {
         if indexPath.section != 0 {
             messageCell.hideButtons()
         }
+
+        messageCell.threadId = message.thread.threadId
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
