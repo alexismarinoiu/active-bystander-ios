@@ -114,12 +114,14 @@ class InboxScreenController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            Environment.backend.delete(MThreadConversationDeleteRequest(
-                threadId: messages[indexPath.row].thread.threadId)) {(success, thread: MThread?) in
-                if !success {
-                    print("Deleting conversation failed: \(thread.debugDescription)")
+            let request = MThreadConversationDeleteRequest(threadId: messages[indexPath.row].thread.threadId)
+            Environment.backend.delete(request) { [weak `self` = self] (success, thread: MThread?) in
+                guard success, thread != nil else {
+                    return
                 }
-                self.reloadInboxScreen()
+                DispatchQueue.main.async {
+                    self?.reloadInboxScreen()
+                }
             }
         }
     }
