@@ -30,13 +30,4 @@ struct Environment {
 
     static var userAuth = UserAuth()
     static var backend: BackendService = HttpBackendService()
-
-    public static func staticImage(_ path: String) -> UIImage? {
-        let url = Environment.base.appendingPathComponent(path)
-        guard let data = try? Data(contentsOf: url) else {
-            return nil
-        }
-
-        return UIImage(data: data)
-    }
 }
