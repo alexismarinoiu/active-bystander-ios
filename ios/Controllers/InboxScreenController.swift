@@ -89,7 +89,8 @@ class InboxScreenController: UITableViewController {
         messageCell.threadId = message.thread.threadId
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
-        if let threadImage = message.thread.threadImage, let image = Environment.staticImage(threadImage) {
+        if let threadImage = message.thread.threadImage,
+            let image = UIImage(fromEnvironmentStaticPath: threadImage) {
             messageCell.setThreadImage(image)
         } else {
             messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
@@ -252,15 +253,7 @@ class MessageTableViewCell: UITableViewCell {
     ///
     /// - Parameter newThreadImage: Image to set
     func setThreadImage(_ newThreadImage: UIImage) {
-        UIGraphicsBeginImageContext(threadImage.bounds.size)
-        let path = UIBezierPath(roundedRect: threadImage.bounds,
-                                cornerRadius: threadImage.frame.size.width / 2)
-        path.addClip()
-        newThreadImage.draw(in: threadImage.bounds)
-        let finalImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        threadImage.image = finalImage
+        threadImage.image = newThreadImage.rounded(in: threadImage)
     }
 
     @IBAction func acceptThreadPressed(_ sender: UIButton) {

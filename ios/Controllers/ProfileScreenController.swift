@@ -13,6 +13,9 @@ class ProfileScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        profileImage.image = profileImage.image?.rounded(in: profileImage)
+
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             locationManager = appDelegate.locationManager
             let selector = #selector(locationManagerChangedAuthorization(notification:))
@@ -56,8 +59,8 @@ class ProfileScreenController: UIViewController {
                 self.displayNameLabel.text = profile.displayName
 
                 if let profilePictureURLString = profile.profileImage,
-                    let image = Environment.staticImage(profilePictureURLString) {
-                    self.profileImage.image = image
+                    let image = UIImage(fromEnvironmentStaticPath: profilePictureURLString) {
+                    self.profileImage.image = image.rounded(in: self.profileImage)
                 }
             }
 
