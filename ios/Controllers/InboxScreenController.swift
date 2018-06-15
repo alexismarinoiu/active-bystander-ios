@@ -89,7 +89,11 @@ class InboxScreenController: UITableViewController {
         messageCell.threadId = message.thread.threadId
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
-        messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
+        if let threadImage = message.thread.threadImage, let image = Environment.staticImage(threadImage) {
+            messageCell.setThreadImage(image)
+        } else {
+            messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
+        }
         messageCell.delegate = self
 
         return cell
