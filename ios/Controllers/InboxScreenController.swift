@@ -74,18 +74,24 @@ class InboxScreenController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath)
+        let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
+        let type: String
+        if indexPath.section != 0 {
+            type = "message"
+        } else {
+            type = "messagePending"
+        }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: type, for: indexPath)
         guard let messageCell = cell as? MessageTableViewCell else {
             return cell
         }
 
-        let message = (indexPath.section == 0 ? requests : messages)[indexPath.item]
-        if indexPath.section != 0 {
-            messageCell.hideButtons()
-        }
+        messageCell.threadId = message.thread.threadId
         messageCell.threadTitleLabel.text = message.thread.title
         messageCell.latestMessageLabel.text = message.latestMessage
         messageCell.setThreadImage(#imageLiteral(resourceName: "default-profile"))
+        messageCell.delegate = self
 
         return cell
     }
@@ -214,7 +220,10 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var threadTitleLabel: UILabel!
     @IBOutlet weak var latestMessageLabel: UILabel!
     @IBOutlet weak var threadImage: UIImageView!
-    @IBOutlet weak var buttonItems: UIView!
+    @IBOutlet weak var buttonItems: UIView?
+
+    var threadId: String?
+    weak var delegate: MessageTableViewCellDelegate?
 
     /// Helper method to set the image of the thread and
     //  round it off in the process
@@ -232,8 +241,42 @@ class MessageTableViewCell: UITableViewCell {
         threadImage.image = finalImage
     }
 
-    func hideButtons() {
-        buttonItems.isHidden = true
+    @IBAction func acceptThreadPressed(_ sender: UIButton) {
+        guard let threadId = threadId else {
+            return
+        }
+        Environment.backend.update(MAcceptRequest(threadId)) { [weak `self` = self] (_, thread: MThread?) in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
+            }
+        }
+    }
+
+    @IBAction func rejectThreadPressed(_ sender: UIButton) {
+        guard let threadId = threadId else {
+            return
+        }
+        Environment.backend.delete(MDeclineRequest(threadId)) { [weak `self` = self] (_, thread: MThread?) in
+            DispatchQueue.main.async {
+                guard let `self` = self else {
+                    return
+                }
+                self.delegate?.messageTableViewCell(self, didRespondToRequest: thread)
+            }
+        }
+    }
+}
+
+protocol MessageTableViewCellDelegate: class {
+    func messageTableViewCell(_ cell: MessageTableViewCell, didRespondToRequest thread: MThread?)
+}
+
+extension InboxScreenController: MessageTableViewCellDelegate {
+    func messageTableViewCell(_ cell: MessageTableViewCell, didRespondToRequest thread: MThread?) {
+        reloadInboxScreen()
     }
 }
 

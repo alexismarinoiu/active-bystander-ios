@@ -9,6 +9,7 @@ protocol Request: Encodable {
 
     func getParameters(for type: CrudType) -> [String: CustomStringConvertible]
     func getCanRequestLogin(for type: CrudType) -> Bool // notTODO: Perhaps move this out to an attribute dictionary
+    func hasEmptyBody(for type: CrudType) -> Bool
 }
 
 extension Request {
@@ -18,6 +19,10 @@ extension Request {
 
     func getCanRequestLogin(for type: CrudType) -> Bool {
         return true
+    }
+
+    func hasEmptyBody(for type: CrudType) -> Bool {
+        return false
     }
 }
 
