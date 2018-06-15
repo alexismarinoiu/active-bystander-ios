@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
 
-        let thread = MThread(threadId: threadId, status: status, title: title)
+        let thread = MThread(threadId: threadId, status: status, title: title, creator: true, threadImage: nil)
 
         notificationCenter.post(name: .AVInboxTabScreenRequestNotification, object: nil, userInfo: [0: thread])
         completionHandler(.newData)
@@ -207,7 +207,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             completionHandler([])
             return
         }
-        let thread = MThread(threadId: threadId, status: status, title: title)
+        let thread = MThread(threadId: threadId, status: status, title: title, creator: true, threadImage: nil)
         notificationCenter.post(name: .AVInboxActiveMessageNotification, object: nil,
                                 userInfo: [0: thread, 1: completionHandler])
         completionHandler([.alert])

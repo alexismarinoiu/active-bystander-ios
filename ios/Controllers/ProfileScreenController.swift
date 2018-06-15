@@ -55,21 +55,12 @@ class ProfileScreenController: UIViewController {
                 self.displayNameLabel.text = profile.displayName
 
                 if let profilePictureURLString = profile.profileImage,
-                    let image = ProfileScreenController.staticImage(profilePictureURLString) {
+                    let image = Environment.staticImage(profilePictureURLString) {
                     self.profilePicture.image = image
                 }
             }
 
         }
-    }
-
-    private static func staticImage(_ path: String) -> UIImage? {
-        let url = Environment.base.appendingPathComponent(path)
-        guard let data = try? Data(contentsOf: url) else {
-            return nil
-        }
-
-        return UIImage(data: data)
     }
 }
 

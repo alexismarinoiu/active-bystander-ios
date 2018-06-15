@@ -4,6 +4,8 @@ struct MThread: Codable {
     let threadId: String
     let status: Status
     let title: String
+    let creator: Bool
+    let threadImage: String?
 
     enum Status: String, Codable {
         case accepted = "ACCEPTED"

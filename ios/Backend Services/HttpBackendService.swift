@@ -84,7 +84,7 @@ extension HttpBackendService {
         var urlRequest = URLRequest(url: makeURL(request, for: method))
         urlRequest.httpMethod = method.rawValue
 
-        if request.hasEmptyBody(for: method.toCrud) {
+        if !request.hasEmptyBody(for: method.toCrud) {
             guard let encodedData = try? JSONEncoder().encode(request) else {
                 return nil
             }
