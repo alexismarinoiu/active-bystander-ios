@@ -35,8 +35,6 @@ class InboxScreenController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        reloadInboxScreen()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +42,7 @@ class InboxScreenController: UITableViewController {
         (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
             .addObserver(self, selector: #selector(remoteNotificationReceived(notification:)),
                          name: .AVInboxActiveMessageNotification, object: nil)
+        reloadInboxScreen()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -97,6 +96,10 @@ class InboxScreenController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard !requests.isEmpty else {
+            return nil
+        }
+
         if section == 0 {
             return NSLocalizedString("Connection Requests", comment: "")
         }
@@ -141,12 +144,12 @@ class InboxScreenController: UITableViewController {
                 var index = -1
                 // Create the messages in the order of threads to prevent reordering
                 self?.pendingQueue.sync {
-                    if thread.status == .accepted {
-                        pendingMessages.append(Message(thread: thread, latestMessage: nil))
-                        index = pendingMessages.count - 1
-                    } else {
+                    if !thread.creator && thread.status != .accepted {
                         pendingRequests.append(Message(thread: thread, latestMessage: nil))
                         index = pendingRequests.count - 1
+                    } else {
+                        pendingMessages.append(Message(thread: thread, latestMessage: nil))
+                        index = pendingMessages.count - 1
                     }
                 }
 
@@ -155,10 +158,10 @@ class InboxScreenController: UITableViewController {
                     // We enqueue appends to the pending queue to avoid concurrent accesses
                     // while allowing fetches to happen concurrently
                     self?.pendingQueue.async {
-                        if thread.status == .accepted {
-                            pendingMessages[index].latestMessage = message
-                        } else {
+                        if !thread.creator && thread.status != .accepted {
                             pendingRequests[index].latestMessage = message
+                        } else {
+                            pendingMessages[index].latestMessage = message
                         }
                         group.leave()
                     }
