@@ -4,8 +4,11 @@ import MobileCoreServices
 class ProfileEditScreenController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var profileImage: UIImageView!
+
     private var allSituations = [MSituation]()
     var selectedHelpAreas = [MHelpArea]()
+    var profileImagePicture: UIImage?
 
     public weak var delegate: ProfileEditScreenControllerDelegate?
 
@@ -19,6 +22,9 @@ class ProfileEditScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        profileImage.image = profileImagePicture
+
         Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
             guard success, let situations = situations else {
                 return
@@ -29,12 +35,6 @@ class ProfileEditScreenController: UIViewController {
                 self?.tableView.reloadData()
             }
         }
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

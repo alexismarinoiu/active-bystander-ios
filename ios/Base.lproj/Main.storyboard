@@ -578,7 +578,7 @@
                     <connections>
                         <outlet property="displayNameLabel" destination="r8l-Pw-dDX" id="hgf-rV-yw3"/>
                         <outlet property="helpAreaTable" destination="O35-SO-LDW" id="90v-bh-sVc"/>
-                        <outlet property="profilePicture" destination="9o0-5k-GKE" id="c6v-bc-Uzh"/>
+                        <outlet property="profileImage" destination="9o0-5k-GKE" id="c6v-bc-Uzh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YpN-PS-9Gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -621,7 +621,7 @@
                                                     </imageView>
                                                     <view opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bJ3-1Z-KZ7">
                                                         <rect key="frame" x="-0.6666666666666714" y="0.0" width="240" height="240"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.30013912671232879" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="1" alpha="0.30013912671232879" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-camera" translatesAutoresizingMaskIntoConstraints="NO" id="Axq-rI-KNN">
                                                         <rect key="frame" x="140" y="140" width="100" height="100"/>
@@ -715,6 +715,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileImage" destination="Znx-yJ-QBU" id="JcM-Vl-DYq"/>
                         <outlet property="tableView" destination="kL4-bc-MBD" id="onw-hq-4lm"/>
                     </connections>
                 </viewController>
@@ -727,10 +728,10 @@
             </objects>
             <point key="canvasLocation" x="2980" y="1738.6699507389164"/>
         </scene>
-        <!--Profile Edit Screen Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="Yjz-Vl-B38">
             <objects>
-                <navigationController id="wqe-oO-lHT" customClass="ProfileEditScreenNavigationController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="wqe-oO-lHT" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DGm-tH-Njn">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

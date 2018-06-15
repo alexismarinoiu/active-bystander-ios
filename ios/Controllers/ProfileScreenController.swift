@@ -7,7 +7,7 @@ class ProfileScreenController: UIViewController {
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var helpAreaTable: UITableView!
 
@@ -31,6 +31,7 @@ class ProfileScreenController: UIViewController {
             }
 
             editController.delegate = self
+            editController.profileImagePicture = profileImage.image
             editController.selectedHelpAreas = self.helpAreas
         }
     }
@@ -56,7 +57,7 @@ class ProfileScreenController: UIViewController {
 
                 if let profilePictureURLString = profile.profileImage,
                     let image = Environment.staticImage(profilePictureURLString) {
-                    self.profilePicture.image = image
+                    self.profileImage.image = image
                 }
             }
 
