@@ -13,6 +13,7 @@ class FindDelegateViewController: UIViewController {
                             preferredStyle: .alert)
 
     private var labels: [MSituation] = []
+    private var timer: Timer?
 
     /// Viewport specified in metres
     private let viewport: CLLocationDistance = 70
@@ -60,6 +61,17 @@ class FindDelegateViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         // Track the location if it's changing
         locationManager.startUpdatingLocation()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //fetching the location periodically
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [weak `self` = self] (_) in
+            self?.fetchLocationsAndUpdateOtherUsersOnMap()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        timer?.invalidate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -170,8 +182,14 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
         let region = MKCoordinateRegionMakeWithDistance(location.coordinate, viewport, viewport)
         mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
+        fetchLocationsAndUpdateOtherUsersOnMap()
+    }
 
-        let mLocation = location.coordinate.toMLocation(username: "nv516")
+    func fetchLocationsAndUpdateOtherUsersOnMap() {
+        guard let mLocation = locationManager.location?.coordinate.toMLocation(username: "nv516") else {
+            return
+        }
+
         Environment.backend.read(mLocation) { (success, locations: [MLocation]?) in
             guard success, let locations = locations else {
                 // notTODO: Handle error, perhaps a periodic refresh?
@@ -182,6 +200,7 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
                 self.updateOtherUsersOnMap(locations: locations)
             }
         }
+
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
