@@ -11,6 +11,7 @@
 		241295F420C149BC00620701 /* MLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F320C149BC00620701 /* MLocation.swift */; };
 		241295F720C16E0700620701 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295F620C16E0700620701 /* BackendService.swift */; };
 		241295FB20C2F0BB00620701 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241295FA20C2F0BB00620701 /* Environment.swift */; };
+		2433629A20D40B83004E520E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2433629920D40B83004E520E /* UIImage+Extensions.swift */; };
 		2447449520C5A1A1007A1B26 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447449420C5A1A1007A1B26 /* UserAuth.swift */; };
 		2447449720C5A2C8007A1B26 /* MAuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447449620C5A2C8007A1B26 /* MAuthStatus.swift */; };
 		2450353220C734B3001283CD /* HttpBackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2450353020C73281001283CD /* HttpBackendService.swift */; };
@@ -64,6 +65,7 @@
 		241295F320C149BC00620701 /* MLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLocation.swift; sourceTree = "<group>"; };
 		241295F620C16E0700620701 /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
 		241295FA20C2F0BB00620701 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		2433629920D40B83004E520E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		2447449420C5A1A1007A1B26 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		2447449620C5A2C8007A1B26 /* MAuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAuthStatus.swift; sourceTree = "<group>"; };
 		2450353020C73281001283CD /* HttpBackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpBackendService.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				2493CDDA20BF48BE00284C2E /* Notifications.swift */,
 				2447449420C5A1A1007A1B26 /* UserAuth.swift */,
 				5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */,
+				2433629920D40B83004E520E /* UIImage+Extensions.swift */,
 				2450352F20C73260001283CD /* Backend Services */,
 				241295F520C16DAC00620701 /* Controllers */,
 				241295F220C1489A00620701 /* Model */,
@@ -288,6 +291,7 @@
 				TargetAttributes = {
 					24D62B0920B5A9C7001367B8 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -383,6 +387,7 @@
 				24A4A37920D2E948005B79FD /* MProfile.swift in Sources */,
 				2447449520C5A1A1007A1B26 /* UserAuth.swift in Sources */,
 				24A4A37520D2D879005B79FD /* MAcceptRequest.swift in Sources */,
+				2433629A20D40B83004E520E /* UIImage+Extensions.swift in Sources */,
 				5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */,
 				B3D337F920C6E419001D0FB1 /* FourDDescriptionScreenController.swift in Sources */,
 				8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */,

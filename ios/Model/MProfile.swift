@@ -15,3 +15,7 @@ struct MProfile: Codable {
     let profileImage: String?
     let helpAreas: [MHelpArea]
 }
+
+struct MProfilePicture: Decodable {
+    let path: String
+}

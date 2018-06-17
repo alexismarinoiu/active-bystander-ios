@@ -7,12 +7,15 @@ class ProfileScreenController: UIViewController {
     private weak var locationTrackingCell: SettingsSwitchCell?
     private weak var locationManager: CLLocationManager?
 
-    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var helpAreaTable: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        profileImage.image = profileImage.image?.rounded(in: profileImage)
+
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             locationManager = appDelegate.locationManager
             let selector = #selector(locationManagerChangedAuthorization(notification:))
@@ -31,6 +34,7 @@ class ProfileScreenController: UIViewController {
             }
 
             editController.delegate = self
+            editController.profileImagePicture = profileImage.image
             editController.selectedHelpAreas = self.helpAreas
         }
     }
@@ -55,8 +59,8 @@ class ProfileScreenController: UIViewController {
                 self.displayNameLabel.text = profile.displayName
 
                 if let profilePictureURLString = profile.profileImage,
-                    let image = Environment.staticImage(profilePictureURLString) {
-                    self.profilePicture.image = image
+                    let image = UIImage(fromEnvironmentStaticPath: profilePictureURLString) {
+                    self.profileImage.image = image.rounded(in: self.profileImage)
                 }
             }
 
@@ -137,4 +141,10 @@ extension ProfileScreenController: ProfileEditScreenControllerDelegate {
         self.helpAreas = helpAreas
         helpAreaTable.reloadData()
     }
+
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController,
+                                     updateProfilePicture picture: UIImage?) {
+        profileImage.image = picture
+    }
+
 }
