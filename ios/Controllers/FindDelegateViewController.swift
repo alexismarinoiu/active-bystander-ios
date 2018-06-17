@@ -7,8 +7,8 @@ class FindDelegateViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var connectButtonBottomConstraint: NSLayoutConstraint!
+
     private var connectButtonHidden: Bool = true
-    private var mapLocations: [MMapLocation]?
     private var timer: Timer?
 
     /// Viewport specified in metres
@@ -112,19 +112,20 @@ extension FindDelegateViewController {
 
     @IBAction func connectPressed(_ sender: Any) {
         //Add labels for pop-up
-        guard let location = self.selectedMarker?.mapLocation else {
+        guard let location = selectedMarker?.mapLocation else {
             return
         }
-        let labelAlert: UIAlertController
-            = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
-                                preferredStyle: .alert)
+        let labelAlert =
+            UIAlertController(title: NSLocalizedString("Select Issue", comment: ""),
+                              message: NSLocalizedString("Select the issue that you need help or advice for:",
+                                                         comment: ""),
+                              preferredStyle: .alert)
 
         for helpArea in location.helpAreas {
             labelAlert.addAction(UIAlertAction(title: helpArea.situation, style: .default,
-                                                    handler: self.situationActionHandler))
+                                               handler: situationActionHandler))
         }
-        labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
-                                                handler: self.situationActionHandler))
+        labelAlert.addAction(UIAlertAction(title: "Other", style: .default, handler: situationActionHandler))
         labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
             labelAlert.dismiss(animated: true, completion: nil)
         }))
@@ -137,7 +138,8 @@ extension FindDelegateViewController {
     }
 
     private func connectToSelectedUser() {
-        guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.mapLocation?.username else {
+        guard let selectedMarker = selectedMarker,
+            let userToConnectTo = selectedMarker.mapLocation?.username else {
             return
         }
 
@@ -188,7 +190,6 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
             }
 
             DispatchQueue.main.async {
-                self.mapLocations = locations
                 self.updateOtherUsersOnMap(locations: locations)
             }
         }
