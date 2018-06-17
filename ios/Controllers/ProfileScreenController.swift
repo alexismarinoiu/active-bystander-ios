@@ -141,4 +141,10 @@ extension ProfileScreenController: ProfileEditScreenControllerDelegate {
         self.helpAreas = helpAreas
         helpAreaTable.reloadData()
     }
+
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController,
+                                     updateProfilePicture picture: UIImage?) {
+        profileImage.image = picture
+    }
+
 }

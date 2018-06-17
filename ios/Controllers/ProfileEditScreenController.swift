@@ -170,7 +170,9 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
                     return
                 }
 
-                self.profileImage.image = image.rounded(in: self.profileImage)
+                let roundedImage = image.rounded(in: self.profileImage)
+                self.profileImage.image = roundedImage
+                self.delegate?.profileEditScreenController(self, updateProfilePicture: roundedImage)
             }
 
         })
@@ -179,4 +181,5 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
 
 protocol ProfileEditScreenControllerDelegate: class {
     func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateHelpAreas helpAreas: [MHelpArea])
+    func profileEditScreenController(_ editScreen: ProfileEditScreenController, updateProfilePicture picture: UIImage?)
 }
