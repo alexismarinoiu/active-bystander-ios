@@ -130,8 +130,50 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        // notTODO: Implement
+        guard let imageUrl = info[UIImagePickerControllerImageURL] as? URL,
+            let backend = Environment.backend as? HttpBackendService,
+            let imageData = try? Data(contentsOf: imageUrl) else {
+                return
+        }
+
+        let uploadAlert = UIAlertController(title: "Uploading\n", message: nil, preferredStyle: .alert)
+        let activityIndicator = { () -> UIActivityIndicatorView in
+            let theBounds = uploadAlert.view.bounds
+            let theOffset = CGFloat(30)
+            let activity = UIActivityIndicatorView(frame: CGRect(x: theBounds.origin.x,
+                                                                 y: theBounds.origin.y + theOffset,
+                                                                 width: theBounds.width,
+                                                                 height: theBounds.height - theOffset))
+            activity.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            activity.isUserInteractionEnabled = false
+            activity.hidesWhenStopped = true
+            activity.activityIndicatorViewStyle = .gray
+            return activity
+        }()
+        uploadAlert.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        picker.present(uploadAlert, animated: true)
+
+        backend.uploadProfilePicture(imageData: imageData, callback: {
+            // swiftlint:disable closure_parameter_position
+            [weak `self` = self, uploadAlert] (success, profilePicture) in
+            // swiftlint:enable closure_parameter_position
+
+            DispatchQueue.main.async { [uploadAlert] in
+                uploadAlert.dismiss(animated: true, completion: {
+                    picker.dismiss(animated: true, completion: nil)
+                })
+
+                guard let `self` = self, success,
+                    let profilePicture = profilePicture,
+                    let image = UIImage(fromEnvironmentStaticPath: profilePicture.path) else {
+                    return
+                }
+
+                self.profileImage.image = image.rounded(in: self.profileImage)
+            }
+
+        })
     }
 }
 

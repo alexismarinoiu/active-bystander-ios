@@ -62,6 +62,43 @@ struct HttpBackendService: BackendService {
 
         perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .delete), callback: callback)
     }
+
+    func uploadProfilePicture(imageData: Data, callback: @escaping (Bool, MProfilePicture?) -> Void) {
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        var request = URLRequest(url: Environment.endpoint.appendingPathComponent("upload"))
+        request.httpMethod = HttpMethod.post.rawValue
+
+        let boundary = "\(UUID())"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        var bodyData = Data()
+        bodyData.append((
+            "--\(boundary)\r\n" +
+            "Content-Disposition: form-data; name=\"file\"; filename=\"profile\"\r\n" +
+            "Content-Type: application/octet-stream\r\n\r\n").data(using: .utf8)!)
+        bodyData.append(imageData)
+        bodyData.append("\r\n--\(boundary)--".data(using: .utf8)!)
+        request.httpBody = bodyData
+
+        session.dataTask(with: request) { (data, status, error) in
+            guard let http = status as? HTTPURLResponse,
+                http.statusCode != 401 else { // Authorization Error
+                    DispatchQueue.main.async {
+                        (UIApplication.shared.delegate as? AppDelegate)?.showLoginViewController()
+                    }
+                    callback(false, nil)
+                    return
+            }
+
+            guard error == nil,
+                let data = data,
+                let decodedData = try? JSONDecoder().decode(MProfilePicture.self, from: data) else {
+                    callback(false, nil)
+                    return
+            }
+
+            callback(true, decodedData)
+        }.resume()
+    }
 }
 
 // Utility Functions
