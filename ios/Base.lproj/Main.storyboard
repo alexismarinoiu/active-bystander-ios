@@ -200,7 +200,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="346" y="2589"/>
+            <point key="canvasLocation" x="130" y="2588"/>
+        </scene>
+        <!--Feedback-->
+        <scene sceneID="IKV-re-XhS">
+            <objects>
+                <viewController title="Feedback" id="dDZ-Hd-UWa" customClass="FeedbackScreenController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BB0-rZ-8YE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKN-Sa-cyW">
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IJa-7V-amu" firstAttribute="trailing" secondItem="XKN-Sa-cyW" secondAttribute="trailing" id="Eim-1w-bvf"/>
+                            <constraint firstItem="XKN-Sa-cyW" firstAttribute="leading" secondItem="IJa-7V-amu" secondAttribute="leading" id="aQv-Yn-pR3"/>
+                            <constraint firstItem="XKN-Sa-cyW" firstAttribute="top" secondItem="IJa-7V-amu" secondAttribute="top" id="ggu-Cv-l9C"/>
+                            <constraint firstItem="IJa-7V-amu" firstAttribute="bottom" secondItem="XKN-Sa-cyW" secondAttribute="bottom" id="x9Y-Sk-868"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IJa-7V-amu"/>
+                    </view>
+                    <connections>
+                        <outlet property="view" destination="BB0-rZ-8YE" id="dka-jM-hK7"/>
+                        <outlet property="webView" destination="XKN-Sa-cyW" id="v0v-6n-ohD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52d-rd-e54" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="858.39999999999998" y="2589.9014778325122"/>
         </scene>
         <!--Profile Nav-->
         <scene sceneID="g8X-uf-0bJ">
@@ -364,7 +399,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1237.5999999999999" y="2587.6847290640394"/>
+            <point key="canvasLocation" x="2204" y="2587"/>
         </scene>
         <!--Profile-->
         <scene sceneID="sWj-Kj-6hz">
@@ -842,6 +877,9 @@
                                                 <rect key="frame" x="13" y="112" width="156" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Provide Feedback"/>
+                                                <connections>
+                                                    <segue destination="dDZ-Hd-UWa" kind="show" identifier="feedbackSegue" id="LzV-Vb-CMo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
