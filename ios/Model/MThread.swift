@@ -22,8 +22,14 @@ extension MThread: Equatable {
 struct MThreadRequest: Encodable {}
 
 extension MThreadRequest: Request {
+    typealias InterchangeType = JSONInterchange
+
     var resource: String {
         return "thread"
+    }
+
+    var interchange: JSONInterchange {
+        return JSONInterchange(hasEmptyBody: true)
     }
 }
 

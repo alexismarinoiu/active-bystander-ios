@@ -130,7 +130,14 @@ extension ProfileEditScreenController: UIImagePickerControllerDelegate, UINaviga
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        picker.dismiss(animated: true, completion: nil)
+
+        guard let imageUrlString = info[UIImagePickerControllerImageURL] as? String,
+            let imageUrl = URL(string: imageUrlString) else {
+            return
+        }
+
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+////        picker.dismiss(animated: true, completion: nil)
         // notTODO: Implement
     }
 }

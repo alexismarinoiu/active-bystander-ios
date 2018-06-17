@@ -11,11 +11,13 @@ struct MDeclineRequest: Encodable {
 
 extension MDeclineRequest: Request {
 
+    typealias InterchangeType = JSONInterchange
+
     var resource: String {
         return "thread/\(threadId)/decline"
     }
 
-    func hasEmptyBody(for type: CrudType) -> Bool {
-        return true
+    var interchange: JSONInterchange {
+        return JSONInterchange(hasEmptyBody: true)
     }
 }

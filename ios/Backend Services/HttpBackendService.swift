@@ -1,8 +1,21 @@
 import UIKit
 
-/// CRUD mappings correspond to the RESTful WS standard
-struct HttpBackendService: BackendService {
+struct JSONInterchange: Interchange {
+    let hasEmptyBody: Bool
+}
 
+struct URLInterchange: Interchange {
+    public func getParameters(for type: CrudType) -> [String: CustomStringConvertible] {
+        return [:]
+    }
+}
+
+struct MultipartInterchange: Interchange {
+    let file: URL
+}
+
+/// CRUD mappings correspond to the RESTful WS standard
+struct HttpBackendService/*: BackendService notTODO: Genericise */{
     /// Maps HTTP method to their string representations
     ///
     /// - get: The HTTP GET method
@@ -29,62 +42,159 @@ struct HttpBackendService: BackendService {
         }
     }
 
-    func create<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void) where Req: Request, Res: Response {
-        guard let urlRequest = makeJSONRequest(request, method: .post) else {
+    // Due to ambiguity, there's a bit of duplication unfortunately
+    // --- CREATE
+    func create<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == JSONInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.post) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .create, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func create<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == URLInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.post) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .create, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func create<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == MultipartInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.post) else {
             callback(false, nil)
             return
         }
 
-        perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .create), callback: callback)
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .create, callback: callback)
+        session.uploadTask(with: urlRequest, fromFile: request.interchange.file,
+                           completionHandler: completionHandler).resume()
     }
 
-    func read<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void) where Req: Request, Res: Response {
-        var urlRequest = URLRequest(url: makeURL(request, for: .get))
-        urlRequest.httpMethod = HttpMethod.get.rawValue
-
-        perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .read), callback: callback)
+    // --- READ
+    func read<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == JSONInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.get) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .read, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
     }
 
-    func update<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void) where Req: Request, Res: Response {
-        guard let urlRequest = makeJSONRequest(request, method: .put) else {
+    func read<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == URLInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.get) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .read, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func read<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == MultipartInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.get) else {
             callback(false, nil)
             return
         }
 
-        perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .update), callback: callback)
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .read, callback: callback)
+        session.uploadTask(with: urlRequest, fromFile: request.interchange.file,
+                           completionHandler: completionHandler).resume()
     }
 
-    func delete<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void) where Req: Request, Res: Response {
-        guard let urlRequest = makeJSONRequest(request, method: .delete) else {
+    // --- UPDATE
+    func update<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == JSONInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.put) else {
             callback(false, nil)
             return
         }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .update, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
 
-        perform(urlRequest: urlRequest, requestLogin: request.getCanRequestLogin(for: .delete), callback: callback)
+    func update<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == URLInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.put) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .update, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func update<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == MultipartInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.put) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .update, callback: callback)
+        session.uploadTask(with: urlRequest, fromFile: request.interchange.file,
+                           completionHandler: completionHandler).resume()
+    }
+
+    // --- DELETE
+    func delete<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == JSONInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.delete) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .delete, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func delete<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == URLInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.delete) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .delete, callback: callback)
+        session.dataTask(with: urlRequest, completionHandler: completionHandler).resume()
+    }
+
+    func delete<Req, Res>(_ request: Req, callback: @escaping (Bool, Res?) -> Void)
+        where Req: Request, Res: Response, Req.InterchangeType == MultipartInterchange {
+        guard var urlRequest = makeRequest(request, for: HttpMethod.delete) else {
+            callback(false, nil)
+            return
+        }
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: .delete, callback: callback)
+        session.uploadTask(with: urlRequest, fromFile: request.interchange.file,
+                           completionHandler: completionHandler).resume()
     }
 }
 
 // Utility Functions
 extension HttpBackendService {
-    func makeURL<Req: Request>(_ request: Req, for method: HttpMethod) -> URL {
-        var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.resource),
-                                       resolvingAgainstBaseURL: false)!
-        let queryItems = request.getParameters(for: method.toCrud).map {
-            URLQueryItem(name: $0.key, value: $0.value.description)
-        }
-
-        if !queryItems.isEmpty {
-            components.queryItems = queryItems
-        }
-
-        return components.url!
-    }
-
-    func makeJSONRequest<Req: Request>(_ request: Req, method: HttpMethod) -> URLRequest? {
-        var urlRequest = URLRequest(url: makeURL(request, for: method))
+    // JSON Interchange Request
+    func makeRequest<Req: Request>(_ request: Req, for method: HttpMethod) -> URLRequest?
+        where Req.InterchangeType == JSONInterchange {
+        var urlRequest = URLRequest(url: Environment.endpoint.appendingPathComponent(request.resource))
         urlRequest.httpMethod = method.rawValue
 
-        if !request.hasEmptyBody(for: method.toCrud) {
+        if !request.interchange.hasEmptyBody {
             guard let encodedData = try? JSONEncoder().encode(request) else {
                 return nil
             }
@@ -98,24 +208,45 @@ extension HttpBackendService {
         return urlRequest
     }
 
-    func perform<Res: Response>(urlRequest request: URLRequest,
-                                requestLogin login: Bool,
-                                callback: @escaping (Bool, Res?) -> Void) {
-        #if DEBUG
-        print("Requesting: \(request.httpMethod ?? "not found") \(request.url?.absoluteString ?? "not found")")
-        #endif
-
-        let newRequest: URLRequest
-        if !Environment.liveAuth, let username = Environment.userAuth.username {
-            var request = request
-            request.addValue(username, forHTTPHeaderField: "AV-User")
-            newRequest = request
-        } else {
-            newRequest = request
+    // URL Interchange Request
+    func makeRequest<Req: Request>(_ request: Req, for method: HttpMethod) -> URLRequest?
+        where Req.InterchangeType == URLInterchange {
+        var components = URLComponents(url: Environment.endpoint.appendingPathComponent(request.resource),
+                                       resolvingAgainstBaseURL: false)!
+        let queryItems = request.interchange.getParameters(for: method.toCrud).map {
+            URLQueryItem(name: $0.key, value: $0.value.description)
         }
 
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: newRequest) { (data, status, error) in
+        if !queryItems.isEmpty {
+            components.queryItems = queryItems
+        }
+
+        var urlRequest = URLRequest(url: components.url!)
+        urlRequest.httpMethod = method.rawValue
+        return urlRequest
+    }
+
+    // URL Multipart Request
+    func makeRequest<Req: Request>(_ request: Req, for method: HttpMethod) -> URLRequest?
+        where Req.InterchangeType == MultipartInterchange {
+        var urlRequest = URLRequest(url: Environment.endpoint.appendingPathComponent(request.resource))
+        urlRequest.httpMethod = method.rawValue
+        return urlRequest
+    }
+
+    private func performSetupAuth(_ urlRequest: inout URLRequest) -> URLSession {
+        if !Environment.liveAuth, let username = Environment.userAuth.username {
+            urlRequest.addValue(username, forHTTPHeaderField: "AV-User")
+        }
+
+        return URLSession(configuration: URLSessionConfiguration.default)
+    }
+
+    private func generateMakeTaskCallback<Req: Request, Res: Response>(request: Req, crudType: CrudType,
+                                                                       callback: @escaping (Bool, Res?) -> Void)
+        -> ((Data?, URLResponse?, Error?) -> Void) {
+        return { [login = request.getCanRequestLogin(for: crudType)] (data, status, error) in
+
             guard let http = status as? HTTPURLResponse,
                 http.statusCode != 401 else { // Authorization Error
                     if login {
@@ -135,6 +266,16 @@ extension HttpBackendService {
             }
 
             callback(true, decodedData)
-        }.resume()
+        }
     }
+
+    private func perform<Req: Request, Res: Response>(_ urlRequest: inout URLRequest, request: Req,
+                                                      crudType: CrudType, callback: @escaping (Bool, Res?) -> Void)
+        where Req.InterchangeType == MultipartInterchange {
+        let session = performSetupAuth(&urlRequest)
+        let completionHandler = generateMakeTaskCallback(request: request, crudType: crudType, callback: callback)
+        session.uploadTask(with: urlRequest, fromFile: request.interchange.file,
+                           completionHandler: completionHandler).resume()
+    }
+
 }

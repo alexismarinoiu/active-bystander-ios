@@ -11,12 +11,14 @@ struct MMessageRequest: Encodable {
 }
 
 extension MMessageRequest: Request {
+    typealias InterchangeType = JSONInterchange
+
     var resource: String {
         return queryLastMessage ? "thread/\(threadId)/last-message" : "thread/\(threadId)"
     }
 
-    func hasEmptyBody(for type: CrudType) -> Bool {
-        return true
+    var interchange: JSONInterchange {
+        return JSONInterchange(hasEmptyBody: true)
     }
 }
 
@@ -36,7 +38,13 @@ struct MMessageSendRequest: Encodable {
 }
 
 extension MMessageSendRequest: Request {
+    typealias InterchangeType = JSONInterchange
+
     var resource: String {
         return "thread/\(threadId)"
+    }
+
+    var interchange: JSONInterchange {
+        return JSONInterchange(hasEmptyBody: false)
     }
 }
