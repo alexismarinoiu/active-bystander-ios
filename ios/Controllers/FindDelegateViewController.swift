@@ -12,7 +12,7 @@ class FindDelegateViewController: UIViewController {
         = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
                             preferredStyle: .alert)
 
-    private var labels: [MSituation] = []
+    private var mapLocations: [MMapLocation]?
     private var timer: Timer?
 
     /// Viewport specified in metres
@@ -26,29 +26,6 @@ class FindDelegateViewController: UIViewController {
         super.viewDidLoad()
 
         connectButton.layer.cornerRadius = 5
-
-        Environment.backend.read(MSituationRequest()) { [weak `self` = self] (success, situations: [MSituation]?) in
-            guard success, let situations = situations else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                guard let `self` = self else {
-                    return
-                }
-
-                self.labels = (situations.flatMap { $0.children }).sorted { $0.title < $1.title }
-                for label in self.labels {
-                    self.labelAlert.addAction(UIAlertAction(title: label.title, style: .default,
-                                                            handler: self.situationActionHandler))
-                }
-                self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
-                                                        handler: self.situationActionHandler))
-                self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                    self.labelAlert.dismiss(animated: true, completion: nil)
-                }))
-            }
-        }
 
         mapView.layoutMargins = mapView.safeAreaInsets
         mapView.showsUserLocation = true
@@ -82,8 +59,8 @@ class FindDelegateViewController: UIViewController {
 
 extension FindDelegateViewController {
 
-    private func updateOtherUsersOnMap(locations: [MLocation]) {
-        let annotations = locations.map { (location: MLocation) -> MKAnnotation in
+    private func updateOtherUsersOnMap(locations: [MMapLocation]) {
+        let annotations = locations.map { (location: MMapLocation) -> MKAnnotation in
             let point = MLocationPointAnnotation()
             point.coordinate = location.coordinate
             point.user = location.username
@@ -190,13 +167,14 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
             return
         }
 
-        Environment.backend.read(mLocation) { (success, locations: [MLocation]?) in
+        Environment.backend.read(mLocation) { (success, locations: [MMapLocation]?) in
             guard success, let locations = locations else {
                 // notTODO: Handle error, perhaps a periodic refresh?
                 return
             }
 
             DispatchQueue.main.async {
+                self.mapLocations = locations
                 self.updateOtherUsersOnMap(locations: locations)
             }
         }
@@ -254,6 +232,21 @@ extension FindDelegateViewController: MKMapViewDelegate {
         if let annotation = view.annotation as? MLocationPointAnnotation {
             showConnectButton()
             selectedMarker = annotation
+
+            //Add labels for pop-up
+            guard let mapLocations = (mapLocations?.filter { $0.username == selectedMarker?.user }) else {
+                return
+            }
+
+            for helpArea in mapLocations[0].helpAreas {
+                self.labelAlert.addAction(UIAlertAction(title: helpArea.situation, style: .default,
+                                                        handler: self.situationActionHandler))
+            }
+            self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
+                                                    handler: self.situationActionHandler))
+            self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                self.labelAlert.dismiss(animated: true, completion: nil)
+            }))
         }
     }
 
@@ -261,6 +254,7 @@ extension FindDelegateViewController: MKMapViewDelegate {
         if view.annotation as? MLocationPointAnnotation == nil {
             hideConnectButton()
             selectedMarker = nil
+
         }
     }
 }

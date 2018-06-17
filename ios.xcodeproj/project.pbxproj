@@ -140,6 +140,7 @@
 				24A4A37820D2E948005B79FD /* MProfile.swift */,
 				24A4A37420D2D878005B79FD /* MAcceptRequest.swift */,
 				2468C83F20D335E0000F42AB /* MDeclineRequest.swift */,
+				8003B5CA20D6A3E300C6568A /* MMapLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,6 +376,7 @@
 				2450353220C734B3001283CD /* HttpBackendService.swift in Sources */,
 				809D216820C2F849007C264E /* SettingsController.swift in Sources */,
 				804FC1FA20C82432003816A5 /* MMessage.swift in Sources */,
+				8003B5CB20D6A3E300C6568A /* MMapLocation.swift in Sources */,
 				809D216920C2F849007C264E /* HomeScreenController.swift in Sources */,
 				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
 				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
