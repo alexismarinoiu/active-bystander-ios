@@ -8,10 +8,6 @@ class FindDelegateViewController: UIViewController {
     @IBOutlet var connectButton: UIButton!
     @IBOutlet weak var connectButtonBottomConstraint: NSLayoutConstraint!
     private var connectButtonHidden: Bool = true
-    private var labelAlert: UIAlertController
-        = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
-                            preferredStyle: .alert)
-
     private var mapLocations: [MMapLocation]?
     private var timer: Timer?
 
@@ -63,7 +59,7 @@ extension FindDelegateViewController {
         let annotations = locations.map { (location: MMapLocation) -> MKAnnotation in
             let point = MLocationPointAnnotation()
             point.coordinate = location.coordinate
-            point.user = location.username
+            point.mapLocation = location
             return point
         }
         mapView.removeAnnotations(mapView.annotations)
@@ -115,6 +111,24 @@ extension FindDelegateViewController {
     }
 
     @IBAction func connectPressed(_ sender: Any) {
+        //Add labels for pop-up
+        guard let location = self.selectedMarker?.mapLocation else {
+            return
+        }
+        let labelAlert: UIAlertController
+            = UIAlertController(title: "Select Issue", message: "Select the Issue  in which you want help with.",
+                                preferredStyle: .alert)
+
+        for helpArea in location.helpAreas {
+            labelAlert.addAction(UIAlertAction(title: helpArea.situation, style: .default,
+                                                    handler: self.situationActionHandler))
+        }
+        labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
+                                                handler: self.situationActionHandler))
+        labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            labelAlert.dismiss(animated: true, completion: nil)
+        }))
+
         self.present(labelAlert, animated: true, completion: nil)
     }
 
@@ -123,7 +137,7 @@ extension FindDelegateViewController {
     }
 
     private func connectToSelectedUser() {
-        guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.user else {
+        guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.mapLocation?.username else {
             return
         }
 
@@ -232,21 +246,6 @@ extension FindDelegateViewController: MKMapViewDelegate {
         if let annotation = view.annotation as? MLocationPointAnnotation {
             showConnectButton()
             selectedMarker = annotation
-
-            //Add labels for pop-up
-            guard let mapLocations = (mapLocations?.filter { $0.username == selectedMarker?.user }) else {
-                return
-            }
-
-            for helpArea in mapLocations[0].helpAreas {
-                self.labelAlert.addAction(UIAlertAction(title: helpArea.situation, style: .default,
-                                                        handler: self.situationActionHandler))
-            }
-            self.labelAlert.addAction(UIAlertAction(title: "Other", style: .default,
-                                                    handler: self.situationActionHandler))
-            self.labelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
-                self.labelAlert.dismiss(animated: true, completion: nil)
-            }))
         }
     }
 
@@ -267,5 +266,5 @@ extension CLLocationCoordinate2D {
 }
 
 class MLocationPointAnnotation: MKPointAnnotation {
-    var user: String?
+    var mapLocation: MMapLocation?
 }

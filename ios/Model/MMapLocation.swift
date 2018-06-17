@@ -11,9 +11,3 @@ struct MMapLocation: Codable {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
-
-extension CLLocationCoordinate2D {
-    func toMMapLocation(username: String) -> MLocation {
-        return MLocation(latitude: latitude, longitude: longitude, username: username)
-    }
-}
