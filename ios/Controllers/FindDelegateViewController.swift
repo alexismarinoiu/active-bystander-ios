@@ -112,7 +112,7 @@ extension FindDelegateViewController {
 
     @IBAction func connectPressed(_ sender: Any) {
         //Add labels for pop-up
-        guard let location = selectedMarker?.mapLocation else {
+        guard let location = selectedMarker?.location else {
             return
         }
         let labelAlert =
@@ -265,5 +265,5 @@ extension CLLocationCoordinate2D {
 }
 
 class MLocationPointAnnotation: MKPointAnnotation {
-    var location: MLocation?
+    var location: MMapLocation?
 }
