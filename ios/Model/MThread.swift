@@ -30,7 +30,6 @@ extension MThreadRequest: Request {
 struct MThreadConnectRequest: Encodable {
     let latitude: Double
     let longitude: Double
-    let username: String
 }
 
 extension MThreadConnectRequest: Request {
