@@ -3,13 +3,13 @@ import WebKit
 
 class FeedbackScreenController: UIViewController {
     @IBOutlet weak var webView: WKWebView!
-    let abURL = "https://www.imperial.ac.uk/engineering/staff/human-resources/active-bystander/"
+    static let webViewURL =
+        URL(string: "https://www.imperial.ac.uk/engineering/staff/human-resources/active-bystander/")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let webViewURL = URL(string: abURL)
-        let myRequest = URLRequest(url: webViewURL!)
+        let myRequest = URLRequest(url: FeedbackScreenController.webViewURL)
         webView.navigationDelegate = self
         webView.load(myRequest)
     }
@@ -17,11 +17,9 @@ class FeedbackScreenController: UIViewController {
 
 extension FeedbackScreenController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if webView.url?.absoluteString == abURL {
-            // swiftlint:disable line_length
-            let javaScript = "var form = document.getElementsByClassName(\"qualtrics-widget responsive-iframe\")[0]; form.scrollIntoView();"
-            // swiftlint:enable line_length
-            webView.evaluateJavaScript(javaScript, completionHandler: nil)
+        if webView.url == FeedbackScreenController.webViewURL {
+            let jscpt = "document.getElementsByClassName(\"qualtrics-widget responsive-iframe\")[0].scrollIntoView();"
+            webView.evaluateJavaScript(jscpt, completionHandler: nil)
         }
     }
 }
