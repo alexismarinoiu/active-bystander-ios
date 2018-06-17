@@ -33,6 +33,7 @@
 		24DF531A20B5AD63006B81E2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DF531920B5AD63006B81E2 /* MapKit.framework */; };
 		337E944420BC578D00B0926E /* MessageScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337E944320BC578D00B0926E /* MessageScreenController.swift */; };
 		5E4ECF2D20BD7E2300FB9D43 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */; };
+		8003B5CB20D6A3E300C6568A /* MMapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8003B5CA20D6A3E300C6568A /* MMapLocation.swift */; };
 		804FC1F820C81FF3003816A5 /* MThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804FC1F720C81FF3003816A5 /* MThread.swift */; };
 		804FC1FA20C82432003816A5 /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804FC1F920C82432003816A5 /* MMessage.swift */; };
 		8097893A20C3EA6A0087BE98 /* AdviceScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */; };
@@ -91,6 +92,7 @@
 		24E2D09520CD986D00FDD869 /* ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios.entitlements; sourceTree = "<group>"; };
 		337E944320BC578D00B0926E /* MessageScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageScreenController.swift; sourceTree = "<group>"; };
 		5E4ECF2C20BD7E2300FB9D43 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
+		8003B5CA20D6A3E300C6568A /* MMapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMapLocation.swift; sourceTree = "<group>"; };
 		804FC1F720C81FF3003816A5 /* MThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MThread.swift; sourceTree = "<group>"; };
 		804FC1F920C82432003816A5 /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
 		8097893920C3EA6A0087BE98 /* AdviceScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdviceScreenController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				24A4A37820D2E948005B79FD /* MProfile.swift */,
 				24A4A37420D2D878005B79FD /* MAcceptRequest.swift */,
 				2468C83F20D335E0000F42AB /* MDeclineRequest.swift */,
+				8003B5CA20D6A3E300C6568A /* MMapLocation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				2450353220C734B3001283CD /* HttpBackendService.swift in Sources */,
 				809D216820C2F849007C264E /* SettingsController.swift in Sources */,
 				804FC1FA20C82432003816A5 /* MMessage.swift in Sources */,
+				8003B5CB20D6A3E300C6568A /* MMapLocation.swift in Sources */,
 				809D216920C2F849007C264E /* HomeScreenController.swift in Sources */,
 				241295FB20C2F0BB00620701 /* Environment.swift in Sources */,
 				80EDCC4920C2E84B003F9852 /* SituationsController.swift in Sources */,
