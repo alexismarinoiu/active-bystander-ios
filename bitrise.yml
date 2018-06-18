@@ -28,6 +28,17 @@ workflows:
         title: Gitlab mark as running
     - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            brew install swiftlint
+        title: Install Swiftlint
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
@@ -69,6 +80,17 @@ workflows:
         title: Gitlab mark as running
     - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            brew install swiftlint
+        title: Install Swiftlint
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
@@ -116,6 +138,17 @@ workflows:
         title: Gitlab mark as running
     - cache-pull@2.0.1: {}
     - certificate-and-profile-installer@1.9.3: {}
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            # fail if any commands fails
+            set -e
+            # debug log
+            set -x
+
+            brew install swiftlint
+        title: Install Swiftlint
     - xcode-test@1.18.14:
         inputs:
         - project_path: "$BITRISE_PROJECT_PATH"
