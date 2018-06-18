@@ -134,7 +134,7 @@ extension FindDelegateViewController {
     }
 
     private func situationActionHandler(_ alertAction: UIAlertAction) {
-        connectToSelectedUser(situation: title!)
+        connectToSelectedUser(situation: alertAction.title ?? "(none specified)")
     }
 
     private func connectToSelectedUser(situation: String) {
