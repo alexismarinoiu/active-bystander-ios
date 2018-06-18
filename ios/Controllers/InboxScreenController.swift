@@ -12,6 +12,8 @@ class InboxScreenController: UITableViewController {
     private let pendingQueue = DispatchQueue(label: "uk.avocado.Bystander.InboxPending", qos: .userInitiated,
                                              attributes: [], autoreleaseFrequency: .inherit, target: nil)
 
+    private var timer: Timer?
+
     override init(style: UITableViewStyle) {
         super.init(style: style)
         postInit()
@@ -43,11 +45,19 @@ class InboxScreenController: UITableViewController {
             .addObserver(self, selector: #selector(remoteNotificationReceived(notification:)),
                          name: .AVInboxActiveMessageNotification, object: nil)
         reloadInboxScreen()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { [weak `self` = self] _ in
+            DispatchQueue.main.async {
+                self?.reloadInboxScreen()
+            }
+        })
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         (UIApplication.shared.delegate as? AppDelegate)?.notificationCenter
             .removeObserver(self, name: .AVInboxActiveMessageNotification, object: nil)
+        timer?.invalidate()
+        timer = nil
     }
 
     override func didReceiveMemoryWarning() {
