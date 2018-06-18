@@ -4,7 +4,6 @@ import CoreLocation
 struct MLocation: Codable {
     let latitude: Double
     let longitude: Double
-    let username: String
 
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -16,8 +15,7 @@ extension MLocation: Request {
         if type == .read {
             return [
                 "latitude": latitude,
-                "longitude": longitude,
-                "username": username
+                "longitude": longitude
             ]
         }
 
@@ -30,7 +28,7 @@ extension MLocation: Request {
 }
 
 extension CLLocationCoordinate2D {
-    func toMLocation(username: String) -> MLocation {
-        return MLocation(latitude: latitude, longitude: longitude, username: username)
+    var asMLocation: MLocation {
+        return MLocation(latitude: latitude, longitude: longitude)
     }
 }

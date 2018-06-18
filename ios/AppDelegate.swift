@@ -156,8 +156,7 @@ extension AppDelegate: CLLocationManagerDelegate {
         }
 
         // notTODO: Change MLocation generation with authentication
-        let request = lastLocation.coordinate.toMLocation(username: "nv516")
-        Environment.backend.update(request) { (success, _: MLocation?) in
+        Environment.backend.update(lastLocation.coordinate.asMLocation) { (success, _: MLocation?) in
             print("Location Request: \(success)")
         }
     }

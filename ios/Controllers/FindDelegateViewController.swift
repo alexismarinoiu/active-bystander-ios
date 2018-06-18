@@ -59,7 +59,7 @@ extension FindDelegateViewController {
         let annotations = locations.map { (location: MMapLocation) -> MKAnnotation in
             let point = MLocationPointAnnotation()
             point.coordinate = location.coordinate
-            point.mapLocation = location
+            point.location = location
             return point
         }
         mapView.removeAnnotations(mapView.annotations)
@@ -112,7 +112,7 @@ extension FindDelegateViewController {
 
     @IBAction func connectPressed(_ sender: Any) {
         //Add labels for pop-up
-        guard let location = selectedMarker?.mapLocation else {
+        guard let location = selectedMarker?.location else {
             return
         }
         let labelAlert =
@@ -138,14 +138,12 @@ extension FindDelegateViewController {
     }
 
     private func connectToSelectedUser() {
-        guard let selectedMarker = selectedMarker,
-            let userToConnectTo = selectedMarker.mapLocation?.username else {
+        guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.location else {
             return
         }
 
-        let connectRequest = MThreadConnectRequest(latitude: selectedMarker.coordinate.latitude,
-                                                   longitude: selectedMarker.coordinate.longitude,
-                                                   username: userToConnectTo)
+        let connectRequest = MThreadConnectRequest(latitude: userToConnectTo.latitude,
+                                                   longitude: userToConnectTo.longitude)
         Environment.backend.update(connectRequest) { (success, thread: MThread?) in
             guard success, let thread = thread else {
                 return
@@ -179,7 +177,7 @@ extension FindDelegateViewController: CLLocationManagerDelegate {
     }
 
     func fetchLocationsAndUpdateOtherUsersOnMap() {
-        guard let mLocation = locationManager.location?.coordinate.toMLocation(username: "nv516") else {
+        guard let mLocation = locationManager.location?.coordinate.asMLocation else {
             return
         }
 
@@ -267,5 +265,5 @@ extension CLLocationCoordinate2D {
 }
 
 class MLocationPointAnnotation: MKPointAnnotation {
-    var mapLocation: MMapLocation?
+    var location: MMapLocation?
 }
