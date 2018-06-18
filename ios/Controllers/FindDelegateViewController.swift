@@ -225,8 +225,8 @@ extension FindDelegateViewController: MKMapViewDelegate {
             marker.clusteringIdentifier = MKMapViewDefaultClusterAnnotationViewReuseIdentifier
             marker.animatesWhenAdded = true
             marker.markerTintColor = .black
-            if (marker.annotation as? MLocationPointAnnotation)?.location?.isKeyHelper == true {
-                marker.markerTintColor = .red
+            if (marker.annotation as? MLocationPointAnnotation)?.location?.keyHelper == true {
+                marker.markerTintColor = .orange
             }
 
             marker.glyphText = "☻"
