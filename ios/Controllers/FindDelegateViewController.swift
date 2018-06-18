@@ -221,9 +221,14 @@ extension FindDelegateViewController: MKMapViewDelegate {
             let marker =
                 mapView.dequeueReusableAnnotationView(withIdentifier: FindDelegateViewController.helperMarkerIdent,
                                                       for: point) as? MKMarkerAnnotationView {
+
             marker.clusteringIdentifier = MKMapViewDefaultClusterAnnotationViewReuseIdentifier
             marker.animatesWhenAdded = true
             marker.markerTintColor = .black
+            if (marker.annotation as? MLocationPointAnnotation)?.location?.isKeyHelper == true {
+                marker.markerTintColor = .red
+            }
+
             marker.glyphText = "☻"
             marker.layer.cornerRadius = 100
             return marker
