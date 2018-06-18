@@ -28,8 +28,13 @@ extension MThreadRequest: Request {
 }
 
 struct MThreadConnectRequest: Encodable {
-    let latitude: Double
-    let longitude: Double
+    struct Location: Encodable {
+        let latitude: Double
+        let longitude: Double
+    }
+
+    let location: Location
+    let situation: String
 }
 
 extension MThreadConnectRequest: Request {
