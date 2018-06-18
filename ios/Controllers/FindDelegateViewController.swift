@@ -134,16 +134,17 @@ extension FindDelegateViewController {
     }
 
     private func situationActionHandler(_ alertAction: UIAlertAction) {
-        connectToSelectedUser()
+        connectToSelectedUser(situation: title!)
     }
 
-    private func connectToSelectedUser() {
+    private func connectToSelectedUser(situation: String) {
         guard let selectedMarker = selectedMarker, let userToConnectTo = selectedMarker.location else {
             return
         }
 
-        let connectRequest = MThreadConnectRequest(latitude: userToConnectTo.latitude,
-                                                   longitude: userToConnectTo.longitude)
+        let location = MThreadConnectRequest.Location(latitude: userToConnectTo.latitude,
+                                                      longitude: userToConnectTo.longitude)
+        let connectRequest = MThreadConnectRequest(location: location, situation: situation)
         Environment.backend.update(connectRequest) { (success, thread: MThread?) in
             guard success, let thread = thread else {
                 return
