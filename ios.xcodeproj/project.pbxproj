@@ -72,6 +72,7 @@
 		2450353320C84091001283CD /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2450353520C841B5001283CD /* TestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDelegate.swift; sourceTree = "<group>"; };
 		24551F7820CF013E00AE7D62 /* MNotificationRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNotificationRegistration.swift; sourceTree = "<group>"; };
+		245A649C20D909E0008DF453 /* UnionPOI.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = UnionPOI.gpx; sourceTree = "<group>"; };
 		2468C83F20D335E0000F42AB /* MDeclineRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDeclineRequest.swift; sourceTree = "<group>"; };
 		2486CB4720C6012C007DF229 /* ProfileScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenController.swift; sourceTree = "<group>"; };
 		2493CDDA20BF48BE00284C2E /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
@@ -179,6 +180,7 @@
 		24D62B0120B5A9C7001367B8 = {
 			isa = PBXGroup;
 			children = (
+				245A649C20D909E0008DF453 /* UnionPOI.gpx */,
 				24D62B0C20B5A9C7001367B8 /* ios */,
 				24D62B2120B5A9C9001367B8 /* iosTests */,
 				24D62B0B20B5A9C7001367B8 /* Products */,
